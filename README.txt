@@ -5,7 +5,7 @@ Team:
 Team Lead: 		Brian Powell
 Development Manager: 	Brittany Rompa
 Planning Manager: 	Craig Wilkerson
-Quality Manager: 	Yuton Zhu
+Quality Manager: 	Yutong Zhu
 Req/Support Manager: 	Muraad Khan
 
 Project: Design and create an airport tracking system. 

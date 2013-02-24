@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="11.5.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>420</x>
+      <y>370</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>DispTable
+Displays Data
+--
+- 
+
+--
+# Display
+# Repaint
+--
+setState
+getState</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>420</x>
+      <y>30</y>
+      <w>210</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>
+FileInput
+
+All File Handling
+--
+-File: Stuff.txt
+-File: Things.txt
+
+--
+# Save
+# Delete
+# Read
+# Write
+
+--
+addRoute
+addAirport
+getAirport
+getRoute
+addAirline
+getAirline</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>730</x>
+      <y>30</y>
+      <w>210</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>Route
+Search Algorithims
+Connects Flights
+Implements FileInput
+--
+-Array: ports
+--
+# read Array
+# change Array
+
+--
+setOpen
+getOpen
+getRouteNumber
+setRouteNumber
+getAirport
+getAirline
+getCost
+getTime</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>150</x>
+      <y>40</y>
+      <w>210</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>GUI
+Extends JFrame
+Calls DispTable
+--
+-JComboBox: Origin
+-JComboBox: Destination
+-JRadioButton: Airport
+-JRadioButton: Airline
+-JRadioButton: Cost
+-JRadioButton: Time
+-JButton: Go
+--
+# 
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>150</x>
+      <y>370</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>MenuBar
+Extends JMenuBar
+--
+-
+--
+# File
+# Airports
+# Routes
+# Airlines
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>600</x>
+      <y>90</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>130;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>600</x>
+      <y>270</y>
+      <w>150</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>130;30;30;100</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>220</x>
+      <y>260</y>
+      <w>50</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>330</x>
+      <y>260</y>
+      <w>110</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;90;110</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,58 @@
+
+import java.io.*;
+import java.util.*;
+
+public class FileInput{
+
+   public static void main(String args[]){
+        StringTokenizer st;
+        String airport[]={""};
+        String route[][]=null;
+        int i =0;
+        int k=0;
+
+        try{
+           BufferedReader br = new BufferedReader(
+                     new FileReader("C:/Users/Brian/Documents/Spring 2013/TSP/test.txt"));
+
+           String line = br.readLine();
+           //;double avg = 0.0;
+           //int num = 0, count = 0;
+
+           while(line != null){
+        	   if(!line.contains("#*")){
+        		   
+        		   if(line.length()==3){
+        			airport[i]=line; 
+        			i++;
+        			   
+        		   }
+        	   		if(line.contains("R*,")){
+        		   	
+                   st = new StringTokenizer(line,",");
+
+                   
+                   for(int j = 0; i < st.countTokens(); j++){
+                	  route[k][j]=st.nextToken();
+                        
+                   }
+                   k++;
+        	   		}
+        	   }
+                   line = br.readLine();
+           }
+
+           br.close();
+/*
+           avg = avg/count;
+           System.out.println("Avg: " + avg);
+           
+*/
+           System.out.println(airport.length);
+           for(int z=0;z<airport.length;z++){
+        	   
+        	   System.out.println(airport[z]);
+           }
+        }catch(Exception e){}
+   } //main
+} //class

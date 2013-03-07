@@ -1,0 +1,28 @@
+import java.io.IOException;
+
+
+public class SearchAlgorithim {
+
+	FileInput f;
+	String filter = "cost";
+	
+	public SearchAlgorithim(String filter){
+		this.filter=filter;
+		try {
+			 f = new FileInput();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		if(filter.matches("cost")){
+			
+			f.
+			
+		}
+		
+	}
+	
+	
+}

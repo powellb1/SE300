@@ -1,0 +1,23 @@
+import java.io.IOException;
+
+
+public class SearchAlgorithim {
+
+	FileInput f;
+	
+	public SearchAlgorithim(String filer){
+		
+		try {
+			 f = new FileInput();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+	
+	
+}

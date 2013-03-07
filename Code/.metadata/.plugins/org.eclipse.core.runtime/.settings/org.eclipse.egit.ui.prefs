@@ -1,2 +1,2 @@
-commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>Test of GitHub for Eclipse</message>\r\n</messages>
+commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>Added FileInput as well as SearchAlgorithim classes. Testcases for&\#x0A;DepthFirst added too</message>\r\n<message>Added FileInput and SearchAlgorithim code as well as some tests for&\#x0A;DepthFirst searches, which is where the search class will end up. </message>\r\n<message>Test of GitHub for Eclipse</message>\r\n</messages>
 eclipse.preferences.version=1

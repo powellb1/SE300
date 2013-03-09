@@ -1,8 +1,8 @@
 
 public class Airport {
 	
-	boolean open;
-	String name;
+	private boolean open;
+	private String name;
 	
 	public Airport(boolean open, String name){
 		
@@ -11,6 +11,10 @@ public class Airport {
 		
 	}
 	
-	
+	public String toString(){
+		
+		return String.format("Name is: %s\nOpen is: %b", name,open);
+		
+	}
 
 }

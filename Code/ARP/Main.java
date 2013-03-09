@@ -23,6 +23,7 @@ public class Main {
 		r=f.getRoutes();
 		
 		System.out.println(r.getFirst().toString());
+		System.out.println(air.get(0).toString());
 		
 		
 	}

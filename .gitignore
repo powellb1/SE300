@@ -2,12 +2,18 @@
 ## Eclipse
 #################
 
-\.metadata\*
+*target*
+*.jar
+*.war
+*.ear
+*.class
+
 *.pydevproject
 .project
 .metadata
-bin/
-tmp/
+bin/**
+tmp/**
+tmp/**/*
 *.tmp
 *.bak
 *.swp

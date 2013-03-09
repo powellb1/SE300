@@ -14,6 +14,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -273,12 +274,15 @@ public class GUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+     
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI().setVisible(true);
             }
         });
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Airport;

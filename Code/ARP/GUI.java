@@ -276,7 +276,11 @@ public class GUI extends javax.swing.JFrame {
         //</editor-fold>
 
      
+<<<<<<< HEAD
         /* Create and display the form 
+=======
+        /* Create and display the form */
+>>>>>>> 8685ead29ea1fa5c307f635e93a8cc9ec190f72c
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

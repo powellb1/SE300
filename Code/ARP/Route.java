@@ -1,15 +1,15 @@
 
 public class Route {
 
-	private String number;
+	private int number;
 	private String Airline;
 	private String Origin;
-	private double depTime;
+	private int depTime;
 	private String Destination;
-	private double arrivalTime;
+	private int arrivalTime;
 	private double cost;
 	
-	public Route(String number, String Airline, String Origin, double depTime, String Destination, double arrivalTime, double cost){
+	public Route(int number, String Airline, String Origin, int depTime, String Destination, int arrivalTime, double cost){
 		
 		this.number=number;
 		this.Airline = Airline;
@@ -21,11 +21,11 @@ public class Route {
 		
 	}
 
-	public String getNumber() {
+	public int getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 
@@ -49,7 +49,7 @@ public class Route {
 		return depTime;
 	}
 
-	public void setDepTime(double depTime) {
+	public void setDepTime(int depTime) {
 		this.depTime = depTime;
 	}
 
@@ -65,7 +65,7 @@ public class Route {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(double arrivalTime) {
+	public void setArrivalTime(int arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
@@ -80,8 +80,15 @@ public class Route {
 	public String toString(){
 		
 		//System.out.println("Number is: "+ number +"Airline is: " + Airline + "Origin is: " + Origin + "Departure time is: "+ depTime + "Destination is: "+ Destination + "Arrival time is: " + arrivalTime + "Cost: " + cost );
-		return String.format("Number is: %s \nAirline is: %s \nOrigin is: %s \nDeparture time is: %f \nDestination is: %s \nArrival time is: %f \nCost: %f \n",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
+		return String.format("Number is: %d \nAirline is: %s \nOrigin is: %s \nDeparture time is: %d \nDestination is: %s \nArrival time is: %d \nCost: %f \n",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
 		
+	}
+	
+	public String[] toArray(){
+		
+		String[] returnArray = {Integer.toString(number),Airline,Origin,Integer.toString(depTime),Destination,Integer.toString(arrivalTime),Double.toString(cost)};
+		
+		return returnArray;
 	}
 	
 }

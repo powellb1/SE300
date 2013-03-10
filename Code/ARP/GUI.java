@@ -13,7 +13,9 @@ public class GUI extends javax.swing.JFrame {
      * Creates new form GUI
      */
     public GUI() {
+    	
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -246,15 +248,15 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_filterActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
+    /*
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -273,26 +275,35 @@ public class GUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+     
+        /* Create and display the form 
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI().setVisible(true);
             }
         });
+        
     }
+    */
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Airport;
-    private javax.swing.JComboBox Destination;
+    @SuppressWarnings("rawtypes")
+	private javax.swing.JComboBox Destination;
     private javax.swing.JTextArea History;
-    private javax.swing.JComboBox Origin;
-    private javax.swing.JTable RouteTable;
+    @SuppressWarnings("rawtypes")
+	private javax.swing.JComboBox Origin;
+    javax.swing.JTable RouteTable;
     private javax.swing.JMenu Routes;
     private javax.swing.JMenuItem addAirport;
     private javax.swing.JMenuItem addRoute;
     private javax.swing.JLabel destinationLabel;
     private javax.swing.JMenuItem editRoute;
     private javax.swing.JMenu file;
-    private javax.swing.JComboBox filter;
+    @SuppressWarnings("rawtypes")
+	private javax.swing.JComboBox filter;
     private javax.swing.JButton filterButton;
     private javax.swing.JLabel filterLabel;
     private javax.swing.JTextArea filteredResults;

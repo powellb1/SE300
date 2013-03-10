@@ -1,6 +1,5 @@
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Graph {
@@ -9,20 +8,26 @@ public class Graph {
 	
   static class Node{
 	
-	  FileInput f = null;
-	
-	  
-	  
+	FileInput f;  
     public final String AirportCode;
     public final LinkedList<Edge> inEdges;
     public final LinkedList<Edge> outEdges;
+    public final LinkedList<Route> routes;
     
     public Node(String AirportCode) {
       this.AirportCode = AirportCode;
       inEdges = new LinkedList<Edge>();
       outEdges = new LinkedList<Edge>();
+      try {
+		f = new FileInput();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+      routes = f.getRoutes();
+      
     }
-    public Node addEdge(Node node,String RouteNumber){
+    public Node addEdge(Node node,int RouteNumber){
       Edge e = new Edge(this, node,RouteNumber);
       outEdges.add(e);
       node.inEdges.add(e);
@@ -38,15 +43,25 @@ public class Graph {
   static class Edge{
     public final Node from;
     public final Node to;
-    public Edge(Node from, Node to, String RouteNumber) {
+    public int RouteNumber;
+    
+    public Edge(Node from, Node to, int RouteNumber) {
       this.from = from;
       this.to = to;
+      this.RouteNumber = RouteNumber;
     }
     @Override
     public boolean equals(Object obj) {
       Edge e = (Edge)obj;
       return e.from == from && e.to == to;
     }
+    
+    public int getRouteNumber(){
+    	
+    	return RouteNumber;
+    	
+    }
+    
   }
 
   public static void main(String[] args) {
@@ -55,24 +70,33 @@ public class Graph {
     Node ORL = new Node("ORL");
     Node ATL = new Node("ATL");
 
-   ATL.addEdge(ORL, "12");
-   ATL.addEdge(ORL, "13");
-   ORL.addEdge(ATL, "4");
-   ORL.addEdge(ATL, "5");
-   DCA.addEdge(ORL, "14");
-   DCA.addEdge(ORL, "15");
-   ORL.addEdge(DCA, "7");
-   ORL.addEdge(DCA, "6");
-   JFK.addEdge(ATL, "9");
-   JFK.addEdge(ORL, "11");
-   JFK.addEdge(ATL, "10");
-   JFK.addEdge(DCA, "16");
-   ATL.addEdge(JFK, "1");
-   ATL.addEdge(JFK, "2");
-   DCA.addEdge(JFK, "8");
-   ORL.addEdge(JFK, "3");
+   ATL.addEdge(ORL, 12);
+   ATL.addEdge(ORL, 13);
+   ATL.addEdge(JFK, 1);
+   ATL.addEdge(JFK, 2);
+       
+   DCA.addEdge(JFK, 8);
+   DCA.addEdge(ORL, 14);
+   DCA.addEdge(ORL, 15);
    
+   ORL.addEdge(ATL, 4);
+   ORL.addEdge(JFK, 3);
+   ORL.addEdge(ATL, 5);
+   ORL.addEdge(DCA, 7);
+   ORL.addEdge(DCA, 6);
    
+   JFK.addEdge(ATL, 9);
+   JFK.addEdge(ORL, 11);
+   JFK.addEdge(ATL, 10);
+   JFK.addEdge(DCA, 16);
+   
+
+   
+      
+   //LinkedList<Route>arrivalsATL=getArrivingRoutes(ATL,ATL.routes);
+   LinkedList<Route>departuresATL=getDepartingRoutes(ATL, ATL.routes);
+   //System.out.println(ATL.routes.getFirst().toString());
+   //System.out.println(connectionsATL.getFirst());
 
     Node[] allNodes = {ATL,ORL,DCA,JFK};
     //L <- Empty list that will contain the sorted elements
@@ -85,7 +109,59 @@ public class Graph {
         S.add(n);
       }
     }
+    
+  }
 
+  public static LinkedList<Route> getArrivingRoutes(Node airport, LinkedList<Route> routes){
+	
+	  	LinkedList<Route> Arrivals = new LinkedList<Route>();
+	  	int routeNum;
+	  	int k;
+	  	
+	 for(int i=0;i<airport.inEdges.size();i++){
+		 
+		routeNum =airport.inEdges.get(i).getRouteNumber();
+
+		for(k=0;k<routes.size();k++){
+			
+				if(routeNum==routes.get(k).getNumber()){
+				System.out.println(routes.get(k).toString());
+				Arrivals.add(routes.get(k));
+				
+			}
+			
+		}
+		 
+	 } 
+	  return Arrivals;
+  }
+  
+  public static LinkedList<Route> getDepartingRoutes(Node airport, LinkedList<Route> routes){
+		
+	  	LinkedList<Route> Departures = new LinkedList<Route>();
+	  	int routeNum;
+	  	int k;
+	  	
+	 for(int i=0;i<airport.outEdges.size();i++){
+		routeNum =airport.outEdges.get(i).getRouteNumber();
+
+		for(k=0;k<routes.size();k++){
+			
+				if(routeNum==routes.get(k).getNumber()){
+				System.out.println(routes.get(k).toString());
+				Departures.add(routes.get(k));
+				
+			}
+			
+		}
+		 
+	 } 
+	  return Departures;
+}
+  
+  
+  
+    /*
     //while S is non-empty do
     while(!S.isEmpty()){
       //remove a node n from S
@@ -109,7 +185,7 @@ public class Graph {
         }
       }
     }
-    /*
+    
     //Check to see if all edges are removed
     boolean cycle = false;
     for(Node n : allNodes){
@@ -122,8 +198,10 @@ public class Graph {
     if(cycle){
       System.out.println("Cycle present, topological sort not possible");
     }else{
-    */
+    
       System.out.println("Topological Sort: "+Arrays.toString(L.toArray()));
     }
-  }
-//}
+    */
+  
+  
+}

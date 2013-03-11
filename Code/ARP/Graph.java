@@ -13,6 +13,8 @@ public class Graph {
     public final LinkedList<Edge> inEdges;
     public final LinkedList<Edge> outEdges;
     public final LinkedList<Route> routes;
+   // public final LinkedList<Route> Departures;
+   // public final LinkedList<Route> Arrivals;
     
     public Node(String AirportCode) {
       this.AirportCode = AirportCode;
@@ -26,6 +28,10 @@ public class Graph {
 	}
       routes = f.getRoutes();
       
+      /*
+      Departures=getDepartingRoutes(this, routes);
+      Arrivals =getArrivingRoutes(this, routes);
+      */
     }
     public Node addEdge(Node node,int RouteNumber){
       Edge e = new Edge(this, node,RouteNumber);
@@ -37,6 +43,14 @@ public class Graph {
     public String toString() {
         return AirportCode;
       }
+    /*
+    public LinkedList <Route> getDepartures(){
+    	return Departures;
+    }
+    public LinkedList<Route> getArrivals(){
+    	return Arrivals;
+    }
+    */
     
   }
 
@@ -65,40 +79,21 @@ public class Graph {
   }
 
   public static void main(String[] args) {
+	  
+	  
     Node JFK = new Node("JFK");
     Node DCA = new Node("DCA");
     Node ORL = new Node("ORL");
     Node ATL = new Node("ATL");
 
-   ATL.addEdge(ORL, 12);
-   ATL.addEdge(ORL, 13);
-   ATL.addEdge(JFK, 1);
-   ATL.addEdge(JFK, 2);
-       
-   DCA.addEdge(JFK, 8);
-   DCA.addEdge(ORL, 14);
-   DCA.addEdge(ORL, 15);
-   
-   ORL.addEdge(ATL, 4);
-   ORL.addEdge(JFK, 3);
-   ORL.addEdge(ATL, 5);
-   ORL.addEdge(DCA, 7);
-   ORL.addEdge(DCA, 6);
-   
-   JFK.addEdge(ATL, 9);
-   JFK.addEdge(ORL, 11);
-   JFK.addEdge(ATL, 10);
-   JFK.addEdge(DCA, 16);
-   
-
-   
-      
-   //LinkedList<Route>arrivalsATL=getArrivingRoutes(ATL,ATL.routes);
-   LinkedList<Route>departuresATL=getDepartingRoutes(ATL, ATL.routes);
-   //System.out.println(ATL.routes.getFirst().toString());
-   //System.out.println(connectionsATL.getFirst());
-
+ 
     Node[] allNodes = {ATL,ORL,DCA,JFK};
+    
+    addRoutes(allNodes,ATL.routes);
+    
+   // getArrivingRoutes(ATL, ATL.routes);
+    //getDepartingRoutes(ATL, ATL.routes);
+    getArrivingRoutes(ORL, ORL.routes);
     //L <- Empty list that will contain the sorted elements
     ArrayList<Node> L = new ArrayList<Node>();
 
@@ -111,6 +106,35 @@ public class Graph {
     }
     
   }
+  
+  public static void addRoutes(Node[] airport, LinkedList<Route> routes){
+	  
+	  Node n = null;
+	  
+	  for(int k=0;k<airport.length;k++){
+	  
+		  for(int i=0;i<routes.size();i++){
+	  
+			  if(airport[k].toString().matches(routes.get(i).getDestination())){
+				  
+				  for(int u=0;u<airport.length;u++){
+					  
+					  if(airport[u].toString().matches(routes.get(i).getOrigin())){
+						  
+						  n=airport[u];
+						  
+					  }
+					  
+				  }
+				  n.addEdge(airport[k], routes.get(i).getNumber());
+		  
+			  }
+	  			
+		  }
+		  
+	  }
+  }
+  
 
   public static LinkedList<Route> getArrivingRoutes(Node airport, LinkedList<Route> routes){
 	

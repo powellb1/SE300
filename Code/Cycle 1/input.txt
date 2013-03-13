@@ -1,0 +1,49 @@
+#comment ******************************************************************************************
+#comment Example Input file
+#comment Version 1.0
+#comment Authors: Evan Richardson, Keith Garfield
+#comment
+#comment This file represents the state of the air network upon first system start-up.
+#comment Use this file to ensure that your system has basic functionality with respect to loading files. 
+#comment Use this file as an example of how to create other input files you may need during development and test.
+#comment *******************************************************************************************
+
+#comment All airports must be listed first, per three-letter code, one airport per line
+#comment Format: XXX
+
+#airports
+ATL
+DCA
+ORL
+JFK
+
+
+#comment All routes to be listed here, one route per line.
+#comment Format: route_id, carrier_id, ap_dep, time_dep, ap_arr, time_arr, price, [val8, val9, val10, ...]
+
+#routes
+R001, DELTA, ATL, 0800, JFK, 1100, 184.00 
+R002, UNITED, ATL, 1430, JFK, 1800, 230.00
+R003, DELTA, ORL, 0830, JFK, 1230, 325.00
+R004, UNITED, ORL, 1000, ATL, 1100, 150.00
+R005, DELTA, ORL, 0820, ATL, 0930, 125.00
+R006, UNITED, ORL, 0730, DCA, 1100, 230.00
+R007, DELTA, ORL, 0900, DCA, 1120, 240.00
+R008, UNITED, DCA, 1200, JFK, 1330, 140.00
+R009, DELTA, JFK, 0800, ATL, 1100, 184.00
+R010, UNITED, JFK, 1430, ATL, 1800, 230.00
+R011, DELTA, JFK, 0830, ORL, 1230, 325.00
+R012, UNITED, ATL, 1000, ORL, 1100, 150.00
+R013, DELTA, ATL, 0820, ORL, 0930, 125.00
+R014, UNITED, DCA, 0730, ORL, 1100, 230.00
+R015, DELTA, DCA, 0900, ORL, 1120, 240.00
+R016, UNITED, JFK, 1200, DCA, 1330, 140.00
+
+#comment All closures to be listed here.
+#comment Format: airport_code, time_c, time_o
+
+#closures
+#comment No closures in initial data set.
+#comment Example: ATL, 0800, 1000
+
+#end

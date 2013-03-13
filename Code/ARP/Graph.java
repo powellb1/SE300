@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /*
+ * Credit should be given to Ben O'Brien and Max Dewees for their help in steering us on the right path
+ * 
  * This class creates nodes and edges that will be used for searching. The nodes are created from the Airports and
  * the edges are the Routes. The methods in this class will automatically generate Nodes and Edges based on the input
  * file. This class implements the depth first tree traversal searching ideology. 
@@ -47,6 +49,13 @@ public class Graph {
 
     
   }
+  
+  //static class Path
+  /*
+   * In essence, this class should create a path between two airports. It can then filter based on cost and time, etc.
+   * This is just a thought. Time will tell how well this is implemented. 
+   * 
+   */
 
   //this class generates the routes between each node
   static class Edge{
@@ -97,7 +106,8 @@ public class Graph {
 	allAirports = createNodes(airports);
 	addRoutes(allAirports,allRoutes);
     
-   // getArrivingRoutes(allAirports.getFirst(), allRoutes);
+    getArrivingRoutes(allAirports.getFirst(), allRoutes);
+    /*
 	cheapestCost = getCheapest(allAirports, allRoutes, allAirports.get(2), allAirports.get(1));
 	if(cheapestCost.getNumber()==-1){
 		
@@ -106,6 +116,7 @@ public class Graph {
 	else{
 	System.out.println(cheapestCost.toString());
 	}
+	*/
    
   }
   
@@ -215,6 +226,61 @@ public class Graph {
 	 
  }
  
-  
-  
+ /*
+ 
+ public static Route getCheapest(LinkedList<Node> allAirports, LinkedList<Route> allRoutes, Node Origin, Node Destination){
+	 
+	LinkedList<Route> destIncoming = getArrivingRoutes(Destination, allRoutes);
+	LinkedList<Route> orgOutgoing = getDepartingRoutes(Origin, allRoutes);
+	System.out.println("Origin "+Origin.toString());
+	System.out.println("Destination "+Destination.toString());
+	LinkedList<Route> Routes = null;
+	Route leastCost = new Route(-1, "YES", "Dummy", 10, "Dummy", 10, 1000000000);
+	Route tempRoute;
+	String tempDest;
+	String tempOrg;
+	
+	for(int i=0;i<destIncoming.size();i++){
+		
+		for(int k=0;k<orgOutgoing.size();k++){
+			
+			if(Destination.toString().matches(orgOutgoing.get(k).getDestination())){
+				
+				tempRoute = orgOutgoing.get(k);
+				
+				if(leastCost.getCost()>=tempRoute.getCost()){
+					leastCost=tempRoute;					
+				}
+				
+			}else{
+				
+				if(destIncoming.get(i).getOrigin().matches(orgOutgoing.get(k).getDestination())){
+					for(int u=0;u<allAirports.size();u++){
+						
+						if(allAirports.get(u).toString().matches(Destination.toString())){
+							tempDest=allAirports.get(u);
+						}
+						
+					}
+				tempRoute=getCheapest(allAirports, allRoutes, allAirports., orgOutgoing.get(k));
+				System.out.println(tempRoute.toString());
+				
+				}
+				
+			}
+			
+		}
+		
+		
+		
+	}
+	 
+	 
+	 
+	 return leastCost;
+	 
+	 
+ }
+   
+  */
 }

@@ -1,8 +1,8 @@
 
 public class Airport {
 	
-	boolean open;
-	String name;
+	private boolean open;
+	private String name;
 	
 	public Airport(boolean open, String name){
 		
@@ -17,6 +17,11 @@ public class Airport {
 		
 	}
 	
+	public String getCode(){
+		
+		return name;
+	}
 	
 
 }
+

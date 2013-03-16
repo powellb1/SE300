@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 
 /*
  * Credit should be given to Ben O'Brien and Max Dewees for their help in steering us on the right path
@@ -32,8 +33,8 @@ public class Graph {
 
     }
     //this method allows the program to add edges (routes) to each airport (node)
-    public Node addEdge(Node node,int RouteNumber){
-      Edge e = new Edge(this, node,RouteNumber);
+    public Node addEdge(Node node,Route r){
+      Edge e = new Edge(this, node,r);
       outEdges.add(e);
       node.inEdges.add(e);
       return this;
@@ -52,14 +53,14 @@ public class Graph {
   static class Edge{
     public final Node from;
     public final Node to;
-    public int RouteNumber;
+    public Route r;
     
-    //the constructor requires a to and from node as well as an identifier in the means of a route number
-    public Edge(Node from, Node to, int RouteNumber) {
+    //the constructor requires a to and from node as well as an identifier in the means of a route 
+    public Edge(Node from, Node to, Route r) {
       this.from = from;
       this.to = to;
-      this.RouteNumber = RouteNumber;
-    }
+      this.r = r;
+    		  }
     @Override
     public boolean equals(Object obj) {
       Edge e = (Edge)obj;
@@ -67,19 +68,79 @@ public class Graph {
     }
     
     
-    public int getRouteNumber(){
+    public Route getRoute(){
     	
-    	return RouteNumber;
+    	return r;
     	
     }
-    
   }
+    
+  
+    static class Path{
+    	public final Node from;
+    	//public final Node to;
+    	public final String toCode;
+    	//public final LinkedList<Route> allRoutes;
+    	
+    	public Path(Node from, String toCode){
+    		this.from = from;
+    		//this.to=to;
+    		this.toCode = toCode;
+    		
+    		
+    	}
+    	
+    	public Node getFrom(){
+    		
+    		return from;
+    	}
+    	
+    	public String getToCode(){
+    		
+    		return toCode;
+    	}
+    	
+    	public LinkedList <Route> getPath(Node Origin, Node Destination){
+    		
+    		 //LinkedList<Route> destIncoming = getArrivingRoutes(Destination, allRoutes);
+    		 LinkedList<Route> orgOutgoing = getDepartingRoutes(Origin);
+    		 LinkedList<Route> path = new LinkedList<Route>();
+    		 Stack <Route> routeStack = new Stack<Route>();
+    		 
+    		 for(int i=0;i<orgOutgoing.size();i++){
+    				routeStack.push(orgOutgoing.get(i));
+    				
+    							
+    						
+    				routeStack.pop();
+    					
+    		 		
+    		 
+    				}
+    		 return path;
+    		 }
+    		 
+    		 
+    }
+    		
+    		
+    	
+    	
+    	
+  
+    	
+    	
+    
+    
+    
+  
 
   public static void main(String[] args) {
 	
 	  LinkedList<Route> allRoutes;
 	  ArrayList<Airport> airports;
 	  FileInput f = null;
+	  LinkedList<Route> a;
 	
 	  
 	  try {
@@ -97,9 +158,8 @@ public class Graph {
 	allAirports = createNodes(airports);
 	addRoutes(allAirports,allRoutes);
     
-    //getArrivingRoutes(allAirports.getFirst(), allRoutes);
-    getPath(allAirports.get(0), allAirports.get(1), allRoutes);
-    
+   a= getArrivingRoutes(allAirports.get(2));
+   System.out.println(a.getFirst().toString());
      
   }
   
@@ -126,10 +186,9 @@ public class Graph {
 						  n=airport.get(u);
 						  
 					  }
-					  
 				  }
 				  //code then adds a route between origin and the destination
-				  n.addEdge(airport.get(k), routes.get(i).getNumber());
+				  n.addEdge(airport.get(k), routes.get(i));
 		  
 			  }
 	  			
@@ -139,56 +198,31 @@ public class Graph {
   }
   
 //this method will return any arriving routes into a given node
-  public static LinkedList<Route> getArrivingRoutes(Node airport, LinkedList<Route> routes){
+  public static LinkedList<Route> getArrivingRoutes(Node airport){
 	
 	  	LinkedList<Route> Arrivals = new LinkedList<Route>();
-	  	int routeNum;
-	  	int k;
 	  	
 	  //loops for every incoming route associated with that airport	
 	 for(int i=0;i<airport.inEdges.size();i++){
 		 
-		routeNum =airport.inEdges.get(i).getRouteNumber();
-
-		//loops for all the routes in the system
-		for(k=0;k<routes.size();k++){
-			
-				//if the route number from the original incoming matches the route just found, it must be an incoming for this airport
-				if(routeNum==routes.get(k).getNumber()){
-				//System.out.println(routes.get(k).toString());
-				Arrivals.add(routes.get(k)); //add them to the linked list
-				
-			}
-			
-		}
-		 
+		 //add to a linked list of all the routes associated with particular node
+		Arrivals.add(airport.inEdges.get(i).getRoute());
+ 
 	 } 
 	  return Arrivals;
   }
   
-  //this method will return all the routes leaving a particular node
-  public static LinkedList<Route> getDepartingRoutes(Node airport, LinkedList<Route> routes){
+
+public static LinkedList<Route> getDepartingRoutes(Node airport){
 		
 	  	LinkedList<Route> Departures = new LinkedList<Route>();
-	  	int routeNum;
-	  	int k;
-	 
+
 	  	//loop for all the outgoing edges associated with a node
 	 for(int i=0;i<airport.outEdges.size();i++){
-		routeNum =airport.outEdges.get(i).getRouteNumber();
+		
+		 //return a linked list of all the routes associated
+		Departures.add(airport.outEdges.get(i).getRoute());
 
-		//loop for all the routes in the system
-		for(k=0;k<routes.size();k++){
-			
-			// if the route selected in the outermost loop matches this node, it must be a departing node
-				if(routeNum==routes.get(k).getNumber()){
-				//System.out.println(routes.get(k).toString());
-				Departures.add(routes.get(k)); //add it to the linked list
-				
-			}
-			
-		}
-		 
 	 } 
 	  return Departures;
 }
@@ -198,7 +232,7 @@ public class Graph {
 	 
 	 LinkedList<Node> nodes = new LinkedList<Node>();
 	 
-	 //loop for the whole array
+	 //loop for all airports in the system
 	 for(int i =0; i<airports.size();i++){
 		 
 		 //create a new node with the given code and add it to the list of nodes
@@ -209,6 +243,7 @@ public class Graph {
 	 
  }
  
+ /*
  //this method will generate paths between 
   public static LinkedList<Route> getPath(Node Origin, Node Destination, LinkedList<Route> allRoutes){
 	 
@@ -249,5 +284,7 @@ public class Graph {
 	 return path;
 	 
  }
+  */
+  
  
 }

@@ -52,8 +52,8 @@ public class Main {
 		air=f.getAirports();
 		r=f.getRoutes();
 		
-		System.out.println(r.getFirst().toString());
-		System.out.println(air.get(0).toString());
+		System.out.println(r.get(2).toString());
+		System.out.println(air.get(2).toString());
 		/*
 		//test=r.toArray();
 		String[] temp;

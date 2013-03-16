@@ -46,4 +46,6 @@ R016, UNITED, JFK, 1200, DCA, 1330, 140.00
 #comment No closures in initial data set.
 #comment Example: ATL, 0800, 1000
 
+ATL, 0800, 1000
+
 #end

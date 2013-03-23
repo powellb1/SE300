@@ -53,7 +53,7 @@ public class Graph {
   static class Edge{
     public final Node from;
     public final Node to;
-    public Route r;
+    public final Route r;
     
     //the constructor requires a to and from node as well as an identifier in the means of a route 
     public Edge(Node from, Node to, Route r) {
@@ -73,19 +73,20 @@ public class Graph {
     	return r;
     	
     }
+
   }
     
   
     static class Path{
     	public final Node from;
     	//public final Node to;
-    	public final String toCode;
+    	public final Node to;
     	//public final LinkedList<Route> allRoutes;
     	
-    	public Path(Node from, String toCode){
+    	public Path(Node from, Node to){
     		this.from = from;
     		//this.to=to;
-    		this.toCode = toCode;
+    		this.to = to;
     		
     		
     	}
@@ -95,22 +96,35 @@ public class Graph {
     		return from;
     	}
     	
-    	public String getToCode(){
+    	public Node getTo(){
     		
-    		return toCode;
+    		return to;
     	}
     	
-    	public LinkedList <Route> getPath(Node Origin, Node Destination){
+    	public LinkedList <Path> getPath(Node Origin, Node Destination){
     		
     		 //LinkedList<Route> destIncoming = getArrivingRoutes(Destination, allRoutes);
     		 LinkedList<Route> orgOutgoing = getDepartingRoutes(Origin);
     		 LinkedList<Route> path = new LinkedList<Route>();
     		 Stack <Route> routeStack = new Stack<Route>();
+    		 Node intermediate;
     		 
     		 for(int i=0;i<orgOutgoing.size();i++){
     				routeStack.push(orgOutgoing.get(i));
     				
-    							
+    				if(Destination.toString().matches(orgOutgoing.get(i).getDestination())){
+    				
+    					//path.add(new Path(Origin, Destination));
+    				}
+    				else{
+    					
+    					for(i=0;i<orgOutgoing.size();i++){
+    						
+    						//path.add(getPath(orgOutgoing.get(i).,Destination));
+    						
+    					}
+    					
+    				}
     						
     				routeStack.pop();
     					
@@ -196,9 +210,10 @@ public class Graph {
 		  
 	  }
   }
-  
+ 
+
 //this method will return any arriving routes into a given node
-  public static LinkedList<Route> getArrivingRoutes(Node airport){
+  public static LinkedList <Route> getArrivingRoutes(Node airport){
 	
 	  	LinkedList<Route> Arrivals = new LinkedList<Route>();
 	  	
@@ -212,7 +227,7 @@ public class Graph {
 	  return Arrivals;
   }
   
-
+//this method iwll return any route departing from a given node
 public static LinkedList<Route> getDepartingRoutes(Node airport){
 		
 	  	LinkedList<Route> Departures = new LinkedList<Route>();

@@ -81,9 +81,16 @@ public class Graph {
     	public final LinkedList <Route> r;
     	
     	
-    	public Path(LinkedList <Route> r){ 
-    		this.r=r;
+    	@SuppressWarnings("unchecked")
+		public Path(LinkedList <Route> r){ 
+    		this.r=(LinkedList<Route>)r.clone();
     		
+    		
+    	}
+    	
+    	public LinkedList<Route> getPath(){
+    		
+    		return r;
     		
     	}
     
@@ -91,17 +98,6 @@ public class Graph {
     	
     }
     		
-    		
-    	
-    	
-    	
-  
-    	
-    	
-    
-    
-    
-  
 
   public static void main(String[] args) {
 	
@@ -127,11 +123,26 @@ public class Graph {
 	allAirports = createNodes(airports);
 	addRoutes(allAirports,allRoutes);
     
-   a= getArrivingRoutes(allAirports.get(2));
-   System.out.println(a.getFirst().toString());
+   //a= getArrivingRoutes(allAirports.get(2));
+   //System.out.println(a.getFirst().toString());
    
-   path = getPath(allAirports.get(0), allAirports.get(4));
-   System.out.println(path.isEmpty());
+   path = pathFind(allAirports.get(0), allAirports.get(1));
+   //System.out.println(path.isEmpty());
+   System.out.println(path.size());
+   if(!path.isEmpty()){
+	   LinkedList <Route> r;
+	   for(int i=0;i<path.size();i++){
+		   
+		  r= path.get(i).getPath();
+		  System.out.println(r.size());
+		  
+		  for(int k=0;k<r.size();k++){
+			  
+			  System.out.println(r.get(k).toString());
+		  }
+	   }
+	   
+   }
      
   }
   
@@ -185,7 +196,7 @@ public class Graph {
 	  return Arrivals;
   }
   
-//this method iwll return any route departing from a given node
+//this method will return any route departing from a given node
 public static LinkedList<Route> getDepartingRoutes(Node airport){
 		
 	  	LinkedList<Route> Departures = new LinkedList<Route>();
@@ -216,7 +227,7 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 
  }
  
- public static LinkedList <Path> getPath(Node Origin, Node Destination){
+ public static LinkedList <Path> pathFind(Node Origin, Node Destination){
 		
 	 System.out.println("Origin: "+Origin.toString()+" \tDestination: "+ Destination.toString());
 	 
@@ -225,14 +236,21 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 LinkedList<Path> path = new LinkedList<Path>();
 	 LinkedList <Route> r = new LinkedList<Route>();
 	 Stack <Route> routeStack = new Stack <Route>();
+	
+	 System.out.println("Size of outgoing: " + orgOutgoing.size());
+	 
+	 //System.out.println(orgOutgoing.peekFirst().toString());
 	 
 	 for(int i=0;i<orgOutgoing.size();i++){
 			routeStack.push(orgOutgoing.get(i));
+				
+			System.out.println("Origin: "+orgOutgoing.get(i).getOrigin().toString());
+			System.out.println("Destination: "+orgOutgoing.get(i).getDestination().toString());
 			
 			if(Destination.toString().matches(orgOutgoing.get(i).getDestination().toString())){
+				
 				r.add(routeStack.firstElement());
-				//System.out.println(r.getFirst().toString());
-				path.add(new Path(r));
+				path.addLast(new Path(r));
 			}
 			else{
 				
@@ -240,15 +258,16 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 					
 					//System.out.println(orgOutgoing.get(k).getDestination().toString());
 					//System.out.println(Destination.toString());
-					System.out.println("K: "+k);
-					getPath(orgOutgoing.get(k).getOrigin(),Destination);
+				
+					System.out.println("New Origin: "+orgOutgoing.get(k).getDestination().toString());
+					path=pathFind(orgOutgoing.get(k).getDestination(),Destination);
 					
 				}
 				
 			}
 					
 			routeStack.pop();
-				
+			r.clear();	
 	 		
 	 
 			}

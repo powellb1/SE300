@@ -3,13 +3,13 @@ public class Route {
 
 	private int number;
 	private String Airline;
-	private String Origin;
+	private Node Origin;
 	private int depTime;
-	private String Destination;
+	private Node Destination;
 	private int arrivalTime;
 	private double cost;
 	
-	public Route(int number, String Airline, String Origin, int depTime, String Destination, int arrivalTime, double cost){
+	public Route(int number, String Airline, Node Origin, int depTime, Node Destination, int arrivalTime, double cost){
 		
 		this.number=number;
 		this.Airline = Airline;
@@ -37,11 +37,11 @@ public class Route {
 		Airline = airline;
 	}
 
-	public String getOrigin() {
+	public Node getOrigin() {
 		return Origin;
 	}
 
-	public void setOrigin(String origin) {
+	public void setOrigin(Node origin) {
 		Origin = origin;
 	}
 
@@ -53,11 +53,11 @@ public class Route {
 		this.depTime = depTime;
 	}
 
-	public String getDestination() {
+	public Node getDestination() {
 		return Destination;
 	}
 
-	public void setDestination(String destination) {
+	public void setDestination(Node destination) {
 		Destination = destination;
 	}
 
@@ -80,7 +80,7 @@ public class Route {
 	public String toString(){
 		
 		//System.out.println("Number is: "+ number +"Airline is: " + Airline + "Origin is: " + Origin + "Departure time is: "+ depTime + "Destination is: "+ Destination + "Arrival time is: " + arrivalTime + "Cost: " + cost );
-		return String.format("Number is: %d \nAirline is: %s \nOrigin is: %s \nDeparture time is: %d \nDestination is: %s \nArrival time is: %d \nCost: %f \n",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
+		return String.format("Number is: %d \nAirline is: %s \nOrigin is: %s \nDeparture time is: %d \nDestination is: %s \nArrival time is: %d \nCost: %.2f \n",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
 		
 	}
 	

@@ -15,7 +15,7 @@ import java.util.Stack;
 
 public class Graph {
 
-	
+	/*
 //class for the nodes. 	
   static class Node{
 	
@@ -75,66 +75,20 @@ public class Graph {
     }
 
   }
-    
+    */
   
     static class Path{
-    	public final Node from;
-    	//public final Node to;
-    	public final Node to;
-    	//public final LinkedList<Route> allRoutes;
+    	public final LinkedList <Route> r;
     	
-    	public Path(Node from, Node to){
-    		this.from = from;
-    		//this.to=to;
-    		this.to = to;
+    	
+    	public Path(LinkedList <Route> r){ 
+    		this.r=r;
     		
     		
     	}
+    
+    	    	
     	
-    	public Node getFrom(){
-    		
-    		return from;
-    	}
-    	
-    	public Node getTo(){
-    		
-    		return to;
-    	}
-    	
-    	public LinkedList <Path> getPath(Node Origin, Node Destination){
-    		
-    		 //LinkedList<Route> destIncoming = getArrivingRoutes(Destination, allRoutes);
-    		 LinkedList<Route> orgOutgoing = getDepartingRoutes(Origin);
-    		 LinkedList<Route> path = new LinkedList<Route>();
-    		 Stack <Route> routeStack = new Stack<Route>();
-    		 Node intermediate;
-    		 
-    		 for(int i=0;i<orgOutgoing.size();i++){
-    				routeStack.push(orgOutgoing.get(i));
-    				
-    				if(Destination.toString().matches(orgOutgoing.get(i).getDestination())){
-    				
-    					//path.add(new Path(Origin, Destination));
-    				}
-    				else{
-    					
-    					for(i=0;i<orgOutgoing.size();i++){
-    						
-    						//path.add(getPath(orgOutgoing.get(i).,Destination));
-    						
-    					}
-    					
-    				}
-    						
-    				routeStack.pop();
-    					
-    		 		
-    		 
-    				}
-    		 return path;
-    		 }
-    		 
-    		 
     }
     		
     		
@@ -155,6 +109,7 @@ public class Graph {
 	  ArrayList<Airport> airports;
 	  FileInput f = null;
 	  LinkedList<Route> a;
+	  LinkedList <Path> path;
 	
 	  
 	  try {
@@ -174,6 +129,9 @@ public class Graph {
     
    a= getArrivingRoutes(allAirports.get(2));
    System.out.println(a.getFirst().toString());
+   
+   path = getPath(allAirports.get(0), allAirports.get(4));
+   System.out.println(path.isEmpty());
      
   }
   
@@ -189,13 +147,13 @@ public class Graph {
 		  for(int i=0;i<routes.size();i++){
 
 			  //this will only go into this portion if the node is the same as the destination node
-			  if(airport.get(k).toString().matches(routes.get(i).getDestination())){
+			  if(airport.get(k).toString().matches(routes.get(i).getDestination().toString())){
 							  
 				  //this iterates for every element in the node linked list
 				  for(int u=0;u<airport.size();u++){
 					  
 					  //this will only execute this portion if the node is the same as the origin
-					  if(airport.get(u).toString().matches(routes.get(i).getOrigin())){
+					  if(airport.get(u).toString().matches(routes.get(i).getOrigin().toString())){
 						  
 						  n=airport.get(u);
 						  
@@ -257,6 +215,47 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 return nodes;
 	 
  }
+ 
+ public static LinkedList <Path> getPath(Node Origin, Node Destination){
+		
+	 System.out.println("Origin: "+Origin.toString()+" \tDestination: "+ Destination.toString());
+	 
+	 //LinkedList<Route> destIncoming = getArrivingRoutes(Destination, allRoutes);
+	 LinkedList<Route> orgOutgoing = getDepartingRoutes(Origin);
+	 LinkedList<Path> path = new LinkedList<Path>();
+	 LinkedList <Route> r = new LinkedList<Route>();
+	 Stack <Route> routeStack = new Stack <Route>();
+	 
+	 for(int i=0;i<orgOutgoing.size();i++){
+			routeStack.push(orgOutgoing.get(i));
+			
+			if(Destination.toString().matches(orgOutgoing.get(i).getDestination().toString())){
+				r.add(routeStack.firstElement());
+				//System.out.println(r.getFirst().toString());
+				path.add(new Path(r));
+			}
+			else{
+				
+				for(int k=0;k<orgOutgoing.size();k++){
+					
+					//System.out.println(orgOutgoing.get(k).getDestination().toString());
+					//System.out.println(Destination.toString());
+					System.out.println("K: "+k);
+					getPath(orgOutgoing.get(k).getOrigin(),Destination);
+					
+				}
+				
+			}
+					
+			routeStack.pop();
+				
+	 		
+	 
+			}
+	 return path;
+	 }
+	 
+	 
  
  /*
  //this method will generate paths between 

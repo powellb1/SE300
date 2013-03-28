@@ -48,9 +48,16 @@ public class FileInput{
         		   }
         		   
         	   		if(matcher.matches()){
-                
+                			if(matcher.group(3)>matcher.group(6)){
+	
+					Sysem.out.println("The flight departs before it arrives!");
+						
+					}
+        	   			else{
         	   			
-        	   			Routes.add(new Route(Integer.parseInt(matcher.group(1)),matcher.group(2) , new Node(matcher.group(3)), Integer.parseInt(matcher.group(4)), new Node(matcher.group(5)), Integer.parseInt(matcher.group(6)),Double.parseDouble(matcher.group(7))));
+					Routes.add(new Route(Integer.parseInt(matcher.group(1)),matcher.group(2) , new Node(matcher.group(3)), Integer.parseInt(matcher.group(4)), new Node(matcher.group(5)), Integer.parseInt(matcher.group(6)),Double.parseDouble(matcher.group(7))));
+					
+					}
         	   		}
         	   		if(matcherClose.matches()){
         	   			

@@ -38,6 +38,7 @@ R013, DELTA, ATL, 0820, ORL, 0930, 125.00
 R014, UNITED, DCA, 0730, ORL, 1100, 230.00
 R015, DELTA, DCA, 0900, ORL, 1120, 240.00
 R016, UNITED, JFK, 1200, DCA, 1330, 140.00
+R017, UNITED, JFK, 1400, DCA, 1340, 120.00
 
 #comment All closures to be listed here.
 #comment Format: airport_code, time_c, time_o

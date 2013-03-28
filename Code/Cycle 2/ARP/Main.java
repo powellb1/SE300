@@ -54,6 +54,8 @@ public class Main {
 		
 		System.out.println(r.get(2).toString());
 		System.out.println(air.get(2).toString());
+		System.out.println(r.size());
+		System.out.println(r.get(15).toString());
 		/*
 		//test=r.toArray();
 		String[] temp;

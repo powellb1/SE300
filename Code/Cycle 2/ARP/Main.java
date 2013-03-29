@@ -25,18 +25,13 @@ public class Main {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-     
-        /* Create and display the form */
+    
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI().setVisible(true);
-            }
-        });
-		
-		
+        
+          
+               DaGUI g = new DaGUI();
+               g.setVisible(true);
+   
 		
 		FileInput f = null;
 		ArrayList <Airport> air;
@@ -54,27 +49,7 @@ public class Main {
 		
 		System.out.println(r.get(2).toString());
 		System.out.println(air.get(2).toString());
-		System.out.println(r.size());
-		System.out.println(r.get(15).toString());
-		/*
-		//test=r.toArray();
-		String[] temp;
-		
-		for(int i=0;i<r.size();i++){
-			
-			temp=r.get(i).toArray();
-			
-			for(int k=0;k<temp.length;i++){
-				
-				g.RouteTable.setValueAt(temp[k], i, k);
-				
-			}
-		}
-		
-		*/
 
-		
-		
 		
 	}
 	

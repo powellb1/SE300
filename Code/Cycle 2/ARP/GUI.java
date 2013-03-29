@@ -1,14 +1,36 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author brian
- */
 public class GUI extends javax.swing.JFrame {
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Airport;
+    @SuppressWarnings("rawtypes")
+	private javax.swing.JComboBox Destination;
+    private javax.swing.JTextArea History;
+    @SuppressWarnings("rawtypes")
+	private javax.swing.JComboBox Origin;
+    javax.swing.JTable RouteTable;
+    private javax.swing.JMenu Routes;
+    public javax.swing.JMenuItem addAirport;
+    private javax.swing.JMenuItem addRoute;
+    private javax.swing.JLabel destinationLabel;
+    private javax.swing.JMenuItem editRoute;
+    private javax.swing.JMenu file;
+    @SuppressWarnings("rawtypes")
+	private javax.swing.JComboBox filter;
+    private javax.swing.JButton filterButton;
+    private javax.swing.JLabel filterLabel;
+    private javax.swing.JTextArea filteredResults;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JMenuItem openAirport;
+    private javax.swing.JLabel originLabel;
+    private javax.swing.JMenuItem removeRoute;
+    private javax.swing.JMenuItem save;
+    // End of variables declaration//GEN-END:variables
+	
     /**
      * Creates new form GUI
      */
@@ -249,76 +271,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_filterActionPerformed
 
     
-    /*
     
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    
 
-     
-<<<<<<< HEAD
-        /* Create and display the form 
-=======
-        /* Create and display the form */
-    /*
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI().setVisible(true);
-            }
-        });
-        
-    }
-    */
-    
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Airport;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox Destination;
-    private javax.swing.JTextArea History;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox Origin;
-    javax.swing.JTable RouteTable;
-    private javax.swing.JMenu Routes;
-    private javax.swing.JMenuItem addAirport;
-    private javax.swing.JMenuItem addRoute;
-    private javax.swing.JLabel destinationLabel;
-    private javax.swing.JMenuItem editRoute;
-    private javax.swing.JMenu file;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox filter;
-    private javax.swing.JButton filterButton;
-    private javax.swing.JLabel filterLabel;
-    private javax.swing.JTextArea filteredResults;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JMenuItem openAirport;
-    private javax.swing.JLabel originLabel;
-    private javax.swing.JMenuItem removeRoute;
-    private javax.swing.JMenuItem save;
-    // End of variables declaration//GEN-END:variables
 }

@@ -14,69 +14,7 @@ import java.util.Stack;
 
 
 public class Graph {
-
-	/*
-//class for the nodes. 	
-  static class Node{
 	
-	
-    public final String AirportCode;
-    public final LinkedList<Edge> inEdges;
-    public final LinkedList<Edge> outEdges;
-    
-    //constructor for the nodes. The identifier for each node is the Airport code imported from the file 
-    public Node(String AirportCode) {
-      this.AirportCode = AirportCode;
-      inEdges = new LinkedList<Edge>();
-      outEdges = new LinkedList<Edge>();
-     
-
-    }
-    //this method allows the program to add edges (routes) to each airport (node)
-    public Node addEdge(Node node,Route r){
-      Edge e = new Edge(this, node,r);
-      outEdges.add(e);
-      node.inEdges.add(e);
-      return this;
-    }
-    
-    //returns the airport code
-    public String toString() {
-        return AirportCode;
-      }
-
-    
-  }
-  
-
-  //this class generates the routes between each node
-  static class Edge{
-    public final Node from;
-    public final Node to;
-    public final Route r;
-    
-    //the constructor requires a to and from node as well as an identifier in the means of a route 
-    public Edge(Node from, Node to, Route r) {
-      this.from = from;
-      this.to = to;
-      this.r = r;
-    		  }
-    @Override
-    public boolean equals(Object obj) {
-      Edge e = (Edge)obj;
-      return e.from == from && e.to == to;
-    }
-    
-    
-    public Route getRoute(){
-    	
-    	return r;
-    	
-    }
-
-  }
-    */
-  
     static class Path{
     	public final LinkedList <Route> r;
     	
@@ -93,9 +31,7 @@ public class Graph {
     		return r;
     		
     	}
-    
-    	    	
-    	
+	
     }
     		
 
@@ -126,7 +62,7 @@ public class Graph {
    //a= getArrivingRoutes(allAirports.get(2));
    //System.out.println(a.getFirst().toString());
    
-   path = pathFind(allAirports.get(0), allAirports.get(1));
+   path = pathFind(allAirports.get(0), allAirports.get(1),allAirports);
    //System.out.println(path.isEmpty());
    System.out.println(path.size());
    if(!path.isEmpty()){
@@ -227,7 +163,7 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 
  }
  
- public static LinkedList <Path> pathFind(Node Origin, Node Destination){
+ public static LinkedList <Path> pathFind(Node Origin, Node Destination, LinkedList <Node> allAirports){
 		
 	 System.out.println("Origin: "+Origin.toString()+" \tDestination: "+ Destination.toString());
 	 
@@ -255,13 +191,17 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 			else{
 				
 				for(int k=0;k<orgOutgoing.size();k++){
-					
+					for(int u=0;u<allAirports.size();u++){
+						
+						if(allAirports.get(u).toString().matches(orgOutgoing.get(k).getDestination().toString())){
 					//System.out.println(orgOutgoing.get(k).getDestination().toString());
 					//System.out.println(Destination.toString());
-				
-					System.out.println("New Origin: "+orgOutgoing.get(k).getDestination().toString());
-					path=pathFind(orgOutgoing.get(k).getDestination(),Destination);
 					
+					System.out.println("New Origin: "+orgOutgoing.get(k).getDestination().toString());
+					path=pathFind(allAirports.get(u),Destination, allAirports);
+						}
+					
+					}
 				}
 				
 			}
@@ -272,52 +212,5 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 
 			}
 	 return path;
-	 }
-	 
-	 
- 
- /*
- //this method will generate paths between 
-  public static LinkedList<Route> getPath(Node Origin, Node Destination, LinkedList<Route> allRoutes){
-	 
-	 LinkedList<Route> destIncoming = getArrivingRoutes(Destination, allRoutes);
-	 LinkedList<Route> orgOutgoing = getDepartingRoutes(Origin, allRoutes);
-	 LinkedList<Route> path = new LinkedList<Route>();
-	 
-	 for(int i=0;i<destIncoming.size();i++){
-			
-			for(int k=0;k<orgOutgoing.size();k++){
-				
-				if(Destination.toString().matches(orgOutgoing.get(k).getDestination())){
-					
-					path.add(orgOutgoing.get(k));
-					System.out.println("Direct route found.");
-					System.out.println(orgOutgoing.get(k).toString());
-
-				}else{
-					if(orgOutgoing.get(k).getDestination().matches(destIncoming.get(i).getOrigin())){
-						
-						if(destIncoming.get(i).getDepTime()-orgOutgoing.get(k).getArrivalTime()>30){
-							
-						System.out.println("Intermediate Route found!");
-						System.out.println(orgOutgoing.get(k).toString());
-						path.add(orgOutgoing.get(k));
-						path.add(destIncoming.get(i));
-						
-						System.out.println(destIncoming.get(i).toString());
-						}
-						
-					}
-					
-				}
-			}
-	 }
-	 
-	 
-	 return path;
-	 
- }
-  */
-  
- 
+	 } 
 }

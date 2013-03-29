@@ -1,9 +1,7 @@
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -68,6 +66,8 @@ public class Routes extends javax.swing.JFrame {
         airlineComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Create New Route");
+        setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(700, 250));
         setResizable(false);
 
@@ -133,45 +133,38 @@ public class Routes extends javax.swing.JFrame {
                     .addComponent(routeNumberLabel)
                     .addComponent(routeNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
-                .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(originLabel)
-                    .addComponent(originText, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(originText, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addComponent(originValidationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(36, 36, 36)
-                .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(destinationLabel)
-                    .addComponent(destinationText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(destinationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(destinationText, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(destinationValidationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
                 .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(acceptButton)
                     .addGroup(routePanelLayout.createSequentialGroup()
                         .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(departLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(departTimeText))
+                            .addComponent(departTimeText)
+                            .addComponent(departValidationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(35, 35, 35)
                         .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(arrivalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(arrivalTimeText))
+                            .addComponent(arrivalTimeText)
+                            .addComponent(arrivalValidationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(35, 35, 35)
                         .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(airlineLabel)
                             .addComponent(airlineComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
-                        .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(costLabel)
-                            .addComponent(costText, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(costText, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                            .addComponent(costValidationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(routePanelLayout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(originValidationLabel)
-                .addGap(57, 57, 57)
-                .addComponent(destinationValidationLabel)
-                .addGap(62, 62, 62)
-                .addComponent(departValidationLabel)
-                .addGap(58, 58, 58)
-                .addComponent(arrivalValidationLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(costValidationLabel)
-                .addGap(35, 35, 35))
         );
         routePanelLayout.setVerticalGroup(
             routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,42 +224,31 @@ public class Routes extends javax.swing.JFrame {
     }                                          
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
- this.originAirport = originText.getText();
        
         Pattern p = Pattern.compile("[A-Z]{3}");
        
-        Matcher m = p.matcher(originAirport);
+        Matcher m = p.matcher(originText.getText());
         
-        int i = 0;
-        
-        while(m.find()){
-            i++;
+        if(m.matches()){
+             originValidationLabel.setText("     ");
         }
-        if(i==0){
-        originValidationLabel.setText("Invalid");
-        
-        } 
-        
         else{
-            originValidationLabel.setText("     ");
+            originValidationLabel.setText("Invalid");
         }
         
-       this.destinationAirport = destinationText.getText();
-       
-        Matcher n = p.matcher(destinationAirport);
+              
+        Matcher n = p.matcher(destinationText.getText());
         
-        int j = 0;
-        
-        while(n.find()){
-            j++;
-        }
-        if(j==0){
-        destinationValidationLabel.setText("Invalid");
-        } 
-        
-        else{
+        if(n.matches()){
             destinationValidationLabel.setText("     ");
         }
+        else{
+            destinationValidationLabel.setText("Invalid");
+        }
+        
+        
+            
+        
     }                                            
 
     /**
@@ -317,46 +299,13 @@ public class Routes extends javax.swing.JFrame {
     public String getOrigin(){
         this.originAirport = originText.getText();
        
-        Pattern p = Pattern.compile("[A-Z]{3}");
-       
-        Matcher m = p.matcher(originAirport);
-        
-        int i = 0;
-        
-        while(m.find()){
-            i++;
-        }
-        if(i==1){
-        
             return originAirport;
-        }
-        else{
-           originValidationLabel.setText("Invalid");
-           
-           return null;
-        }
     }
     public String getDestination(){
         this.destinationAirport = destinationText.getText();
        
-        Pattern p = Pattern.compile("[A-Z]{3}");
-       
-        Matcher m = p.matcher(destinationAirport);
-        
-        int i = 0;
-        
-        while(m.find()){
-            i++;
-        }
-        if(i==1){
-        
             return destinationAirport;
-        }
-        else{
-           destinationValidationLabel.setText("Invalid");
-           
-           return null;
-        }
+        
     }
     public int getDepartTime(){
        this.departText = departTimeText.getText();
@@ -411,4 +360,3 @@ public class Routes extends javax.swing.JFrame {
     private javax.swing.JPanel routePanel;
     // End of variables declaration                   
 }
-

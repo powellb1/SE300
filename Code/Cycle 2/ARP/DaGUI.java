@@ -18,6 +18,8 @@ public class DaGUI extends javax.swing.JFrame {
     private String originString;
     private Object destAirport;
     private String destString;
+    Director d;
+    addAirport a = new addAirport();
     
     public DaGUI() {
         initComponents();
@@ -57,6 +59,7 @@ public class DaGUI extends javax.swing.JFrame {
         saveOption = new javax.swing.JMenuItem();
         routesTab = new javax.swing.JMenu();
         newRouteOption = new javax.swing.JMenuItem();
+        deleteRouteOption = new javax.swing.JMenuItem();
         airportsTab = new javax.swing.JMenu();
         openCloseOption = new javax.swing.JMenuItem();
         newAirportOption = new javax.swing.JMenuItem();
@@ -238,6 +241,15 @@ public class DaGUI extends javax.swing.JFrame {
         });
         routesTab.add(newRouteOption);
 
+        deleteRouteOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        deleteRouteOption.setText("Delete Route");
+        deleteRouteOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteRouteOptionActionPerformed(evt);
+            }
+        });
+        routesTab.add(deleteRouteOption);
+
         daMenu.add(routesTab);
 
         airportsTab.setText("Airports");
@@ -295,17 +307,17 @@ public class DaGUI extends javax.swing.JFrame {
 
     private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originBoxActionPerformed
         
-        Pattern p = Pattern.compile("[A-Z]");
+        //Pattern p = Pattern.compile("[A-Z]");
         
-        originAirport = originBox.getSelectedItem();
+        //originAirport = originBox.getSelectedItem();
         
-        destBox.addItem(originAirport);
+        //destBox.addItem(originAirport);
         
-        originString = originAirport.toString();
+       // originString = originAirport.toString();
         
-        Matcher m = p.matcher(originString);
+       // Matcher m = p.matcher(originString);
              
-        destBox.removeItem(originAirport);
+       // destBox.removeItem(originAirport);
         
     }//GEN-LAST:event_originBoxActionPerformed
 
@@ -332,8 +344,15 @@ public class DaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_openCloseOptionActionPerformed
 
     private void newAirportOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAirportOptionActionPerformed
-        new addAirport();
+       a.setVisible(true);
+       a.passDirector(d);   
     }//GEN-LAST:event_newAirportOptionActionPerformed
+    
+    private void deleteRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteOptionActionPerformed
+        d=a.updateDirector();
+    	new DeleteRoute();
+        System.out.println(d.getAirports().get(d.getAirports().size()-1).toString());
+    }//GEN-LAST:event_deleteRouteOptionActionPerformed
 
     private void categoriesBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriesBoxActionPerformed
         
@@ -362,6 +381,11 @@ public class DaGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_categoriesBoxActionPerformed
 
+    public void passDirector(Director d){
+    	
+    	this.d = (Director)d.clone();
+    	
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel airportValidationLabel;
@@ -369,6 +393,7 @@ public class DaGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox categoriesBox;
     private javax.swing.JLabel categoriesLabel;
     private javax.swing.JMenuBar daMenu;
+    private javax.swing.JMenuItem deleteRouteOption;
     private javax.swing.JComboBox destBox;
     private javax.swing.JLabel destLabel;
     private javax.swing.JMenu fileTab;

@@ -36,6 +36,8 @@ public class Main {
 		FileInput f = null;
 		ArrayList <Airport> air;
 		LinkedList <Route> r;
+		Director d = new Director();
+		g.passDirector(d);
 		
 		try {
 			f = new FileInput();

@@ -18,10 +18,11 @@ public class addAirport extends javax.swing.JFrame {
     /**
      * Creates new form addAirport
      */
+	Director d;
+	
     public addAirport() {
         initComponents();
         setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     /**
@@ -45,7 +46,7 @@ public class addAirport extends javax.swing.JFrame {
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt, airCodeField, code);
+                addButtonActionPerformed(evt, airCodeField, result);
             }
         });
 
@@ -91,6 +92,8 @@ public class addAirport extends javax.swing.JFrame {
                 {
   
                 	result.setText("Success!");
+                	d.addAirport(new Airport(airCodeField.getText(),0,0));
+                	System.out.println(d.getAirports().get(d.getAirports().size()-1).toString());
                 	
                 }else{
                 	result.setText("Failed! The format is incorrect!");
@@ -98,6 +101,16 @@ public class addAirport extends javax.swing.JFrame {
               
     }//GEN-LAST:event_addButtonActionPerformed
 
+public void passDirector(Director d){
+    	
+    	this.d = (Director)d.clone();
+    	
+    }
+public Director updateDirector(){
+	
+	return d;
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton addButton;
     private javax.swing.JTextField airCodeField;

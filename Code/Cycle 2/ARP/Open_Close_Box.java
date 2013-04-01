@@ -27,6 +27,13 @@ public class Open_Close_Box extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Air_Panel2 = new javax.swing.JPanel();
+        Combo_Airport2 = new javax.swing.JComboBox();
+        From_lbl2 = new javax.swing.JLabel();
+        Until_lbl2 = new javax.swing.JLabel();
+        Combo_Depart_Time2 = new javax.swing.JTextField();
+        Combo_Arrive_Time2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         Open_Airport_Ok = new javax.swing.JButton();
         Close_tab = new javax.swing.JTabbedPane();
         Air_Panel = new javax.swing.JPanel();
@@ -37,14 +44,64 @@ public class Open_Close_Box extends javax.swing.JFrame {
         Combo_Arrive_Time = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         Air_Panel1 = new javax.swing.JPanel();
-        Combo_Airport1 = new javax.swing.JComboBox();
-        From_lbl1 = new javax.swing.JLabel();
-        Until_lbl1 = new javax.swing.JLabel();
-        Combo_Depart_Time1 = new javax.swing.JTextField();
-        Combo_Arrive_Time1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        Until_lbl1 = new javax.swing.JLabel();
+        From_lbl1 = new javax.swing.JLabel();
+        Combo_Airport1 = new javax.swing.JComboBox();
+        Combo_Arrive_Time1 = new javax.swing.JTextField();
+        Combo_Depart_Time1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        Air_Panel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose Your Airport"));
+
+        Combo_Airport2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ATL", "DCA", "JFK", "ORL" }));
+
+        From_lbl2.setText("End:");
+
+        Until_lbl2.setText("Begin:");
+
+        jLabel5.setText("Airport:");
+
+        javax.swing.GroupLayout Air_Panel2Layout = new javax.swing.GroupLayout(Air_Panel2);
+        Air_Panel2.setLayout(Air_Panel2Layout);
+        Air_Panel2Layout.setHorizontalGroup(
+            Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Air_Panel2Layout.createSequentialGroup()
+                .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Air_Panel2Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel5)
+                        .addGap(45, 45, 45)
+                        .addComponent(Combo_Airport2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Air_Panel2Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Until_lbl2)
+                            .addComponent(From_lbl2))
+                        .addGap(30, 30, 30)
+                        .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Combo_Depart_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Combo_Arrive_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(133, Short.MAX_VALUE))
+        );
+        Air_Panel2Layout.setVerticalGroup(
+            Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Air_Panel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Airport2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Depart_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Until_lbl2))
+                .addGap(18, 18, 18)
+                .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Arrive_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(From_lbl2))
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Open_Airport_Ok.setText("OK");
 
@@ -52,9 +109,9 @@ public class Open_Close_Box extends javax.swing.JFrame {
 
         Combo_Airport.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ATL", "DCA", "JFK", "ORL" }));
 
-        From_lbl.setText("From:");
+        From_lbl.setText("End:");
 
-        Until_lbl.setText("Until:");
+        Until_lbl.setText("Begin:");
 
         jLabel3.setText("Airport:");
 
@@ -62,123 +119,110 @@ public class Open_Close_Box extends javax.swing.JFrame {
         Air_Panel.setLayout(Air_PanelLayout);
         Air_PanelLayout.setHorizontalGroup(
             Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Air_PanelLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+            .addGroup(Air_PanelLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
                 .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Air_PanelLayout.createSequentialGroup()
-                        .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(From_lbl)
-                            .addComponent(jLabel3))
-                        .addGap(51, 51, 51)
-                        .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Combo_Depart_Time, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Combo_Arrive_Time, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Air_PanelLayout.createSequentialGroup()
-                        .addComponent(Until_lbl)
-                        .addGap(63, 63, 63)
-                        .addComponent(Combo_Airport, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addComponent(Until_lbl, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(From_lbl, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(30, 30, 30)
+                .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Combo_Airport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Combo_Depart_Time, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Combo_Arrive_Time, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         Air_PanelLayout.setVerticalGroup(
             Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Air_PanelLayout.createSequentialGroup()
-                .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Air_PanelLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(From_lbl))
-                    .addGroup(Air_PanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Until_lbl)
-                            .addComponent(Combo_Airport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(Combo_Depart_Time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Combo_Arrive_Time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Airport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Depart_Time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Until_lbl))
+                .addGap(18, 18, 18)
+                .addGroup(Air_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Arrive_Time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(From_lbl))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         Close_tab.addTab("Open", Air_Panel);
 
         Air_Panel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose Your Airport"));
 
-        Combo_Airport1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ATL", "DCA", "JFK", "ORL" }));
-
-        From_lbl1.setText("From:");
-
-        Until_lbl1.setText("Until:");
-
         jLabel4.setText("Airport:");
+
+        Until_lbl1.setText("Begin:");
+
+        From_lbl1.setText("End:");
+
+        Combo_Airport1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ATL", "DCA", "JFK", "ORL" }));
 
         javax.swing.GroupLayout Air_Panel1Layout = new javax.swing.GroupLayout(Air_Panel1);
         Air_Panel1.setLayout(Air_Panel1Layout);
         Air_Panel1Layout.setHorizontalGroup(
             Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Air_Panel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+            .addGroup(Air_Panel1Layout.createSequentialGroup()
+                .addGap(67, 67, 67)
                 .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Air_Panel1Layout.createSequentialGroup()
-                        .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(From_lbl1)
-                            .addComponent(jLabel4))
-                        .addGap(51, 51, 51)
-                        .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Combo_Depart_Time1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Combo_Arrive_Time1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Air_Panel1Layout.createSequentialGroup()
-                        .addComponent(Until_lbl1)
-                        .addGap(63, 63, 63)
-                        .addComponent(Combo_Airport1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addComponent(Until_lbl1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(From_lbl1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(30, 30, 30)
+                .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Combo_Airport1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Combo_Depart_Time1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Combo_Arrive_Time1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         Air_Panel1Layout.setVerticalGroup(
             Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Air_Panel1Layout.createSequentialGroup()
-                .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Air_Panel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(From_lbl1))
-                    .addGroup(Air_Panel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Until_lbl1)
-                            .addComponent(Combo_Airport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(Combo_Depart_Time1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Combo_Arrive_Time1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Airport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Depart_Time1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Until_lbl1))
+                .addGap(18, 18, 18)
+                .addGroup(Air_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Arrive_Time1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(From_lbl1))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         Close_tab.addTab("Close", Air_Panel1);
+        Air_Panel1.getAccessibleContext().setAccessibleName("Close an airport");
+        Air_Panel1.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Close_tab)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(Close_tab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(Open_Airport_Ok, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(141, 141, 141)
+                .addComponent(Open_Airport_Ok, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(Close_tab, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(Close_tab, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Open_Airport_Ok)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        Close_tab.getAccessibleContext().setAccessibleName("Open an airport");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -186,19 +230,26 @@ public class Open_Close_Box extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Air_Panel;
     private javax.swing.JPanel Air_Panel1;
+    private javax.swing.JPanel Air_Panel2;
     private javax.swing.JTabbedPane Close_tab;
     private javax.swing.JComboBox Combo_Airport;
     private javax.swing.JComboBox Combo_Airport1;
+    private javax.swing.JComboBox Combo_Airport2;
     private javax.swing.JTextField Combo_Arrive_Time;
     private javax.swing.JTextField Combo_Arrive_Time1;
+    private javax.swing.JTextField Combo_Arrive_Time2;
     private javax.swing.JTextField Combo_Depart_Time;
     private javax.swing.JTextField Combo_Depart_Time1;
+    private javax.swing.JTextField Combo_Depart_Time2;
     private javax.swing.JLabel From_lbl;
     private javax.swing.JLabel From_lbl1;
+    private javax.swing.JLabel From_lbl2;
     private javax.swing.JButton Open_Airport_Ok;
     private javax.swing.JLabel Until_lbl;
     private javax.swing.JLabel Until_lbl1;
+    private javax.swing.JLabel Until_lbl2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

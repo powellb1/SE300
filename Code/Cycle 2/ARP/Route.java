@@ -78,7 +78,7 @@ public class Route {
 	}
 	
 	public String Stringify(){
-		return String.format("Number is: %d \nAirline is: %s \nOrigin is: %s \nDeparture time is: %d \nDestination is: %s \nArrival time is: %d \nCost: %.2f \n",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
+		return String.format("%2d, %s, %4s, %5d, %4s, %5d, %.2f",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
 		
 	}
 	

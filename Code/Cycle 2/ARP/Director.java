@@ -1,4 +1,7 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -63,6 +66,35 @@ public class Director extends java.lang.Object implements java.lang.Cloneable{
 		airports.add(a);
 	}
 	
+	public void saveMeh(){
+	
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("savedOutput.txt", "UTF-8");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		writer.println("# The list of airports are as follows:\n");
+		for(int i=0;i<airports.size();i++){
+			
+			writer.println(airports.get(i).toString());
+			
+		}
+		writer.println("\n\n# The list of routes are as follows:\n");
+		for(int i=0;i<allRoutes.size();i++){
+			
+			writer.println(allRoutes.get(i).Stringify());
+			
+		}
+		writer.println("\n\n");
+		writer.close();
+		
+		
+	}
 	
 	
 	

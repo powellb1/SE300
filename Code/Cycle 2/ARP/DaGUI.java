@@ -74,14 +74,14 @@ public class DaGUI extends javax.swing.JFrame {
 
         destLabel.setText("Destination Airport");
 
-        originBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-----", "ATL", "ORL", "LAX" }));
+        originBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
         originBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 originBoxActionPerformed(evt);
             }
         });
 
-        destBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-----", "ATL", "ORL", "LAX" }));
+        destBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
 
         filterLabel.setText("Filters");
 
@@ -324,21 +324,28 @@ private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
        
+    	if(originBox.getSelectedIndex()==destBox.getSelectedIndex()){
+    	
+    		history.append("Invalid! Origin and destination are the same!\n");
+    		
+    	}else{
+    	
        originAirport = originBox.getSelectedItem();
        originString = originAirport.toString();
        destAirport = destBox.getSelectedItem();
        destString = destAirport.toString();
-       
+    	}   
        
     }//GEN-LAST:event_findButtonActionPerformed
 
     private void saveOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveOptionActionPerformed
-        // TODO add your handling code here:
+        d.saveMeh();
+        history.append("Information saved to savedOutput.txt");
     }//GEN-LAST:event_saveOptionActionPerformed
 
     private void newRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newRouteOptionActionPerformed
       // d=a.updateDirector();
-       originBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
+
        new routeFrame(d);
     	//r.setVisible(true);
     	//r.passDirector(d);
@@ -355,7 +362,7 @@ private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     
     private void deleteRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteOptionActionPerformed
     	new DeleteRoute(d);
-        System.out.println(d.getAirports().get(d.getAirports().size()-1).toString());
+        history.append("Airport "+d.getAirports().get(d.getAirports().size()-1).toString()+" has been added to the system.\n");
     }//GEN-LAST:event_deleteRouteOptionActionPerformed
 
     private void categoriesBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriesBoxActionPerformed

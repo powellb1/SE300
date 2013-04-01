@@ -48,18 +48,11 @@ public class FileInput{
         		   }
         		   
         	   		if(matcher.matches()){
-                			if(Integer.parseInt(matcher.group(4))>Integer.parseInt(matcher.group(6))){
+                			if(Integer.parseInt(matcher.group(4))<Integer.parseInt(matcher.group(6))&& Integer.parseInt(matcher.group(6))-Integer.parseInt(matcher.group(4))>30){
 	
-					System.out.println("The flight departs before it arrives!");
+					//System.out.println("The flight departs before it arrives!");
 						
-					}
-        	   			else if(Integer.parseInt(matcher.group(6))-Integer.parseInt(matcher.group(4))<30){
 					
-					System.out.println("The flight duration is less than 30 minutes!");	
-					
-					}
-					
-					else{
         	   			
 					Routes.add(new Route(Integer.parseInt(matcher.group(1)),matcher.group(2), new Node(matcher.group(3)), Integer.parseInt(matcher.group(4)), new Node(matcher.group(5)), Integer.parseInt(matcher.group(6)),Double.parseDouble(matcher.group(7))));
 					

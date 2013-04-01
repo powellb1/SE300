@@ -27,17 +27,17 @@ public class Main {
         }
     
         
-        
+		Director d = new Director();
           
-               DaGUI g = new DaGUI();
+               DaGUI g = new DaGUI(d);
                g.setVisible(true);
    
-		
+		/*
 		FileInput f = null;
 		ArrayList <Airport> air;
 		LinkedList <Route> r;
-		Director d = new Director();
-		g.passDirector(d);
+		
+		//g.passDirector(d);
 		
 		try {
 			f = new FileInput();
@@ -50,8 +50,8 @@ public class Main {
 		r=f.getRoutes();
 		
 		System.out.println(r.get(2).toString());
-		System.out.println(air.get(0).toString());
-
+		//System.out.println(air.get(0).toString());
+*/
 		
 	}
 	

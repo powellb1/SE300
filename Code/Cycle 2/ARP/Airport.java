@@ -27,6 +27,11 @@ public class Airport {
 	
 	public String toString(){
 		
+		return name;
+	}
+	/*
+	public String toString(){
+		
 		String s;
 		
 		if(closeEnd-closeBegin>0){
@@ -41,7 +46,7 @@ public class Airport {
 		return s;
 		
 	}
-	
+	*/
 	public String getCode(){
 		
 		return name;

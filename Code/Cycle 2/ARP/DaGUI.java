@@ -19,9 +19,10 @@ public class DaGUI extends javax.swing.JFrame {
     private Object destAirport;
     private String destString;
     Director d;
-    addAirport a = new addAirport();
+    //addAirport a = new addAirport();
     
-    public DaGUI() {
+    public DaGUI(Director d) {
+    	this.d=d;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -305,7 +306,7 @@ public class DaGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originBoxActionPerformed
+private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originBoxActionPerformed
         
         //Pattern p = Pattern.compile("[A-Z]");
         
@@ -336,7 +337,11 @@ public class DaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_saveOptionActionPerformed
 
     private void newRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newRouteOptionActionPerformed
-        new routeFrame();
+      // d=a.updateDirector();
+       originBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
+       new routeFrame(d);
+    	//r.setVisible(true);
+    	//r.passDirector(d);
     }//GEN-LAST:event_newRouteOptionActionPerformed
 
     private void openCloseOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openCloseOptionActionPerformed
@@ -344,13 +349,12 @@ public class DaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_openCloseOptionActionPerformed
 
     private void newAirportOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAirportOptionActionPerformed
-       a.setVisible(true);
-       a.passDirector(d);   
+    	new addAirport(d);
+    	   
     }//GEN-LAST:event_newAirportOptionActionPerformed
     
     private void deleteRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteOptionActionPerformed
-        d=a.updateDirector();
-    	new DeleteRoute();
+    	new DeleteRoute(d);
         System.out.println(d.getAirports().get(d.getAirports().size()-1).toString());
     }//GEN-LAST:event_deleteRouteOptionActionPerformed
 
@@ -381,11 +385,6 @@ public class DaGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_categoriesBoxActionPerformed
 
-    public void passDirector(Director d){
-    	
-    	this.d = (Director)d.clone();
-    	
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel airportValidationLabel;

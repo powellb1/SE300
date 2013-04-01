@@ -20,9 +20,11 @@ public class addAirport extends javax.swing.JFrame {
      */
 	Director d;
 	
-    public addAirport() {
+    public addAirport(Director d) {
+    	this.d=d;
         initComponents();
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**
@@ -101,6 +103,7 @@ public class addAirport extends javax.swing.JFrame {
               
     }//GEN-LAST:event_addButtonActionPerformed
 
+    /*
 public void passDirector(Director d){
     	
     	this.d = (Director)d.clone();
@@ -110,7 +113,7 @@ public Director updateDirector(){
 	
 	return d;
 }
-    
+  */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton addButton;
     private javax.swing.JTextField airCodeField;

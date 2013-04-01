@@ -12,7 +12,10 @@ public class DeleteRoute extends javax.swing.JFrame {
     /**
      * Creates new form DeleteRoute
      */
-    public DeleteRoute() {
+	Director d;
+	
+    public DeleteRoute(Director d) {
+    	this.d=d;
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -71,7 +74,7 @@ public class DeleteRoute extends javax.swing.JFrame {
             }
         });
 
-        routeBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-----", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        routeBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAllRoutes().toArray()));
         routeBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 routeBoxActionPerformed(evt);
@@ -180,7 +183,9 @@ public class DeleteRoute extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-
+    	int i=routeBox.getSelectedIndex();
+    	d.getAllRoutes().remove(i);
+    	routeBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAllRoutes().toArray()));
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void destFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destFieldActionPerformed
@@ -188,43 +193,17 @@ public class DeleteRoute extends javax.swing.JFrame {
     }//GEN-LAST:event_destFieldActionPerformed
 
     private void routeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeBoxActionPerformed
-        // TODO add your handling code here:
+    	
+    	int i=routeBox.getSelectedIndex();
+    	airlineField.setText(d.getAllRoutes().get(i).getAirline());
+    	arrivalField.setText(Integer.toString(d.getAllRoutes().get(i).getArrivalTime()));
+    	costField.setText(Double.toString(d.getAllRoutes().get(i).getCost()));
+    	departField.setText(Integer.toString(d.getAllRoutes().get(i).getDepTime()));
+    	destField.setText(d.getAllRoutes().get(i).getDestination().toString());
+    	originField.setText(d.getAllRoutes().get(i).getOrigin().toString());
     }//GEN-LAST:event_routeBoxActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteRoute.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DeleteRoute().setVisible(true);
-            }
-        });
-    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField airlineField;
     private javax.swing.JLabel airlineLabel;

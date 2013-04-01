@@ -45,7 +45,7 @@ public class Route {
 		Origin = origin;
 	}
 
-	public double getDepTime() {
+	public int getDepTime() {
 		return depTime;
 	}
 
@@ -61,7 +61,7 @@ public class Route {
 		Destination = destination;
 	}
 
-	public double getArrivalTime() {
+	public int getArrivalTime() {
 		return arrivalTime;
 	}
 
@@ -77,11 +77,15 @@ public class Route {
 		this.cost = cost;
 	}
 	
+	public String Stringify(){
+		return String.format("Number is: %d \nAirline is: %s \nOrigin is: %s \nDeparture time is: %d \nDestination is: %s \nArrival time is: %d \nCost: %.2f \n",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
+		
+	}
+	
 	public String toString(){
 		
 		//System.out.println("Number is: "+ number +"Airline is: " + Airline + "Origin is: " + Origin + "Departure time is: "+ depTime + "Destination is: "+ Destination + "Arrival time is: " + arrivalTime + "Cost: " + cost );
-		return String.format("Number is: %d \nAirline is: %s \nOrigin is: %s \nDeparture time is: %d \nDestination is: %s \nArrival time is: %d \nCost: %.2f \n",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
-		
+		return Integer.toString(number);
 	}
 	
 }

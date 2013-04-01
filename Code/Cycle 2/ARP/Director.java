@@ -11,8 +11,8 @@ import java.util.LinkedList;
  */
 public class Director extends java.lang.Object implements java.lang.Cloneable{
 	
-	LinkedList<Route> allRoutes;
-	ArrayList<Airport> airports;
+	private LinkedList<Route> allRoutes;
+	private ArrayList<Airport> airports;
 	
 	@SuppressWarnings("unchecked")
 	public Object clone(){

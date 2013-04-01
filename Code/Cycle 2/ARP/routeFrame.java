@@ -28,11 +28,14 @@ public class routeFrame extends javax.swing.JFrame {
     private boolean arrival;
     private int flightDifference;
     
+    Director d;
     
-    public routeFrame() {
+    public routeFrame(Director d) {
+    	this.d = d;
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
+        
     }
 
     /**
@@ -82,6 +85,7 @@ public class routeFrame extends javax.swing.JFrame {
         });
 
         routeNumberLabel.setText("Route #");
+        routeNumberText.setText(Integer.toString(d.getAllRoutes().get(d.getAllRoutes().size()-1).getNumber()+1));
 
         originLabel.setText("Origin");
 
@@ -363,6 +367,16 @@ public class routeFrame extends javax.swing.JFrame {
         return cost;
     }
    
+public void passDirector(Director d){
+    	
+    	this.d = (Director)d.clone();
+    	
+    }
+public Director updateDirector(){
+	
+	return d;
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceptButton;
     private javax.swing.JLabel airlineLabel;

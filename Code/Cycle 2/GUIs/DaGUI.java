@@ -58,6 +58,7 @@ public class DaGUI extends javax.swing.JFrame {
         saveOption = new javax.swing.JMenuItem();
         routesTab = new javax.swing.JMenu();
         newRouteOption = new javax.swing.JMenuItem();
+        deleteRouteOption = new javax.swing.JMenuItem();
         airportsTab = new javax.swing.JMenu();
         openCloseOption = new javax.swing.JMenuItem();
         newAirportOption = new javax.swing.JMenuItem();
@@ -239,6 +240,10 @@ public class DaGUI extends javax.swing.JFrame {
         });
         routesTab.add(newRouteOption);
 
+        deleteRouteOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        deleteRouteOption.setText("Delete Route");
+        routesTab.add(deleteRouteOption);
+
         daMenu.add(routesTab);
 
         airportsTab.setText("Airports");
@@ -404,6 +409,7 @@ public class DaGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox categoriesBox;
     private javax.swing.JLabel categoriesLabel;
     private javax.swing.JMenuBar daMenu;
+    private javax.swing.JMenuItem deleteRouteOption;
     private javax.swing.JComboBox destBox;
     private javax.swing.JLabel destLabel;
     private javax.swing.JMenu fileTab;

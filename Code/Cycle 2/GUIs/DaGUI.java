@@ -296,17 +296,17 @@ public class DaGUI extends javax.swing.JFrame {
 
     private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originBoxActionPerformed
         
-        Pattern p = Pattern.compile("[A-Z]");
+        //Pattern p = Pattern.compile("[A-Z]");
         
-        originAirport = originBox.getSelectedItem();
+        //originAirport = originBox.getSelectedItem();
         
-        destBox.addItem(originAirport);
+        //destBox.addItem(originAirport);
         
-        originString = originAirport.toString();
+       // originString = originAirport.toString();
         
-        Matcher m = p.matcher(originString);
+       // Matcher m = p.matcher(originString);
              
-        destBox.removeItem(originAirport);
+       // destBox.removeItem(originAirport);
         
     }//GEN-LAST:event_originBoxActionPerformed
 

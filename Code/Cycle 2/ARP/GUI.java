@@ -3,20 +3,18 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Airport;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox Destination;
+    private javax.swing.JComboBox Destination;
     private javax.swing.JTextArea History;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox Origin;
-    javax.swing.JTable RouteTable;
+    private javax.swing.JComboBox Origin;
+    private javax.swing.JTable RouteTable;
     private javax.swing.JMenu Routes;
-    public javax.swing.JMenuItem addAirport;
+    private javax.swing.JMenuItem addAirport;
     private javax.swing.JMenuItem addRoute;
+    private javax.swing.JMenuItem closeAirport;
     private javax.swing.JLabel destinationLabel;
     private javax.swing.JMenuItem editRoute;
     private javax.swing.JMenu file;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox filter;
+    private javax.swing.JComboBox filter;
     private javax.swing.JButton filterButton;
     private javax.swing.JLabel filterLabel;
     private javax.swing.JTextArea filteredResults;
@@ -69,6 +67,7 @@ public class GUI extends javax.swing.JFrame {
         Airport = new javax.swing.JMenu();
         addAirport = new javax.swing.JMenuItem();
         openAirport = new javax.swing.JMenuItem();
+        closeAirport = new javax.swing.JMenuItem();
         Routes = new javax.swing.JMenu();
         addRoute = new javax.swing.JMenuItem();
         removeRoute = new javax.swing.JMenuItem();
@@ -145,6 +144,7 @@ public class GUI extends javax.swing.JFrame {
 
         file.setText("File");
 
+        save.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         save.setText("Save");
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,11 +157,18 @@ public class GUI extends javax.swing.JFrame {
 
         Airport.setText("Airports");
 
+        addAirport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         addAirport.setText("Add Airport");
+        
         Airport.add(addAirport);
 
+        openAirport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openAirport.setText("Open Airport");
         Airport.add(openAirport);
+
+        closeAirport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        closeAirport.setText("Close Airport");
+        Airport.add(closeAirport);
 
         jMenuBar1.add(Airport);
 
@@ -170,6 +177,7 @@ public class GUI extends javax.swing.JFrame {
         addRoute.setText("Add Route");
         Routes.add(addRoute);
 
+        removeRoute.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         removeRoute.setText("Remove Route");
         removeRoute.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +186,7 @@ public class GUI extends javax.swing.JFrame {
         });
         Routes.add(removeRoute);
 
+        editRoute.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         editRoute.setText("Edit Route");
         Routes.add(editRoute);
 
@@ -201,18 +210,19 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(filterLabel)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(originLabel)
                                 .addGap(92, 92, 92)
                                 .addComponent(Origin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(destinationLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Destination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(filterButton)
-                                .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(filterLabel)
+                                    .addComponent(destinationLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Destination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())

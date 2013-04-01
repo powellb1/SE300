@@ -43,7 +43,7 @@ public class FileInput{
         	   if(!line.contains("#")){
         		   if(line.length()==3 && !line.matches("[0-9]+")){
   
-        			Airports.add(new Airport(true,line,0,0));
+        			Airports.add(new Airport(line,0,0));
         			   
         		   }
         		   
@@ -73,6 +73,7 @@ public class FileInput{
         	   					
         	   					Airports.get(i).setCloseBegin(Integer.parseInt(matcherClose.group(2)));
         	   					Airports.get(i).setCloseEnd(Integer.parseInt(matcherClose.group(3)));
+        	   					Airports.get(i).setOpen();
         	   					
         	   				}
         	   				

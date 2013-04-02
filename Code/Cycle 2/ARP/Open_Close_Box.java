@@ -12,7 +12,10 @@ public class Open_Close_Box extends javax.swing.JFrame {
     /**
      * Creates new form Open_Close_Box
      */
-    public Open_Close_Box() {
+	Director d;
+	
+    public Open_Close_Box(Director d) {
+    	this.d=d;
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -51,9 +54,10 @@ public class Open_Close_Box extends javax.swing.JFrame {
         Combo_Arrive_Time1 = new javax.swing.JTextField();
         Combo_Depart_Time1 = new javax.swing.JTextField();
 
-        Air_Panel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose Your Airport"));
-
-        Combo_Airport2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ATL", "DCA", "JFK", "ORL" }));
+        //Air_Panel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose Your Airport"));
+        setTitle("Open/Close an Airport");
+        
+        Combo_Airport2.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
 
         From_lbl2.setText("End:");
 
@@ -61,53 +65,13 @@ public class Open_Close_Box extends javax.swing.JFrame {
 
         jLabel5.setText("Airport:");
 
-        javax.swing.GroupLayout Air_Panel2Layout = new javax.swing.GroupLayout(Air_Panel2);
-        Air_Panel2.setLayout(Air_Panel2Layout);
-        Air_Panel2Layout.setHorizontalGroup(
-            Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Air_Panel2Layout.createSequentialGroup()
-                .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Air_Panel2Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel5)
-                        .addGap(45, 45, 45)
-                        .addComponent(Combo_Airport2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Air_Panel2Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Until_lbl2)
-                            .addComponent(From_lbl2))
-                        .addGap(30, 30, 30)
-                        .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Combo_Depart_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Combo_Arrive_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(133, Short.MAX_VALUE))
-        );
-        Air_Panel2Layout.setVerticalGroup(
-            Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Air_Panel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Combo_Airport2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Combo_Depart_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Until_lbl2))
-                .addGap(18, 18, 18)
-                .addGroup(Air_Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Combo_Arrive_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(From_lbl2))
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Open_Airport_Ok.setText("OK");
 
-        Air_Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose Your Airport"));
+        Air_Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Opening an Airport"));
 
-        Combo_Airport.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ATL", "DCA", "JFK", "ORL" }));
+        Combo_Airport.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
 
         From_lbl.setText("End:");
 
@@ -153,7 +117,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
 
         Close_tab.addTab("Open", Air_Panel);
 
-        Air_Panel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose Your Airport"));
+        Air_Panel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Closing an Airport"));
 
         jLabel4.setText("Airport:");
 
@@ -161,7 +125,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
 
         From_lbl1.setText("End:");
 
-        Combo_Airport1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ATL", "DCA", "JFK", "ORL" }));
+        Combo_Airport1.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
 
         javax.swing.GroupLayout Air_Panel1Layout = new javax.swing.GroupLayout(Air_Panel1);
         Air_Panel1.setLayout(Air_Panel1Layout);

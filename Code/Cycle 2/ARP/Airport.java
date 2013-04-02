@@ -6,22 +6,13 @@ public class Airport {
 	private int closeBegin;
 	private int closeEnd;
 	
-	public Airport(String name, int closeBegin, int closeEnd){
+	public Airport(String name, boolean open,int closeBegin, int closeEnd){
 		
 		//this.open = open;
 		this.name = name;
 		this.closeBegin = closeBegin;
 		this.closeEnd=closeEnd;
-		
-		if(closeBegin==0 && closeEnd ==0){
-			
-			open =true;
-			
-		}
-		else{
-			open = false;
-			
-		}
+		this.open=open;
 		
 	}
 	
@@ -52,19 +43,10 @@ public class Airport {
 		return name;
 	}
 	
-	public void setOpen(){
+	public void setOpen(boolean open){
 		
-if(closeBegin==0 && closeEnd ==0){
-			
-			open =true;
-			
-		}
-		else{
-			open = false;
-			
-		}
-		
-		
+		this.open=open;
+	
 	}
 
 	public int getCloseBegin() {

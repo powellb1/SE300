@@ -2,8 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  *
@@ -175,7 +174,7 @@ public class DaGUI extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Route #", "Origin", "Destination", "Departure Time", "Arrival Time", "Airline", "Cost"
+                "Route #", "Origin", "Destination", "Dept. Time", "Arrival Time", "Airline", "Cost"
             }
         ) {
             Class[] types = new Class [] {
@@ -340,7 +339,7 @@ private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void saveOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveOptionActionPerformed
         d.saveMeh();
-        history.append("Information saved to savedOutput.txt");
+        history.append("Information saved to savedOutput.txt\n");
     }//GEN-LAST:event_saveOptionActionPerformed
 
     private void newRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newRouteOptionActionPerformed
@@ -352,7 +351,7 @@ private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }//GEN-LAST:event_newRouteOptionActionPerformed
 
     private void openCloseOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openCloseOptionActionPerformed
-       new Open_Close_Box();
+       new Open_Close_Box(d);
     }//GEN-LAST:event_openCloseOptionActionPerformed
 
     private void newAirportOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAirportOptionActionPerformed

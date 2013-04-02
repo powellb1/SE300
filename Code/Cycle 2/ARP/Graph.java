@@ -48,7 +48,7 @@ public class Graph {
 	  ArrayList<Airport> airports;
 	  FileInput f = null;
 	  LinkedList<Route> a;
-	  LinkedList <Path> path = null;
+	  LinkedList <Path> path = new LinkedList<Path>();
 	  
 	  
 	  try {
@@ -110,6 +110,7 @@ public class Graph {
 					  //this will only execute this portion if the node is the same as the origin
 					  if(airport.get(u).toString().matches(routes.get(i).getOrigin().toString())){
 						  
+						  //we then assign the current node we're at to n
 						  n=airport.get(u);
 						  
 					  }
@@ -190,10 +191,12 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 			return;
 			
 		}
-	 
+
 	 for(int i=0;i<orgOutgoing.size();i++){
 			r.add(orgOutgoing.get(i));
+			System.out.println("Size of LinkedList: "+r.size());
 			routeStack.push(orgOutgoing.get(i));
+			
 				
 			//System.out.println("Origin: "+orgOutgoing.get(i).getOrigin().toString());
 			//System.out.println("Destination: "+orgOutgoing.get(i).getDestination().toString());
@@ -202,7 +205,7 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 			
 			if(Destination.toString().matches(orgOutgoing.get(i).getDestination().toString())){
 				
-				
+				System.out.println("Size of r "+r.size());
 				  path.add(new Path(r));
 				 System.out.println(routeStack.toString());
 				  
@@ -216,9 +219,9 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 						if(allAirports.get(u).toString().matches(orgOutgoing.get(k).getDestination().toString())){
 					//System.out.println(orgOutgoing.get(k).getDestination().toString());
 					//System.out.println(Destination.toString());
-					
+
 					//System.out.println("New Origin: "+orgOutgoing.get(k).getDestination().toString());
-					pathFind(allAirports.get(u),Destination, allAirports,path);
+					//pathFind(allAirports.get(u),Destination, allAirports,path);
 						}
 					
 					}
@@ -235,4 +238,6 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 //return path; 
 
 	 } 
+ 
+ 
 }

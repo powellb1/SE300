@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -18,6 +20,7 @@ public class DaGUI extends javax.swing.JFrame {
     private Object destAirport;
     private String destString;
     Director d;
+    LinkedList <String> airlines = new LinkedList<String>();
     //addAirport a = new addAirport();
     
     public DaGUI(Director d) {
@@ -181,7 +184,7 @@ public class DaGUI extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
@@ -382,7 +385,13 @@ private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         if(categoriesBox.getSelectedItem() == "Airline"){
             subcategoriesBox.removeAllItems();
             subcategoriesBox.addItem("-----");
-            subcategoriesBox.addItem("DELTA");  // placeholder for variable containing list of Airlines
+            for(int i=0;i<d.getAllRoutes().size();i++){
+            	
+            	subcategoriesBox.addItem(d.getAllRoutes().get(i).getAirline());
+            	
+            }
+           // 
+            //subcategoriesBox.(d.getAirports().toArray().toString());  // placeholder for variable containing list of Airlines
             
         }
         if(categoriesBox.getSelectedItem() == "-----"){

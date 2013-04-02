@@ -42,6 +42,7 @@ public class addAirport extends javax.swing.JFrame {
         result = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add a New Airport");
 
         code.setText("Airport Code");
 
@@ -94,8 +95,8 @@ public class addAirport extends javax.swing.JFrame {
                 {
   
                 	result.setText("Success!");
-                	d.addAirport(new Airport(airCodeField.getText(),0,0));
-                	System.out.println(d.getAirports().get(d.getAirports().size()-1).toString());
+                	d.addAirport(new Airport(airCodeField.getText(),false,0,0));
+                	//System.out.println(d.getAirports().get(d.getAirports().size()-1).toString());
                 	
                 }else{
                 	result.setText("Failed! The format is incorrect!");

@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -14,6 +15,8 @@ import java.util.Stack;
 
 
 public class Graph {
+	
+	LinkedList <Path> p;
 	
     static class Path{
     	
@@ -69,7 +72,7 @@ public class Graph {
    //a= getArrivingRoutes(allAirports.get(2));
    //System.out.println(a.getFirst().toString());
    
-  pathFind(allAirports.get(0), allAirports.get(2),allAirports,path);
+  pathFind(allAirports.get(0), allAirports.get(1));
    //System.out.println(path.isEmpty());
    
    System.out.println(path.size());
@@ -172,6 +175,42 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 
  }
  
+ 
+ public static void pathFind(Node Origin, Node Destination){
+	 
+	 Stack <Node> nodeStack = new Stack <Node>();
+	 LinkedList <Node> visibleNodes = new LinkedList<Node>();
+	 
+	 nodeStack.push(Origin);
+	 
+	if(nodeStack.size()==0){
+		
+		return;
+		
+	}
+	
+	if(Origin.toString().matches(Destination.toString())){
+		System.out.println(nodeStack.size());
+		System.out.println(nodeStack.toString());
+		
+		
+	}else{
+		
+		visibleNodes=getVisibleNodes(Origin);
+		
+		for(int i=0;i<visibleNodes.size();i++){
+			
+			pathFind(visibleNodes.get(i),Destination);
+			
+		}
+		
+		
+	}
+	 nodeStack.pop();
+ }
+ 
+ 
+ /*
  public static void pathFind(Node Origin, Node Destination, LinkedList <Node> allAirports,LinkedList <Path> path){
 		
 	 //System.out.println("Origin: "+Origin.toString()+" \tDestination: "+ Destination.toString());
@@ -238,6 +277,27 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 //return path; 
 
 	 } 
- 
+ */
+ public static LinkedList <Node> getVisibleNodes(Node n){
+	 
+	 LinkedList<Node> visibleNodesunSorted = new LinkedList<Node>();
+	 
+	 for(int i=0;i<n.getInEdges().size();i++){
+		 
+		 visibleNodesunSorted.add(n.getInEdges().get(i).getFrom());
+		 
+	 }
+	 
+	 for(int i=0;i<n.getOutEdges().size();i++){
+		 
+		 visibleNodesunSorted.add(n.getOutEdges().get(i).getTo());
+		 
+	 }
+	 
+	 LinkedList <Node> visibleNodes = new LinkedList<Node>(new HashSet<Node>(visibleNodesunSorted));
+	 
+	 return visibleNodes;
+	 
+ }
  
 }

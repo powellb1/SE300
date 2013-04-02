@@ -24,6 +24,18 @@ class Node{
       return this;
     }
     
+    public LinkedList<Edge> getInEdges(){
+    	
+    	return inEdges;
+    	
+    }
+    
+    public LinkedList<Edge> getOutEdges(){
+    	
+    	return outEdges;
+    	
+    }
+    
     //returns the airport code
     public String toString() {
         return AirportCode;
@@ -50,6 +62,18 @@ class Node{
         public Route getRoute(){
         	
         	return r;
+        	
+        }
+        
+        public Node getTo(){
+        	
+        	return to;
+        	
+        }
+       
+        public Node getFrom(){
+        	
+        	return from;
         	
         }
 

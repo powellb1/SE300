@@ -1,0 +1,29 @@
+# The list of airports are as follows:
+
+ATL
+DCA
+ORL
+JFK
+YES
+
+
+# The list of routes are as follows:
+
+ 1, DELTA,  ATL,   800,  JFK,  1100, 184.00
+ 2, UNITED,  ATL,  1430,  JFK,  1800, 230.00
+ 3, DELTA,  ORL,   830,  JFK,  1230, 325.00
+ 4, UNITED,  ORL,  1000,  ATL,  1100, 150.00
+ 5, DELTA,  ORL,   820,  ATL,   930, 125.00
+ 6, UNITED,  ORL,   730,  DCA,  1100, 230.00
+ 8, UNITED,  DCA,  1200,  JFK,  1330, 140.00
+ 9, DELTA,  JFK,   800,  ATL,  1100, 184.00
+10, UNITED,  JFK,  1430,  ATL,  1800, 230.00
+11, DELTA,  JFK,   830,  ORL,  1230, 325.00
+12, UNITED,  ATL,  1000,  ORL,  1100, 150.00
+13, DELTA,  ATL,   820,  ORL,   930, 125.00
+14, UNITED,  DCA,   730,  ORL,  1100, 230.00
+15, DELTA,  DCA,   900,  ORL,  1120, 240.00
+16, UNITED,  JFK,  1200,  DCA,  1330, 140.00
+
+
+

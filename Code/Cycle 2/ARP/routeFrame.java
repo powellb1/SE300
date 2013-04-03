@@ -9,6 +9,12 @@ import java.util.regex.Pattern;
  *
  * @author Craig
  */
+
+//Should add a JLabel between the two combo boxes that says invalid or something if dest==origin
+//encompass the whole error checking within one giant if block
+//perhaps a pop-up window saying succes(?)
+
+
 @SuppressWarnings("serial")
 public class routeFrame extends javax.swing.JFrame {
 
@@ -115,14 +121,14 @@ public class routeFrame extends javax.swing.JFrame {
 
         costValidationLabel.setText("           ");
 
-        originBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        originBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
         originBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 originBoxActionPerformed(evt);
             }
         });
 
-        destinationBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
 
         airlineValidationLabel.setText("     ");
 
@@ -319,7 +325,7 @@ public class routeFrame extends javax.swing.JFrame {
        
     }//GEN-LAST:event_originBoxActionPerformed
 
-    
+    /*
     public void setRouteNumber(String routeNumber){
         routeNumber = this.routeNumber;
         
@@ -367,16 +373,7 @@ public class routeFrame extends javax.swing.JFrame {
         
         return cost;
     }
-   
-public void passDirector(Director d){
-    	
-    	this.d = (Director)d.clone();
-    	
-    }
-public Director updateDirector(){
-	
-	return d;
-}
+   */
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceptButton;

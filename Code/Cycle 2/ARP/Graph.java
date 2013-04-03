@@ -16,7 +16,9 @@ import java.util.Stack;
 
 public class Graph {
 	
-	LinkedList <Path> p;
+	static LinkedList <Path> p;
+	static LinkedList <Node> path;
+	
 	
     static class Path{
     	
@@ -180,9 +182,12 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 
 	 Stack <Node> nodeStack = new Stack <Node>();
 	 LinkedList <Node> visibleNodes = new LinkedList<Node>();
-	 
+	 System.out.println("Origin " +Origin.toString());
+	  
 	 nodeStack.push(Origin);
-	 
+	
+	 System.out.println(nodeStack.size());
+	
 	if(nodeStack.size()==0){
 		
 		return;
@@ -190,22 +195,27 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	}
 	
 	if(Origin.toString().matches(Destination.toString())){
-		System.out.println(nodeStack.size());
+	
+		//get a linkedlist of type route (somehow)
+		//create a path object
+		//add it to the linkedlist of paths
+		//call it a day
 		System.out.println(nodeStack.toString());
 		
-		
 	}else{
+		
 		
 		visibleNodes=getVisibleNodes(Origin);
 		
 		for(int i=0;i<visibleNodes.size();i++){
-			
+			System.out.println(nodeStack.toString());
 			pathFind(visibleNodes.get(i),Destination);
 			
 		}
 		
 		
 	}
+	
 	 nodeStack.pop();
  }
  
@@ -288,15 +298,17 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 		 
 	 }
 	 
+	 /*
 	 for(int i=0;i<n.getOutEdges().size();i++){
-		 
+
 		 visibleNodesunSorted.add(n.getOutEdges().get(i).getTo());
 		 
 	 }
+	 */
 	 
-	 LinkedList <Node> visibleNodes = new LinkedList<Node>(new HashSet<Node>(visibleNodesunSorted));
+	 return new LinkedList<Node>(new HashSet<Node>(visibleNodesunSorted));
 	 
-	 return visibleNodes;
+	 //return visibleNodes;
 	 
  }
  

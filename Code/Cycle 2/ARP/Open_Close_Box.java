@@ -9,6 +9,8 @@
  */
 public class Open_Close_Box extends javax.swing.JFrame {
 
+	//checking for invalid input
+	
     /**
      * Creates new form Open_Close_Box
      */

@@ -1,3 +1,5 @@
+import java.util.Vector;
+
 
 public class Route {
 
@@ -86,6 +88,14 @@ public class Route {
 		
 		//System.out.println("Number is: "+ number +"Airline is: " + Airline + "Origin is: " + Origin + "Departure time is: "+ depTime + "Destination is: "+ Destination + "Arrival time is: " + arrivalTime + "Cost: " + cost );
 		return Integer.toString(number);
+	}
+	
+	public Vector<Route> toVector(){
+		
+		
+		return null;
+		
+		
 	}
 	
 }

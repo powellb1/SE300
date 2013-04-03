@@ -1,4 +1,7 @@
+import java.util.HashSet;
 import java.util.LinkedList;
+
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this template, choose Tools | Templates
@@ -21,6 +24,18 @@ public class DaGUI extends javax.swing.JFrame {
     private String destString;
     Director d;
     LinkedList <String> airlines = new LinkedList<String>();
+    
+    //for JTable
+    LinkedList<Integer> number = new LinkedList<Integer>();
+    LinkedList<String> airline = new LinkedList<String>();
+    LinkedList<String> origin = new LinkedList<String>();    
+    LinkedList<Integer> depTime = new LinkedList<Integer>();
+    LinkedList<String> destination = new LinkedList<String>();
+    LinkedList<Integer> arrivalTime = new LinkedList<Integer>();
+    LinkedList<Double> cost = new LinkedList<Double>();
+
+
+
     //addAirport a = new addAirport();
     
     public DaGUI(Director d) {
@@ -169,25 +184,39 @@ public class DaGUI extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
+
         info.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
+            new Object [][] {},
             new String [] {
                 "Route #", "Origin", "Destination", "Dept. Time", "Arrival Time", "Airline", "Cost"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
             };
-
+            
             public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
+      
+        
+        for(int i=0;i<d.getAllRoutes().size();i++){
+        	
+        	 if ( i+1 < info.getRowCount()-1 )
+        		    ( (DefaultTableModel) info.getModel() ).insertRow(i+1,new String[]{Integer.toString(d.getAllRoutes().get(i).getNumber()),d.getAllRoutes().get(i).getAirline(),
+        		    		d.getAllRoutes().get(i).getOrigin().toString(),Integer.toString(d.getAllRoutes().get(i).getDepTime()),d.getAllRoutes().get(i).getDestination().toString(),
+        		    		Integer.toString(d.getAllRoutes().get(i).getArrivalTime())});//,Double.toString(d.getAllRoutes().get(i).getCost())});
+        		  else
+        		    ( (DefaultTableModel) info.getModel() ).addRow(new String[]{Integer.toString(d.getAllRoutes().get(i).getNumber()),d.getAllRoutes().get(i).getAirline(),
+        		    		d.getAllRoutes().get(i).getOrigin().toString(),Integer.toString(d.getAllRoutes().get(i).getDepTime()),d.getAllRoutes().get(i).getDestination().toString(),
+        		    		Integer.toString(d.getAllRoutes().get(i).getArrivalTime())});//,Double.toString(d.getAllRoutes().get(i).getCost())});	
+        	
+        	
+        	
+        }
+        
+        
         info.setColumnSelectionAllowed(true);
         info.getTableHeader().setResizingAllowed(false);
         info.getTableHeader().setReorderingAllowed(false);
@@ -385,14 +414,23 @@ private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         if(categoriesBox.getSelectedItem() == "Airline"){
             subcategoriesBox.removeAllItems();
             subcategoriesBox.addItem("-----");
-            for(int i=0;i<d.getAllRoutes().size();i++){
+            
+            LinkedList <String> boxie = new LinkedList<String>();
+            
+            for(int i=0;i<d.getAirports().size();i++){
             	
-            	subcategoriesBox.addItem(d.getAllRoutes().get(i).getAirline());
+            	boxie.add(d.getAllRoutes().get(i).getAirline());
             	
             }
-           // 
-            //subcategoriesBox.(d.getAirports().toArray().toString());  // placeholder for variable containing list of Airlines
             
+            LinkedList <String> newBoxies = new LinkedList<String>(new HashSet<String>(boxie));
+            
+            for(int i=0;i<newBoxies.size();i++){
+            
+            subcategoriesBox.addItem(newBoxies.get(i));
+            
+            }
+                       
         }
         if(categoriesBox.getSelectedItem() == "-----"){
             subcategoriesBox.removeAllItems();

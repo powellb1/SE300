@@ -12,25 +12,10 @@ import java.util.LinkedList;
  * @author Brian
  *
  */
-public class Director extends java.lang.Object implements java.lang.Cloneable{
+public class Director{
 	
 	private LinkedList<Route> allRoutes;
 	private ArrayList<Airport> airports;
-	
-	@SuppressWarnings("unchecked")
-	public Object clone(){
-		Director other = null;
-		try {
-			 other = (Director)super.clone();
-			other.allRoutes = (LinkedList<Route>)allRoutes.clone();
-			other.airports = (ArrayList<Airport>)airports.clone();
-			return other;
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return other;
-	}
 	
 	public Director(){
 

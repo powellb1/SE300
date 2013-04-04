@@ -75,6 +75,7 @@ public class routeFrame extends javax.swing.JFrame {
         destinationBox = new javax.swing.JComboBox();
         airlineText = new javax.swing.JTextField();
         airlineValidationLabel = new javax.swing.JLabel();
+        matchingLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create New Route");
@@ -85,6 +86,7 @@ public class routeFrame extends javax.swing.JFrame {
         intructionsLabel.setText("Please Input The Route Information");
 
         routeNumberText.setEditable(false);
+        routeNumberText.setText(Integer.toString(d.getAllRoutes().getLast().getNumber()+1));
         routeNumberText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 routeNumberTextActionPerformed(evt);
@@ -92,7 +94,6 @@ public class routeFrame extends javax.swing.JFrame {
         });
 
         routeNumberLabel.setText("Route #");
-        routeNumberText.setText(Integer.toString(d.getAllRoutes().get(d.getAllRoutes().size()-1).getNumber()+1));
 
         originLabel.setText("Origin");
 
@@ -132,6 +133,9 @@ public class routeFrame extends javax.swing.JFrame {
 
         airlineValidationLabel.setText("     ");
 
+        matchingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        matchingLabel.setText(" ");
+
         javax.swing.GroupLayout routePanelLayout = new javax.swing.GroupLayout(routePanel);
         routePanel.setLayout(routePanelLayout);
         routePanelLayout.setHorizontalGroup(
@@ -141,18 +145,23 @@ public class routeFrame extends javax.swing.JFrame {
                 .addComponent(intructionsLabel)
                 .addGap(239, 239, 239))
             .addGroup(routePanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
                 .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(routeNumberLabel)
-                    .addComponent(routeNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(originLabel)
-                    .addComponent(originBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(destinationLabel)
-                    .addComponent(destinationBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(routePanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(routeNumberLabel)
+                            .addComponent(routeNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(originLabel)
+                            .addComponent(originBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(destinationLabel)
+                            .addComponent(destinationBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(routePanelLayout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(matchingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(38, 38, 38)
                 .addGroup(routePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(acceptButton)
@@ -206,7 +215,8 @@ public class routeFrame extends javax.swing.JFrame {
                     .addComponent(departValidationLabel)
                     .addComponent(arrivalValidationLabel)
                     .addComponent(costValidationLabel)
-                    .addComponent(airlineValidationLabel))
+                    .addComponent(airlineValidationLabel)
+                    .addComponent(matchingLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(acceptButton)
                 .addContainerGap())
@@ -232,7 +242,7 @@ public class routeFrame extends javax.swing.JFrame {
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
        
-        Pattern p = Pattern.compile("[A-Z]+");
+        Pattern p = Pattern.compile("[A-Z]*\\s*[A-Z]+");
        
         Matcher m = p.matcher(airlineText.getText());
         
@@ -317,12 +327,22 @@ public class routeFrame extends javax.swing.JFrame {
             
        departValidationLabel.setText("Invalid");
        arrivalValidationLabel.setText("Invalid");
-        }    
+        }  
+        if(originBox.getSelectedIndex()==destinationBox.getSelectedIndex()){
+        	
+        	matchingLabel.setText("Invalid!");
+        	
+        }else{
+        	
+        	matchingLabel.setText("Success!");
+        	
+        }
         
     }//GEN-LAST:event_acceptButtonActionPerformed
 
     private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originBoxActionPerformed
        
+        	
     }//GEN-LAST:event_originBoxActionPerformed
 
     /*
@@ -389,12 +409,11 @@ public class routeFrame extends javax.swing.JFrame {
     private javax.swing.JLabel departLabel;
     private javax.swing.JTextField departTimeText;
     private javax.swing.JLabel departValidationLabel;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox destinationBox;
+    private javax.swing.JComboBox destinationBox;
     private javax.swing.JLabel destinationLabel;
     private javax.swing.JLabel intructionsLabel;
-    @SuppressWarnings("rawtypes")
-	private javax.swing.JComboBox originBox;
+    private javax.swing.JLabel matchingLabel;
+    private javax.swing.JComboBox originBox;
     private javax.swing.JLabel originLabel;
     private javax.swing.JLabel routeNumberLabel;
     private javax.swing.JTextField routeNumberText;

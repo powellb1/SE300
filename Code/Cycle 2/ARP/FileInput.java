@@ -31,7 +31,7 @@ public class FileInput{
 			 line = br.readLine();
 		
 
-			 String regex = "R(\\d{3})\\W*([A-Z]+)\\W*([A-Z]{3})\\W*([0-9]{4})\\W*([A-Z]{3})\\W*([0-9]{4})\\W*([0-9]*\\.*[0-9]*).*";
+			 String regex = "R(\\d{3})\\W*([A-Z]*\\s*[A-Z]+)\\W*([A-Z]{3})\\W*([0-9]{4})\\W*([A-Z]{3})\\W*([0-9]{4})\\W*([0-9]*\\.*[0-9]*).*";
 			 Pattern pattern = Pattern.compile(regex);
 			 String regexClose = "([A-Z]{3})\\W*([0-9]{4})\\W*([0-9]{4}).*";
 			 Pattern patternClose = Pattern.compile(regexClose);

@@ -25,6 +25,8 @@ public class DaGUI extends javax.swing.JFrame {
     Director d;
     LinkedList <String> airlines = new LinkedList<String>();
     
+<<<<<<< HEAD
+=======
     //for JTable
     LinkedList<Integer> number = new LinkedList<Integer>();
     LinkedList<String> airline = new LinkedList<String>();
@@ -36,6 +38,7 @@ public class DaGUI extends javax.swing.JFrame {
 
 
 
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
     //addAirport a = new addAirport();
     
     public DaGUI(Director d) {
@@ -186,6 +189,30 @@ public class DaGUI extends javax.swing.JFrame {
 
 
         info.setModel(new javax.swing.table.DefaultTableModel(
+<<<<<<< HEAD
+                new Object [][] {
+
+                },
+                new String [] {
+                    "Route #", "Origin", "Destination", "Dept. Time", "Arrival Time", "Airline", "Cost"
+                }
+            ) {
+                Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                };
+                boolean[] canEdit = new boolean [] {
+                    false, false, false, false, false, false, true
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit [columnIndex];
+                }
+            });
+=======
             new Object [][] {},
             new String [] {
                 "Route #", "Origin", "Destination", "Dept. Time", "Arrival Time", "Airline", "Cost"
@@ -199,11 +226,21 @@ public class DaGUI extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
       
         
         for(int i=0;i<d.getAllRoutes().size();i++){
         	
         	 if ( i+1 < info.getRowCount()-1 )
+<<<<<<< HEAD
+        		    ( (DefaultTableModel) info.getModel() ).insertRow(i+1,new String[]{Integer.toString(d.getAllRoutes().get(i).getNumber()),d.getAllRoutes().get(i).getOrigin().toString(),
+        		    		d.getAllRoutes().get(i).getDestination().toString(),Integer.toString(d.getAllRoutes().get(i).getDepTime()),
+        		    		Integer.toString(d.getAllRoutes().get(i).getArrivalTime()),d.getAllRoutes().get(i).getAirline(),"$"+Double.toString(d.getAllRoutes().get(i).getCost())});
+        		  else
+        		    ( (DefaultTableModel) info.getModel() ).addRow(new String[]{Integer.toString(d.getAllRoutes().get(i).getNumber()),d.getAllRoutes().get(i).getOrigin().toString(),
+        		    		d.getAllRoutes().get(i).getDestination().toString(),Integer.toString(d.getAllRoutes().get(i).getDepTime()),
+        		    		Integer.toString(d.getAllRoutes().get(i).getArrivalTime()),d.getAllRoutes().get(i).getAirline(),"$"+Double.toString(d.getAllRoutes().get(i).getCost())});	
+=======
         		    ( (DefaultTableModel) info.getModel() ).insertRow(i+1,new String[]{Integer.toString(d.getAllRoutes().get(i).getNumber()),d.getAllRoutes().get(i).getAirline(),
         		    		d.getAllRoutes().get(i).getOrigin().toString(),Integer.toString(d.getAllRoutes().get(i).getDepTime()),d.getAllRoutes().get(i).getDestination().toString(),
         		    		Integer.toString(d.getAllRoutes().get(i).getArrivalTime())});//,Double.toString(d.getAllRoutes().get(i).getCost())});
@@ -211,6 +248,7 @@ public class DaGUI extends javax.swing.JFrame {
         		    ( (DefaultTableModel) info.getModel() ).addRow(new String[]{Integer.toString(d.getAllRoutes().get(i).getNumber()),d.getAllRoutes().get(i).getAirline(),
         		    		d.getAllRoutes().get(i).getOrigin().toString(),Integer.toString(d.getAllRoutes().get(i).getDepTime()),d.getAllRoutes().get(i).getDestination().toString(),
         		    		Integer.toString(d.getAllRoutes().get(i).getArrivalTime())});//,Double.toString(d.getAllRoutes().get(i).getCost())});	
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
         	
         	
         	
@@ -375,11 +413,7 @@ private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }//GEN-LAST:event_saveOptionActionPerformed
 
     private void newRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newRouteOptionActionPerformed
-      // d=a.updateDirector();
-
        new routeFrame(d);
-    	//r.setVisible(true);
-    	//r.passDirector(d);
     }//GEN-LAST:event_newRouteOptionActionPerformed
 
     private void openCloseOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openCloseOptionActionPerformed
@@ -417,12 +451,24 @@ private void originBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             
             LinkedList <String> boxie = new LinkedList<String>();
             
+<<<<<<< HEAD
+            for(int i=0;i<d.getAllRoutes().size();i++){
+            	
+            	boxie.add(d.getAllRoutes().get(i).getAirline());
+            	
+            	
+            }
+            
+            //LinkedList<String>newBoxies = boxie;
+            
+=======
             for(int i=0;i<d.getAirports().size();i++){
             	
             	boxie.add(d.getAllRoutes().get(i).getAirline());
             	
             }
             
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
             LinkedList <String> newBoxies = new LinkedList<String>(new HashSet<String>(boxie));
             
             for(int i=0;i<newBoxies.size();i++){

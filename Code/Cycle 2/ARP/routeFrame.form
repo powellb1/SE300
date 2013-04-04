@@ -50,6 +50,32 @@
                   <EmptySpace min="-2" pref="239" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="routeNumberLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="routeNumberText" min="-2" pref="54" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="originLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="originBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="destinationLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="destinationBox" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="matchingLabel" min="-2" pref="89" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+=======
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="routeNumberLabel" min="-2" max="-2" attributes="0"/>
@@ -68,6 +94,7 @@
                       <Component id="destinationValidationLabel" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="acceptButton" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -83,11 +110,20 @@
                               <Component id="arrivalValidationLabel" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="airlineLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="airlineText" max="32767" attributes="0"/>
+                              <Component id="airlineValidationLabel" alignment="0" pref="54" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+=======
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="airlineLabel" min="-2" max="-2" attributes="0"/>
                               <Component id="airlineComboBox" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="costLabel" min="-2" max="-2" attributes="0"/>
                               <Component id="costText" pref="55" max="32767" attributes="0"/>
@@ -95,7 +131,11 @@
                           </Group>
                       </Group>
                   </Group>
+<<<<<<< HEAD
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
+=======
                   <EmptySpace pref="24" max="32767" attributes="0"/>
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
               </Group>
           </Group>
         </DimensionLayout>
@@ -117,6 +157,22 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="routeNumberText" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                      <Component id="departTimeText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="arrivalTimeText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="costText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="originBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="destinationBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="airlineText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="departValidationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="arrivalValidationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="costValidationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="airlineValidationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="matchingLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
                       <Component id="originText" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="destinationText" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="departTimeText" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -131,6 +187,7 @@
                       <Component id="departValidationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="arrivalValidationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="costValidationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Component id="acceptButton" min="-2" max="-2" attributes="0"/>
@@ -163,11 +220,14 @@
             <Property name="text" type="java.lang.String" value="Origin"/>
           </Properties>
         </Component>
+<<<<<<< HEAD
+=======
         <Component class="javax.swing.JTextField" name="originText">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="originTextActionPerformed"/>
           </Events>
         </Component>
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
         <Component class="javax.swing.JLabel" name="destinationLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Destination"/>
@@ -178,8 +238,11 @@
             <Property name="text" type="java.lang.String" value="Depart Time"/>
           </Properties>
         </Component>
+<<<<<<< HEAD
+=======
         <Component class="javax.swing.JTextField" name="destinationText">
         </Component>
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
         <Component class="javax.swing.JTextField" name="departTimeText">
         </Component>
         <Component class="javax.swing.JLabel" name="arrivalLabel">
@@ -200,6 +263,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="costText">
+<<<<<<< HEAD
+          <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Text Cursor"/>
+            </Property>
+          </Properties>
+=======
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
         </Component>
         <Component class="javax.swing.JButton" name="acceptButton">
           <Properties>
@@ -209,6 +280,8 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acceptButtonActionPerformed"/>
           </Events>
         </Component>
+<<<<<<< HEAD
+=======
         <Component class="javax.swing.JLabel" name="originValidationLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="           "/>
@@ -219,6 +292,7 @@
             <Property name="text" type="java.lang.String" value="            "/>
           </Properties>
         </Component>
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
         <Component class="javax.swing.JLabel" name="departValidationLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="            "/>
@@ -234,7 +308,26 @@
             <Property name="text" type="java.lang.String" value="           "/>
           </Properties>
         </Component>
+<<<<<<< HEAD
+        <Component class="javax.swing.JComboBox" name="originBox">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="originBoxActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="destinationBox">
+=======
         <Component class="javax.swing.JComboBox" name="airlineComboBox">
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -246,6 +339,22 @@
             </Property>
           </Properties>
         </Component>
+<<<<<<< HEAD
+        <Component class="javax.swing.JTextField" name="airlineText">
+        </Component>
+        <Component class="javax.swing.JLabel" name="airlineValidationLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="     "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="matchingLabel">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value=" "/>
+          </Properties>
+        </Component>
+=======
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
       </SubComponents>
     </Container>
   </SubComponents>

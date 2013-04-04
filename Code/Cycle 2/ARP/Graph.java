@@ -54,7 +54,7 @@ public class Graph {
 	  FileInput f = null;
 	  LinkedList<Route> a;
 	  LinkedList <Path> path = new LinkedList<Path>();
-	  
+	  Stack <Node> nodeStack = new Stack<Node>();
 	  
 	  try {
 			f = new FileInput();
@@ -68,13 +68,18 @@ public class Graph {
 	  
 	LinkedList<Node> allAirports = new LinkedList<Node>();
 	
+	System.out.println(allRoutes.get(18).getAirline());
 	allAirports = createNodes(airports);
 	addRoutes(allAirports,allRoutes);
     
    //a= getArrivingRoutes(allAirports.get(2));
    //System.out.println(a.getFirst().toString());
    
+<<<<<<< HEAD
+  pathFind(allAirports.get(0), allAirports.get(3),nodeStack);
+=======
   pathFind(allAirports.get(0), allAirports.get(1));
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
    //System.out.println(path.isEmpty());
    
    System.out.println(path.size());
@@ -178,6 +183,21 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
  }
  
  
+<<<<<<< HEAD
+ public static void pathFind(Node Origin, Node Destination, Stack<Node> nodeStack){
+	 
+	 //Stack <Node> nodeStack;
+	
+	 LinkedList <Node> visibleNodes = new LinkedList<Node>();
+	 //System.out.println("Origin " +Origin.toString());
+	  
+	 nodeStack.push(Origin);
+	
+	 System.out.println("Nodestack after pushing "+nodeStack.size());
+	
+	if(nodeStack.size()==0){
+		System.out.println("NodeStack is finally 0!");
+=======
  public static void pathFind(Node Origin, Node Destination){
 	 
 	 Stack <Node> nodeStack = new Stack <Node>();
@@ -190,6 +210,7 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	
 	if(nodeStack.size()==0){
 		
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
 		return;
 		
 	}
@@ -200,16 +221,28 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 		//create a path object
 		//add it to the linkedlist of paths
 		//call it a day
+<<<<<<< HEAD
+		System.out.println("Nodestack when the destination is equal: "+nodeStack.toString());
+=======
 		System.out.println(nodeStack.toString());
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
 		
 	}else{
 		
 		
+<<<<<<< HEAD
+		visibleNodes=getVisibleNodes(Origin,nodeStack);
+		
+		for(int i=0;i<visibleNodes.size();i++){
+			System.out.println(nodeStack.toString());
+			pathFind(visibleNodes.get(i),Destination,nodeStack);
+=======
 		visibleNodes=getVisibleNodes(Origin);
 		
 		for(int i=0;i<visibleNodes.size();i++){
 			System.out.println(nodeStack.toString());
 			pathFind(visibleNodes.get(i),Destination);
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
 			
 		}
 		
@@ -217,6 +250,10 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	}
 	
 	 nodeStack.pop();
+<<<<<<< HEAD
+	 System.out.println("Nodestack after popping " +nodeStack.size());
+=======
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
  }
  
  
@@ -288,12 +325,43 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 
 	 } 
  */
+<<<<<<< HEAD
+ public static LinkedList <Node> getVisibleNodes(Node n,Stack<Node> nodeStack){
+=======
  public static LinkedList <Node> getVisibleNodes(Node n){
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
 	 
 	 LinkedList<Node> visibleNodesunSorted = new LinkedList<Node>();
 	 
 	 for(int i=0;i<n.getInEdges().size();i++){
 		 
+<<<<<<< HEAD
+		 
+		if(!nodeStack.contains(n.getInEdges().get(i).getFrom())){
+			 
+			 
+			 visibleNodesunSorted.add(n.getInEdges().get(i).getFrom());	 
+			 
+			 
+		 }
+		 
+		
+		 
+	 }
+	 
+	 
+	 for(int i=0;i<n.getOutEdges().size();i++){
+
+		 if(!nodeStack.contains(n.getOutEdges().get(i).getTo())){
+			 
+			 
+			 visibleNodesunSorted.add(n.getOutEdges().get(i).getTo());	 
+		 
+	 }
+	 
+	 
+	 
+=======
 		 visibleNodesunSorted.add(n.getInEdges().get(i).getFrom());
 		 
 	 }
@@ -307,9 +375,15 @@ public static LinkedList<Route> getDepartingRoutes(Node airport){
 	 */
 	 
 	 return new LinkedList<Node>(new HashSet<Node>(visibleNodesunSorted));
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
 	 
 	 //return visibleNodes;
 	 
  }
  
+<<<<<<< HEAD
+	 return new LinkedList<Node>(new HashSet<Node>(visibleNodesunSorted));
+}
+=======
+>>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
 }

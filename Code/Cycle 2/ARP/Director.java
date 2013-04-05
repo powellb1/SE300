@@ -51,6 +51,28 @@ public class Director{
 		airports.add(a);
 	}
 
+	public void deleteAirport(Airport a){
+		airports.remove(a);
+		LinkedList <Route> toBeRemoved = new LinkedList<Route>();
+		
+		for(int i=0;i<allRoutes.size();i++){
+
+			if(allRoutes.get(i).getOrigin().toString().matches(a.toString())||allRoutes.get(i).getDestination().toString().matches(a.toString())){
+				toBeRemoved.add(allRoutes.get(i));
+
+			}
+
+		}
+		
+		for(int i=0;i<toBeRemoved.size();i++){
+			
+			allRoutes.remove(toBeRemoved.get(i));
+			
+		}
+	
+
+	}
+
 	public void saveMeh(){
 
 		PrintWriter writer = null;

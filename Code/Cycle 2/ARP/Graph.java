@@ -18,10 +18,19 @@ public class Graph {
 
 	static LinkedList <Path> p;
 	static LinkedList <Node> path;
+	static LinkedList <Node> allAirports;
+	//static LinkedList <Route> allRoutes;
+	Director d;
 
-
+	public Graph(Director d){
+		
+		this.d=d;
+		
+	}
+	
+	
 	static class Path{
-
+		
 		private  Stack<Node> nodeStack;
 		private  LinkedList<Route> route = new LinkedList<Route>();
 		
@@ -83,6 +92,13 @@ public class Graph {
 	}
 
 
+	public void draw(){
+		
+		allAirports=createNodes(d.getAirports());
+		addRoutes(allAirports,d.getAllRoutes());
+		
+	}
+	
 	public static void main(String[] args) {
 
 		LinkedList<Route> allRoutes;
@@ -195,7 +211,7 @@ public class Graph {
 	}
 	*/
 	//this method will return any arriving routes into a given node
-	public static LinkedList <Route> getArrivingRoutes(Node airport){
+	public LinkedList <Route> getArrivingRoutes(Node airport){
 
 		LinkedList<Route> Arrivals = new LinkedList<Route>();
 
@@ -210,7 +226,7 @@ public class Graph {
 	}
 
 	//this method will return any route departing from a given node
-	public static LinkedList<Route> getDepartingRoutes(Node airport){
+	public LinkedList<Route> getDepartingRoutes(Node airport){
 
 		LinkedList<Route> Departures = new LinkedList<Route>();
 
@@ -374,5 +390,21 @@ public class Graph {
 
 		}
 		return new LinkedList<Node>(new HashSet<Node>(visibleNodesunSorted));
+	}
+	
+	
+	public Node getNode(Airport a){
+		
+		Node n = null;
+		
+		for(int i=0;i<allAirports.size();i++){
+			if(a.toString().matches(allAirports.get(i).toString())){
+				
+				n=allAirports.get(i);
+			}
+			
+		}
+		
+		return n;
 	}
 }

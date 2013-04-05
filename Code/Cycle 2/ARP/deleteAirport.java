@@ -2,19 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package my.dagui;
-
 /**
  *
  * @author Craig
  */
 public class deleteAirport extends javax.swing.JFrame {
 
+	Director d;
     /**
      * Creates new form deleteAirport
      */
-    public deleteAirport() {
+    public deleteAirport(Director d) {
+    	this.d=d;
         initComponents();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**
@@ -43,7 +45,7 @@ public class deleteAirport extends javax.swing.JFrame {
             }
         });
 
-        airportBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-----", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        airportBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
 
         javax.swing.GroupLayout stuffPanelLayout = new javax.swing.GroupLayout(stuffPanel);
         stuffPanel.setLayout(stuffPanelLayout);
@@ -88,43 +90,9 @@ public class deleteAirport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+        d.deleteAirport((Airport) airportBox.getSelectedItem());
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(deleteAirport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(deleteAirport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(deleteAirport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(deleteAirport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new deleteAirport().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox airportBox;
     private javax.swing.JButton deleteButton;

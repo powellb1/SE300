@@ -1,5 +1,6 @@
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Stack;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +24,13 @@ public class DaGUI extends javax.swing.JFrame {
 	private Object destAirport;
 	private String destString;
 	Director d;
+	Graph g; 
+	
+	LinkedList <Route> arrivingRoutes = new LinkedList<Route>();
+	LinkedList <Route> departingRoutes = new LinkedList<Route>();
+	Stack <Node> nodeStack = new Stack<Node>();
+	LinkedList<Node> visible = new LinkedList<Node>();
+	
 	LinkedList <String> airlines = new LinkedList<String>();
 
 	//addAirport a = new addAirport();
@@ -31,6 +39,7 @@ public class DaGUI extends javax.swing.JFrame {
 		this.d=d;
 		initComponents();
 		setLocationRelativeTo(null);
+		g=new Graph(d);
 	}
 
 	/**
@@ -59,10 +68,12 @@ public class DaGUI extends javax.swing.JFrame {
         tablePanel = new javax.swing.JPanel();
         tableScroll = new javax.swing.JScrollPane();
         info = new javax.swing.JTable();
-        historyScroll = new javax.swing.JScrollPane();
-        history = new javax.swing.JTextArea();
         resultsScroll = new javax.swing.JScrollPane();
         results = new javax.swing.JTextArea();
+        historyScroll = new javax.swing.JScrollPane();
+        history = new javax.swing.JTextArea();
+        tableScroll1 = new javax.swing.JScrollPane();
+        resultsTable = new javax.swing.JTable();
         daMenu = new javax.swing.JMenuBar();
         fileTab = new javax.swing.JMenu();
         saveOption = new javax.swing.JMenuItem();
@@ -137,34 +148,38 @@ public class DaGUI extends javax.swing.JFrame {
             .addGroup(selectionPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(airportValidationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(selectionPanelLayout.createSequentialGroup()
-                .addComponent(originLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(originBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(originMoreInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(selectionPanelLayout.createSequentialGroup()
-                .addComponent(destLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(destBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(destMoreInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
-            .addGroup(selectionPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectionPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(selectionPanelLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(destLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addComponent(destBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(selectionPanelLayout.createSequentialGroup()
+                        .addComponent(originLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(originBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(originMoreInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(destMoreInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(selectionPanelLayout.createSequentialGroup()
                         .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(categoriesLabel)
                             .addComponent(subcatigoriesLabel))
-                        .addGap(52, 52, 52)
-                        .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(categoriesBox, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(subcategoriesBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(filterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(categoriesBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(subcategoriesBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(selectionPanelLayout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(findButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(105, 105, 105))
         );
         selectionPanelLayout.setVerticalGroup(
             selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,31 +191,90 @@ public class DaGUI extends javax.swing.JFrame {
                     .addComponent(originMoreInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(selectionPanelLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(destLabel)
-                            .addComponent(destBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(67, 67, 67)
+                        .addComponent(destLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectionPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(destMoreInfo)))
+                        .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(destMoreInfo)
+                            .addComponent(destBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(airportValidationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filterLabel)
-                .addGap(18, 18, 18)
-                .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(categoriesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categoriesLabel))
-                .addGap(21, 21, 21)
-                .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(subcategoriesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(subcatigoriesLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(selectionPanelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(categoriesLabel)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectionPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(categoriesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(selectionPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(subcatigoriesLabel))
+                    .addComponent(subcategoriesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(findButton)
-                .addGap(40, 40, 40))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         info.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Route #", "Origin", "Destination", "Dept. Time", "Arrival Time", "Airline", "Cost"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        info.setAlignmentX(0.0F);
+        info.setAlignmentY(0.0F);
+        info.setColumnSelectionAllowed(true);
+        info.getTableHeader().setResizingAllowed(false);
+        info.getTableHeader().setReorderingAllowed(false);
+        tableScroll.setViewportView(info);
+        info.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        results.setEditable(false);
+        results.setColumns(20);
+        results.setLineWrap(true);
+        results.setRows(5);
+        resultsScroll.setViewportView(results);
+
+        javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
+        tablePanel.setLayout(tablePanelLayout);
+        tablePanelLayout.setHorizontalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tablePanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tableScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resultsScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        tablePanelLayout.setVerticalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tablePanelLayout.createSequentialGroup()
+                .addComponent(tableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+        );
+
+        history.setEditable(false);
+        history.setColumns(20);
+        history.setRows(5);
+        historyScroll.setViewportView(history);
+
+        resultsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -229,41 +303,13 @@ public class DaGUI extends javax.swing.JFrame {
 						Integer.toString(d.getAllRoutes().get(i).getArrivalTime()),d.getAllRoutes().get(i).getAirline(),"$"+Double.toString(d.getAllRoutes().get(i).getCost())});	
 			
 		}
-        
-     
-        info.setAlignmentX(0.0F);
-        info.setAlignmentY(0.0F);
-        info.setColumnSelectionAllowed(true);
-        info.getTableHeader().setResizingAllowed(false);
-        info.getTableHeader().setReorderingAllowed(false);
-        tableScroll.setViewportView(info);
-        info.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-
-        javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
-        tablePanel.setLayout(tablePanelLayout);
-        tablePanelLayout.setHorizontalGroup(
-            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(tableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        tablePanelLayout.setVerticalGroup(
-            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablePanelLayout.createSequentialGroup()
-                .addComponent(tableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        history.setEditable(false);
-        history.setColumns(20);
-        history.setRows(5);
-        historyScroll.setViewportView(history);
-
-        results.setEditable(false);
-        results.setColumns(20);
-        results.setLineWrap(true);
-        results.setRows(5);
-        resultsScroll.setViewportView(results);
+  
+        resultsTable.setAlignmentX(0.0F);
+        resultsTable.setAlignmentY(0.0F);
+        resultsTable.getTableHeader().setResizingAllowed(false);
+        resultsTable.getTableHeader().setReorderingAllowed(false);
+        tableScroll1.setViewportView(resultsTable);
+        resultsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         fileTab.setText("File");
 
@@ -337,12 +383,17 @@ public class DaGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(selectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultsScroll)))
-            .addComponent(historyScroll)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(selectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tableScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(historyScroll)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,11 +401,12 @@ public class DaGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(resultsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tableScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(selectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(historyScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(historyScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -461,17 +513,152 @@ public class DaGUI extends javax.swing.JFrame {
 	}//GEN-LAST:event_categoriesBoxActionPerformed
 
     private void deleteAirportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirportActionPerformed
-        // TODO add your handling code here:
+        new deleteAirport(d);
     }//GEN-LAST:event_deleteAirportActionPerformed
 
     private void destMoreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destMoreInfoActionPerformed
-        // TODO add your handling code here:
+    	deleteAllRows((DefaultTableModel) resultsTable.getModel());
+    	results.setText("");
+    	g.draw();
+    	nodeStack.push(g.getNode((Airport)destBox.getSelectedItem()));
+    	departingRoutes = g.getDepartingRoutes(g.getNode((Airport) destBox.getSelectedItem()));
+    	arrivingRoutes = g.getArrivingRoutes(g.getNode((Airport)destBox.getSelectedItem()));
+    	visible = g.getVisibleNodes(g.getNode((Airport) destBox.getSelectedItem()), nodeStack , new HashSet<Route>());
+    	
+    	System.out.println(nodeStack.toString());
+    	
+    	results.append("Directly reachable Airports: \n");
+    	for(int i=0;i<visible.size();i++){
+    		
+    		results.append(visible.get(i).toString()+"  ");
+    		
+    		
+    	}
+    	results.append("\nRoutes that depart from "+destBox.getSelectedItem().toString()+" :\n");
+    	
+    	for(int i=0;i<departingRoutes.size();i++){
+    		
+    		results.append(departingRoutes.get(i).getNumber()+"\t");
+    		
+    	}
+    	
+    	results.append("\nRoutes that arrive at "+destBox.getSelectedItem().toString()+" :\n");
+    	
+    	for(int i=0;i<arrivingRoutes.size();i++){
+    		
+    		results.append(arrivingRoutes.get(i).getNumber()+"\t");
+    	}
+    	
+    	for(int i=0;i<departingRoutes.size();i++){
+
+			if ( i+1 < resultsTable.getRowCount()-1 )
+				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+1,new String[]{Integer.toString(departingRoutes.get(i).getNumber()),departingRoutes.get(i).getOrigin().toString(),
+						departingRoutes.get(i).getDestination().toString(),Integer.toString(departingRoutes.get(i).getDepTime()),
+						Integer.toString(departingRoutes.get(i).getArrivalTime()),departingRoutes.get(i).getAirline(),"$"+Double.toString(departingRoutes.get(i).getCost())});
+			else
+				( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(departingRoutes.get(i).getNumber()),departingRoutes.get(i).getOrigin().toString(),
+						departingRoutes.get(i).getDestination().toString(),Integer.toString(departingRoutes.get(i).getDepTime()),
+						Integer.toString(departingRoutes.get(i).getArrivalTime()),departingRoutes.get(i).getAirline(),"$"+Double.toString(departingRoutes.get(i).getCost())});	
+			
+		}
+    	
+    	for(int i=0;i<arrivingRoutes.size();i++){
+
+			if ( i+1 < resultsTable.getRowCount()-1 )
+				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+1,new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
+						arrivingRoutes.get(i).getDestination().toString(),Integer.toString(arrivingRoutes.get(i).getDepTime()),
+						Integer.toString(arrivingRoutes.get(i).getArrivalTime()),arrivingRoutes.get(i).getAirline(),"$"+Double.toString(arrivingRoutes.get(i).getCost())});
+			else
+				( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
+						arrivingRoutes.get(i).getDestination().toString(),Integer.toString(arrivingRoutes.get(i).getDepTime()),
+						Integer.toString(arrivingRoutes.get(i).getArrivalTime()),arrivingRoutes.get(i).getAirline(),"$"+Double.toString(arrivingRoutes.get(i).getCost())});	
+			
+		}
+    	
+    	
+    	arrivingRoutes.clear();
+    	departingRoutes.clear();
+    	nodeStack.clear();
+    	visible.clear();
+    	
+    	
+    
     }//GEN-LAST:event_destMoreInfoActionPerformed
 
     private void originMoreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originMoreInfoActionPerformed
-        // TODO add your handling code here:
+    	deleteAllRows((DefaultTableModel) resultsTable.getModel());
+    	results.setText("");
+    	g.draw();
+    	nodeStack.push(g.getNode((Airport)originBox.getSelectedItem()));
+    	departingRoutes = g.getDepartingRoutes(g.getNode((Airport) originBox.getSelectedItem()));
+    	arrivingRoutes = g.getArrivingRoutes(g.getNode((Airport)originBox.getSelectedItem()));
+    	visible = g.getVisibleNodes(g.getNode((Airport) originBox.getSelectedItem()), nodeStack , new HashSet<Route>());
+    	
+    	System.out.println(nodeStack.toString());
+    	
+    	results.append("Directly reachable Airports: \n");
+    	for(int i=0;i<visible.size();i++){
+    		
+    		results.append(visible.get(i).toString()+"  ");
+    		
+    		
+    	}
+    	results.append("\n\nRoutes that depart from "+originBox.getSelectedItem().toString()+" :\n");
+    	
+    	for(int i=0;i<departingRoutes.size();i++){
+    		
+    		results.append(departingRoutes.get(i).getNumber()+"\t");
+    		
+    	}
+    	
+    	results.append("\n\nRoutes that arrive at "+originBox.getSelectedItem().toString()+" :\n");
+    	
+    	for(int i=0;i<arrivingRoutes.size();i++){
+    		
+    		results.append(arrivingRoutes.get(i).getNumber()+"\t");
+    	}
+    	
+    	for(int i=0;i<departingRoutes.size();i++){
+
+			if ( i+1 < resultsTable.getRowCount()-1 )
+				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+1,new String[]{Integer.toString(departingRoutes.get(i).getNumber()),departingRoutes.get(i).getOrigin().toString(),
+						departingRoutes.get(i).getDestination().toString(),Integer.toString(departingRoutes.get(i).getDepTime()),
+						Integer.toString(departingRoutes.get(i).getArrivalTime()),departingRoutes.get(i).getAirline(),"$"+Double.toString(departingRoutes.get(i).getCost())});
+			else
+				( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(departingRoutes.get(i).getNumber()),departingRoutes.get(i).getOrigin().toString(),
+						departingRoutes.get(i).getDestination().toString(),Integer.toString(departingRoutes.get(i).getDepTime()),
+						Integer.toString(departingRoutes.get(i).getArrivalTime()),departingRoutes.get(i).getAirline(),"$"+Double.toString(departingRoutes.get(i).getCost())});	
+			
+		}
+    	
+    	for(int i=0;i<arrivingRoutes.size();i++){
+
+			if ( i+1 < resultsTable.getRowCount()-1 )
+				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+1,new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
+						arrivingRoutes.get(i).getDestination().toString(),Integer.toString(arrivingRoutes.get(i).getDepTime()),
+						Integer.toString(arrivingRoutes.get(i).getArrivalTime()),arrivingRoutes.get(i).getAirline(),"$"+Double.toString(arrivingRoutes.get(i).getCost())});
+			else
+				( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
+						arrivingRoutes.get(i).getDestination().toString(),Integer.toString(arrivingRoutes.get(i).getDepTime()),
+						Integer.toString(arrivingRoutes.get(i).getArrivalTime()),arrivingRoutes.get(i).getAirline(),"$"+Double.toString(arrivingRoutes.get(i).getCost())});	
+			
+		}
+    	
+    	
+    	arrivingRoutes.clear();
+    	departingRoutes.clear();
+    	nodeStack.clear();
+    	visible.clear();
+    	
+    	
     }//GEN-LAST:event_originMoreInfoActionPerformed
 
+    
+    public static void deleteAllRows(final DefaultTableModel model) {
+        for( int i = model.getRowCount() - 1; i >= 0; i-- ) {
+            model.removeRow(i);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel airportValidationLabel;
@@ -499,6 +686,7 @@ public class DaGUI extends javax.swing.JFrame {
     private javax.swing.JButton originMoreInfo;
     private javax.swing.JTextArea results;
     private javax.swing.JScrollPane resultsScroll;
+    private javax.swing.JTable resultsTable;
     private javax.swing.JMenu routesTab;
     private javax.swing.JMenuItem saveOption;
     private javax.swing.JPanel selectionPanel;
@@ -506,5 +694,6 @@ public class DaGUI extends javax.swing.JFrame {
     private javax.swing.JLabel subcatigoriesLabel;
     private javax.swing.JPanel tablePanel;
     private javax.swing.JScrollPane tableScroll;
+    private javax.swing.JScrollPane tableScroll1;
     // End of variables declaration//GEN-END:variables
 }

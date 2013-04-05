@@ -80,7 +80,7 @@ public class Route {
 	}
 
 	public String Stringify(){
-		return String.format("%2d, %s, %4s, %5d, %4s, %5d, %.2f",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
+		return String.format("%2d\t%s\t%4s\t%5d\t%4s\t%5d\t%.2f",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
 
 	}
 

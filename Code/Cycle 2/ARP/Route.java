@@ -10,9 +10,9 @@ public class Route {
 	private Node Destination;
 	private int arrivalTime;
 	private double cost;
-	
+
 	public Route(int number, String Airline, Node Origin, int depTime, Node Destination, int arrivalTime, double cost){
-		
+
 		this.number=number;
 		this.Airline = Airline;
 		this.Origin = Origin;
@@ -20,7 +20,7 @@ public class Route {
 		this.Destination = Destination;
 		this.arrivalTime = arrivalTime;
 		this.cost = cost;
-		
+
 	}
 
 	public int getNumber() {
@@ -78,24 +78,24 @@ public class Route {
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-	
+
 	public String Stringify(){
 		return String.format("%2d, %s, %4s, %5d, %4s, %5d, %.2f",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
-		
+
 	}
-	
+
 	public String toString(){
-		
+
 		//System.out.println("Number is: "+ number +"Airline is: " + Airline + "Origin is: " + Origin + "Departure time is: "+ depTime + "Destination is: "+ Destination + "Arrival time is: " + arrivalTime + "Cost: " + cost );
 		return Integer.toString(number);
 	}
-	
+
 	public Vector<Route> toVector(){
-		
-		
+
+
 		return null;
-		
-		
+
+
 	}
-	
+
 }

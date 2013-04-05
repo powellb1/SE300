@@ -5,10 +5,7 @@ DCA
 ORL
 JFK
 YES
-<<<<<<< HEAD
 YES
-=======
->>>>>>> d9184bb83c4b0d93102acfa565521c17e571bc84
 
 
 # The list of routes are as follows:

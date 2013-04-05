@@ -13,26 +13,26 @@ import java.util.LinkedList;
  *
  */
 public class Director{
-	
+
 	private LinkedList<Route> allRoutes;
 	private ArrayList<Airport> airports;
-	
+
 	public Director(){
 
-	
-	  FileInput f = null;
-	  
-	 
-	  
-	  
-	  try {
+
+		FileInput f = null;
+
+
+
+
+		try {
 			f = new FileInput();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	      allRoutes = f.getRoutes();
-	      airports = f.getAirports();
+		allRoutes = f.getRoutes();
+		airports = f.getAirports();
 	}
 
 	public LinkedList<Route> getAllRoutes() {
@@ -50,9 +50,9 @@ public class Director{
 	public void addAirport(Airport a) {
 		airports.add(a);
 	}
-	
+
 	public void saveMeh(){
-	
+
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter("savedOutput.txt", "UTF-8");
@@ -65,22 +65,22 @@ public class Director{
 		}
 		writer.println("# The list of airports are as follows:\n");
 		for(int i=0;i<airports.size();i++){
-			
+
 			writer.println(airports.get(i).toString());
-			
+
 		}
 		writer.println("\n\n# The list of routes are as follows:\n");
 		for(int i=0;i<allRoutes.size();i++){
-			
+
 			writer.println(allRoutes.get(i).Stringify());
-			
+
 		}
 		writer.println("\n\n");
 		writer.close();
-		
-		
+
+
 	}
-	
-	
-	
+
+
+
 }

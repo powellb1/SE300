@@ -84,6 +84,7 @@ public class RouteForm extends javax.swing.JFrame {
         intructionsLabel.setText("Please Input The Route Information");
 
         routeNumberText.setEditable(false);
+	routeNumberText.setText(Integer.toString(d.getAllRoutes().getLast().getNumber()+1));
         routeNumberText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 routeNumberTextActionPerformed(evt);
@@ -119,14 +120,14 @@ public class RouteForm extends javax.swing.JFrame {
 
         costValidationLabel.setText("           ");
 
-        originBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        originBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
         originBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 originBoxActionPerformed(evt);
             }
         });
 
-        destinationBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
 
         airlineValidationLabel.setText("     ");
 

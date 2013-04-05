@@ -16,6 +16,7 @@ class Node{
 
 
 	}
+	
 	//this method allows the program to add edges (routes) to each airport (node)
 	public Node addEdge(Node node,Route r){
 		Edge e = new Edge(this, node,r);

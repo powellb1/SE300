@@ -26,7 +26,7 @@ public class modifyRoute extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+/*
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -37,7 +37,7 @@ public class modifyRoute extends javax.swing.JFrame {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 300, Short.MAX_VALUE)
         );
-
+*/
         pack();
     }// </editor-fold>//GEN-END:initComponents
 

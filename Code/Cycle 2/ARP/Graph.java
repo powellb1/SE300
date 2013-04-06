@@ -16,9 +16,11 @@ import java.util.Stack;
 
 public class Graph {
 
-	static LinkedList <Path> p;
+	static LinkedList <Path> p = new LinkedList<Path>();
 	static LinkedList <Node> path;
 	static LinkedList <Node> allAirports;
+	static Stack <Node> nodeStack = new Stack<Node>();
+	static HashSet <Route> routePath = new HashSet<Route>();
 	//static LinkedList <Route> allRoutes;
 	Director d;
 
@@ -106,9 +108,9 @@ public class Graph {
 		FileInput f = null;
 		LinkedList<Route> a;
 		LinkedList <Path> path = new LinkedList<Path>();
-		Stack <Node> nodeStack = new Stack<Node>();
+
 		LinkedList<Route> r;
-		HashSet <Route> routePath = new HashSet<Route>();
+
 		
 		try {
 			f = new FileInput();
@@ -135,6 +137,14 @@ public class Graph {
 		
 
 	}
+	
+	public int getCheapest(Node Origin, Node Destination){
+		
+		pathFind(Origin,Destination,nodeStack, p,routePath);
+		return 0;
+		
+	}
+	
 
 	//this method will automatically generate any route associated with each node. 
 	public static void addRoutes(LinkedList<Node> airport, LinkedList<Route> routes){

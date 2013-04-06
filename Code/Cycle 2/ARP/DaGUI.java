@@ -440,6 +440,9 @@ public class DaGUI extends javax.swing.JFrame {
 			originString = originAirport.toString();
 			destAirport = destBox.getSelectedItem();
 			destString = destAirport.toString();
+			g.draw();
+			g.getCheapest(g.getNode((Airport)originAirport), g.getNode((Airport)destAirport));
+			
 		}   
 
 	}//GEN-LAST:event_findButtonActionPerformed
@@ -525,7 +528,6 @@ public class DaGUI extends javax.swing.JFrame {
     	arrivingRoutes = g.getArrivingRoutes(g.getNode((Airport)destBox.getSelectedItem()));
     	visible = g.getVisibleNodes(g.getNode((Airport) destBox.getSelectedItem()), nodeStack , new HashSet<Route>());
     	
-    	System.out.println(nodeStack.toString());
     	
     	results.append("Directly reachable Airports: \n");
     	for(int i=0;i<visible.size();i++){
@@ -593,8 +595,6 @@ public class DaGUI extends javax.swing.JFrame {
     	departingRoutes = g.getDepartingRoutes(g.getNode((Airport) originBox.getSelectedItem()));
     	arrivingRoutes = g.getArrivingRoutes(g.getNode((Airport)originBox.getSelectedItem()));
     	visible = g.getVisibleNodes(g.getNode((Airport) originBox.getSelectedItem()), nodeStack , new HashSet<Route>());
-    	
-    	System.out.println(nodeStack.toString());
     	
     	results.append("Directly reachable Airports: \n");
     	for(int i=0;i<visible.size();i++){

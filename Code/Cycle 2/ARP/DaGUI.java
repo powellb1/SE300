@@ -526,7 +526,7 @@ public class DaGUI extends javax.swing.JFrame {
     	nodeStack.push(g.getNode((Airport)destBox.getSelectedItem()));
     	departingRoutes = g.getDepartingRoutes(g.getNode((Airport) destBox.getSelectedItem()));
     	arrivingRoutes = g.getArrivingRoutes(g.getNode((Airport)destBox.getSelectedItem()));
-    	visible = g.getVisibleNodes(g.getNode((Airport) destBox.getSelectedItem()), nodeStack , new HashSet<Route>());
+    	visible = g.getVisibleNodes(g.getNode((Airport) destBox.getSelectedItem()), nodeStack);
     	
     	
     	results.append("Directly reachable Airports: \n");
@@ -594,7 +594,7 @@ public class DaGUI extends javax.swing.JFrame {
     	nodeStack.push(g.getNode((Airport)originBox.getSelectedItem()));
     	departingRoutes = g.getDepartingRoutes(g.getNode((Airport) originBox.getSelectedItem()));
     	arrivingRoutes = g.getArrivingRoutes(g.getNode((Airport)originBox.getSelectedItem()));
-    	visible = g.getVisibleNodes(g.getNode((Airport) originBox.getSelectedItem()), nodeStack , new HashSet<Route>());
+    	visible = g.getVisibleNodes(g.getNode((Airport) originBox.getSelectedItem()), nodeStack);
     	
     	results.append("Directly reachable Airports: \n");
     	for(int i=0;i<visible.size();i++){
@@ -603,7 +603,7 @@ public class DaGUI extends javax.swing.JFrame {
     		
     		
     	}
-    	results.append("\n\nRoutes that depart from "+originBox.getSelectedItem().toString()+" :\n");
+    	results.append("\nRoutes that depart from "+originBox.getSelectedItem().toString()+" :\n");
     	
     	for(int i=0;i<departingRoutes.size();i++){
     		
@@ -611,7 +611,7 @@ public class DaGUI extends javax.swing.JFrame {
     		
     	}
     	
-    	results.append("\n\nRoutes that arrive at "+originBox.getSelectedItem().toString()+" :\n");
+    	results.append("\nRoutes that arrive at "+originBox.getSelectedItem().toString()+" :\n");
     	
     	for(int i=0;i<arrivingRoutes.size();i++){
     		

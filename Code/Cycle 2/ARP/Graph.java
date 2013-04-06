@@ -20,87 +20,87 @@ public class Graph {
 	static LinkedList <Node> path;
 	static LinkedList <Node> allAirports;
 	static Stack <Node> nodeStack = new Stack<Node>();
-	static HashSet <Route> routePath = new HashSet<Route>();
+	static LinkedList <Node> routePath = new LinkedList<Node>();
+	static LinkedList<Node>routePaths = new LinkedList<Node>();
 	//static LinkedList <Route> allRoutes;
 	Director d;
 
 	public Graph(Director d){
-		
+
 		this.d=d;
-		
+
 	}
-	
-	
+
+
 	static class Path{
-		
+
 		private  Stack<Node> nodeStack;
 		private  LinkedList<Route> route = new LinkedList<Route>();
-		
+
 		@SuppressWarnings("unchecked")
 		public Path(Stack <Node> nodeStack){ 
 			this.nodeStack=(Stack <Node>)nodeStack.clone();
 			System.out.println("Path's nodeStack: " + nodeStack.toString());
 		}
 
-		public LinkedList<Route> getPath(){
-			
-			for(int i=0;i<(nodeStack.size()*2.0);i++){
-				System.out.println(i);
-			Node n =nodeStack.pop();
-			//System.out.println(nodeStack.peek());
-			//findRoutes(n,nodeStack.peek());
-			/*
-			for(int k=0;k<n.getInEdges().size();k++){
-				
-				if(n.getInEdges().get(k).getFrom().toString().matches(nodeStack.peek().getOutEdges().get)){
-					System.out.println(n.getInEdges().get(k).getFrom().toString());
-					route.add(n.getInEdges().get(k).getRoute());
-					
+
+		public LinkedList<Route> getRoutes(){
+
+			Node n = nodeStack.pop();
+			Node next = nodeStack.peek();
+
+			while(!nodeStack.isEmpty()){
+
+				for(int k=0;k<n.getInEdges().size();k++){
+
+					if(n.getInEdges().get(k).getFrom().toString().matches(next.toString())){
+
+						if(route.size()>1){
+
+							if(!route.getFirst().getOrigin().toString().matches(n.getInEdges().get(k).getRoute().getOrigin().toString())){
+
+								if(route.getFirst().getDepTime()-n.getInEdges().get(k).getRoute().getArrivalTime()>30){
+									//System.out.println(route.getFirst().getDepTime()-n.getInEdges().get(k).getRoute().getArrivalTime());
+									//System.out.println(route.getFirst().toString());
+									//System.out.println(n.getInEdges().get(k).getRoute().toString());
+									route.addFirst(n.getInEdges().get(k).getRoute());
+
+								}
+							}
+
+						}else{
+
+							route.addFirst(n.getInEdges().get(k).getRoute());
+
+						}
+
+					}
+
+
 				}
-				
-			}
-			
-			for(int k=0;k<n.getOutEdges().size();k++){
-				
-				if(n.getOutEdges().get(k).getTo().toString().matches(nodeStack.peek().toString())){
-					
-					route.add(n.getOutEdges().get(k).getRoute());
+
+				if(nodeStack.size()==1){
+					break;
+				}else{
+					n=nodeStack.pop();
+					next=nodeStack.peek();
+
 				}
-				
-			}
-			*/
-			
 			}
 			
-			//new LinkedList<Node>(new HashSet<Node>(visibleNodesunSorted));
 			
-			//return new LinkedList<Route>(new HashSet<Route>(route));
+
+
+
 			return route;
 		}
 
-		
-		
-		public double getCheapest(){
-			
-
-
-			return 0;
-
-
-		}
-		
-		
 
 	}
 
 
-	public void draw(){
-		
-		allAirports=createNodes(d.getAirports());
-		addRoutes(allAirports,d.getAllRoutes());
-		
-	}
-	
+
+
 	public static void main(String[] args) {
 
 		LinkedList<Route> allRoutes;
@@ -111,7 +111,7 @@ public class Graph {
 
 		LinkedList<Route> r;
 
-		
+
 		try {
 			f = new FileInput();
 		} catch (IOException e) {
@@ -128,23 +128,39 @@ public class Graph {
 		allAirports = createNodes(airports);
 		addRoutes(allAirports,allRoutes);
 
+		getCheapest(allAirports.get(0),allAirports.get(3));
 
-		pathFind(allAirports.get(0), allAirports.get(5),nodeStack, path,routePath);
-		r=path.getFirst().getPath();
-	//System.out.println(r.toString());
-		
+		//System.out.println(r.toString());
 
-		
+
+
 
 	}
-	
-	public int getCheapest(Node Origin, Node Destination){
-		
-		pathFind(Origin,Destination,nodeStack, p,routePath);
+
+	public static double getCheapest(Node Origin, Node Destination){
+
+		pathFind(Origin,Destination,nodeStack, p);
+		LinkedList <Route> r = new LinkedList<Route>();
+		LinkedList<Route> rTemp = new LinkedList<Route>();
+
+		for(int i=0;i<p.size();i++){
+
+			r=p.get(i).getRoutes();
+			System.out.println(r.toString());
+
+		}
+
 		return 0;
-		
+
 	}
-	
+
+	public void draw(){
+
+		allAirports=createNodes(d.getAirports());
+		addRoutes(allAirports,d.getAllRoutes());
+
+	}
+
 
 	//this method will automatically generate any route associated with each node. 
 	public static void addRoutes(LinkedList<Node> airport, LinkedList<Route> routes){
@@ -181,45 +197,45 @@ public class Graph {
 		}
 	}
 
-/*
+	/*
 	public static LinkedList<Route> findRoutes(Node from, Node to){
-		
+
 		System.out.println(from.toString());
 		System.out.println(to.toString());
 		LinkedList<Route> r = new LinkedList<Route>();
-		
+
 		for(int k=0;k<from.getInEdges().size();k++){
-			
-			
+
+
 			for(int i=0;i<to.getOutEdges().size();i++){
 				//System.out.println("In edge"+ k +" "+from.getInEdges().get(k).getTo().toString());
 				//System.out.println("Out edge" + i + " " +to.getOutEdges().get(i).getFrom().toString());
 			if(from.getInEdges().get(k).getTo().toString().matches(to.getOutEdges().get(i).getFrom().toString())){
-				
-				
-			
-				
+
+
+
+
 					r.add(from.getInEdges().get(k).getRoute());
 				System.out.println(r.toString());
-				
-				
+
+
 			}
-				
-			
-				
+
+
+
 			}
-			
-			
-			
-			
-			
+
+
+
+
+
 		}
-		
-		
+
+
 		return r;
-	
+
 	}
-	*/
+	 */
 	//this method will return any arriving routes into a given node
 	public LinkedList <Route> getArrivingRoutes(Node airport){
 
@@ -267,12 +283,12 @@ public class Graph {
 	}
 
 
-	public static void pathFind(Node Origin, Node Destination, Stack<Node> nodeStack, LinkedList <Path> path, HashSet <Route> routePath){
+	public static void pathFind(Node Origin, Node Destination, Stack<Node> nodeStack, LinkedList <Path> path){
 
 		LinkedList <Node> visibleNodes = new LinkedList<Node>();
 		nodeStack.push(Origin);
+
 		Node n;
-		
 
 
 		if(nodeStack.size()==0){
@@ -281,40 +297,39 @@ public class Graph {
 
 		if(Origin.toString().matches(Destination.toString())){
 
-			
-			
-			
+
+
+
 			//get a linkedlist of type route (somehow)
 			//create a path object
 			//add it to the linkedlist of paths
 			//call it a day
-			System.out.println("routePath "+routePath.toString());
+			//routePath.add(e);
+
 			path.add(new Path(nodeStack));
 			System.out.println("Nodestack when the destination is equal: "+nodeStack.toString());
 
 		}else{
-			visibleNodes=getVisibleNodes(Origin,nodeStack,routePath);
-			
+			visibleNodes=getVisibleNodes(Origin,nodeStack);
+
 			for(int i=0;i<visibleNodes.size();i++){
 				System.out.println(nodeStack.toString());
-				pathFind(visibleNodes.get(i),Destination,nodeStack,path,routePath);
+				pathFind(visibleNodes.get(i),Destination,nodeStack,path);
 
 			}
 		}
 
-		/*
-		n=nodeStack.peek();
-		for(int i=0;i<n.getInEdges().size();i++){
-			
-			if(routePath.contains(n.getInEdges().get(i).getRoute())){
-				
-				routePath.remove(n.getInEdges().get(i).getRoute());
-				
-			}
-			
-		}
-		*/
+
+
+
+
 		nodeStack.pop();
+
+
+
+
+
+
 	}
 
 	/*
@@ -385,7 +400,7 @@ public class Graph {
 
 	 } 
 	 */
-	public static LinkedList <Node> getVisibleNodes(Node n,Stack<Node> nodeStack,HashSet<Route> r){
+	public static LinkedList <Node> getVisibleNodes(Node n,Stack<Node> nodeStack){
 
 		LinkedList<Node> visibleNodesunSorted = new LinkedList<Node>();
 
@@ -394,27 +409,27 @@ public class Graph {
 			if(!nodeStack.contains(n.getOutEdges().get(i).getTo())){
 
 				visibleNodesunSorted.add(n.getOutEdges().get(i).getTo());
-				r.add(n.getOutEdges().get(i).getRoute());
+
 
 			}
 
 		}
 		return new LinkedList<Node>(new HashSet<Node>(visibleNodesunSorted));
 	}
-	
-	
+
+
 	public Node getNode(Airport a){
-		
+
 		Node n = null;
-		
+
 		for(int i=0;i<allAirports.size();i++){
 			if(a.toString().matches(allAirports.get(i).toString())){
-				
+
 				n=allAirports.get(i);
 			}
-			
+
 		}
-		
+
 		return n;
 	}
 }

@@ -18,7 +18,7 @@ ORL
 JFK
 YES
 BWI
-
+NAY
 
 #comment All routes to be listed here, one route per line.
 #comment Format: route_id, carrier_id, ap_dep, time_dep, ap_arr, time_arr, price, [val8, val9, val10, ...]

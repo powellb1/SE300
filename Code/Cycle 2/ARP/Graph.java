@@ -34,22 +34,22 @@ public class Graph {
 
 	static class Path{
 
-		private  Stack<Node> nodeStack;
+		private  Stack<Node> pathStack;
 		private  LinkedList<Route> route = new LinkedList<Route>();
 
 		@SuppressWarnings("unchecked")
 		public Path(Stack <Node> nodeStack){ 
-			this.nodeStack=(Stack <Node>)nodeStack.clone();
+			this.pathStack=(Stack <Node>)nodeStack.clone();
 			System.out.println("Path's nodeStack: " + nodeStack.toString());
 		}
 
 
 		public LinkedList<Route> getRoutes(){
 
-			Node n = nodeStack.pop();
-			Node next = nodeStack.peek();
+			Node n = pathStack.pop();
+			Node next = pathStack.peek();
 
-			while(!nodeStack.isEmpty()){
+			while(!pathStack.isEmpty()){
 
 				for(int k=0;k<n.getInEdges().size();k++){
 
@@ -79,11 +79,11 @@ public class Graph {
 
 				}
 
-				if(nodeStack.size()==1){
+				if(pathStack.size()<=1){
 					break;
 				}else{
-					n=nodeStack.pop();
-					next=nodeStack.peek();
+					n=pathStack.pop();
+					next=pathStack.peek();
 
 				}
 			}
@@ -138,18 +138,21 @@ public class Graph {
 	}
 
 	public static double getCheapest(Node Origin, Node Destination){
-
-		pathFind(Origin,Destination,nodeStack, p);
+		Stack <Node> cheapestNodesStack = new Stack <Node>();
+		LinkedList <Path> cheapestPaths = new LinkedList<Path>();
+		
+		pathFind(Origin,Destination,cheapestNodesStack, cheapestPaths);
+		
 		LinkedList <Route> r = new LinkedList<Route>();
 		LinkedList<Route> rTemp = new LinkedList<Route>();
 
-		for(int i=0;i<p.size();i++){
+		for(int i=0;i<cheapestPaths.size();i++){
 
-			r=p.get(i).getRoutes();
+			r=cheapestPaths.get(i).getRoutes();
 			System.out.println(r.toString());
 
 		}
-
+		cheapestNodesStack.clear();
 		return 0;
 
 	}

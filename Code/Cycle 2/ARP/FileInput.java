@@ -4,13 +4,25 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+
 public class FileInput{
 
 	LinkedList<Route> Routes;
 	ArrayList<Airport> Airports;
 
-	public FileInput() throws IOException{
+	public FileInput() throws IOException {
 
+		readFile();
+
+
+	} //constructor
+
+	private void readFile() throws IOException{
 		BufferedReader br = null;
 		String line = null;
 
@@ -24,8 +36,22 @@ public class FileInput{
 
 		}catch(FileNotFoundException e){
 
-			System.out.println("File not found!");
+			JFileChooser inputFileChooser = new JFileChooser();
+			inputFileChooser.setMultiSelectionEnabled(false);
+			inputFileChooser.setFileFilter(new TextFileFilter());
+			int returnVal = inputFileChooser.showDialog(null,"Open a text file");
+			
+			if(returnVal == JFileChooser.APPROVE_OPTION){
 
+				br = new BufferedReader(new FileReader(inputFileChooser.getSelectedFile()));
+				
+			}else{
+				
+				JOptionPane.showMessageDialog(null,
+					    "No file chosen! System will now exit!");
+				System.exit(0);
+			}
+			
 		}
 
 		line = br.readLine();
@@ -82,10 +108,16 @@ public class FileInput{
 		}
 
 		br.close();
-
-
-	} //constructor
-
+		
+		if(Routes.isEmpty()&&Airports.isEmpty()){
+			
+			readFile();
+			
+		}
+		
+	}
+	
+	
 	public LinkedList<Route> getRoutes(){
 
 		return Routes;
@@ -95,5 +127,22 @@ public class FileInput{
 
 		return Airports;
 	}
+	
+	public class TextFileFilter extends javax.swing.filechooser.FileFilter  
+	{  
+	     public boolean accept(File file)  
+	     {  
+	          //Convert to lower case before checking extension  
+	         return (file.getName().toLowerCase().endsWith(".txt")  ||  
+	            file.isDirectory()); 
+	    }  
+	  
+	    public String getDescription()  
+	    {  
+	        return "Text File (*.txt)";  
+	    }  
+	}  
+		
+	
 
 } //class

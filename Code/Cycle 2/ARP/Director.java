@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class Director{
 
 	private LinkedList<Route> allRoutes;
-	private ArrayList<Airport> airports;
+	private ArrayList<Airport> allAirports;
 
 	public Director(){
 
@@ -32,7 +32,7 @@ public class Director{
 			e.printStackTrace();
 		}
 		allRoutes = f.getRoutes();
-		airports = f.getAirports();
+		allAirports = f.getAirports();
 	}
 
 	public LinkedList<Route> getAllRoutes() {
@@ -44,15 +44,28 @@ public class Director{
 	}
 
 	public ArrayList<Airport> getAirports() {
-		return airports;
+		return allAirports;
 	}
 
 	public void addAirport(Airport a) {
-		airports.add(a);
+		allAirports.add(a);
+	}
+	
+	public void editRoute(Route r){
+		
+		for(int i=0;i<allRoutes.size();i++){
+			
+			if(allRoutes.get(i).toString().matches(r.toString())){
+				
+				allRoutes.set(i, r);
+			}
+			
+		}
+		
 	}
 
 	public void deleteAirport(Airport a){
-		airports.remove(a);
+		allAirports.remove(a);
 		LinkedList <Route> toBeRemoved = new LinkedList<Route>();
 		
 		for(int i=0;i<allRoutes.size();i++){
@@ -73,6 +86,17 @@ public class Director{
 
 	}
 
+	public void deleteRoute(Route r){
+		
+		allRoutes.remove(r);
+		
+		for(int i=0;i<allRoutes.size();i++){
+			
+			allRoutes.get(i).setNumber(i+1);
+			
+		}
+		
+	}
 	public void saveMeh(){
 
 		PrintWriter writer = null;
@@ -86,9 +110,9 @@ public class Director{
 			e.printStackTrace();
 		}
 		writer.println("# The list of airports are as follows:\n");
-		for(int i=0;i<airports.size();i++){
+		for(int i=0;i<allAirports.size();i++){
 
-			writer.println(airports.get(i).toString());
+			writer.println(allAirports.get(i).toString());
 
 		}
 		writer.println("\n\n# The list of routes are as follows:\n");

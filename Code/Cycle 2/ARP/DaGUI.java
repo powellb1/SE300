@@ -337,6 +337,12 @@ public class DaGUI extends javax.swing.JFrame {
 
         deleteRouteOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         deleteRouteOption.setText("Delete Route");
+        deleteRouteOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteRouteOptionActionPerformed(evt);
+            }
+        });
+        
         routesTab.add(deleteRouteOption);
 
         editRouteOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));

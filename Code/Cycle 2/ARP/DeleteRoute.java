@@ -183,8 +183,8 @@ public class DeleteRoute extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-		int i=routeBox.getSelectedIndex();
-		d.getAllRoutes().remove(i);
+		
+		d.deleteRoute((Route) routeBox.getSelectedItem());
 		routeBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAllRoutes().toArray()));
 	}//GEN-LAST:event_deleteButtonActionPerformed
 

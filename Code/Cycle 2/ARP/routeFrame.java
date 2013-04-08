@@ -6,6 +6,8 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Craig
@@ -234,7 +236,7 @@ public class routeFrame extends javax.swing.JFrame {
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
        
-        Pattern p = Pattern.compile("[A-Z]+");
+        Pattern p = Pattern.compile("[A-Z]*\\s*[A-Z]+");
        
         Matcher m = p.matcher(airlineText.getText());
         
@@ -337,7 +339,29 @@ public class routeFrame extends javax.swing.JFrame {
         if(cost == true && airports == true && times == true && airline == true){
             
         	d.addRoute(new Route(Integer.parseInt(routeNumberText.getText()), airlineText.getText(), new Node(originBox.getSelectedItem().toString()), departTime, new Node(destinationBox.getSelectedItem().toString()), arrivalTime, costDouble));
-            System.out.println("Added!");
+
+        	
+        	JOptionPane.showMessageDialog(null,
+				    ("Route "+d.getAllRoutes().getLast().getNumber()+" added to the system!"),"Route added!", JOptionPane.INFORMATION_MESSAGE);
+        	
+            departValidationLabel.setText("            ");
+
+            arrivalValidationLabel.setText("           ");
+
+            costValidationLabel.setText("           ");
+            airlineValidationLabel.setText("     ");
+            routeNumberText.setText(Integer.toString(d.getAllRoutes().getLast().getNumber()+1));
+            airportValidationLabel.setText("");
+            departTimeText.setText("");
+            arrivalTimeText.setText("");
+            costText.setText("");
+            airlineText.setText("");
+            
+            cost=false;
+            airports=false;
+            times=false;
+            airline=false;
+        	
         }
         
     }//GEN-LAST:event_acceptButtonActionPerformed

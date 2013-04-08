@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import javax.swing.table.DefaultTableModel;
 
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -436,6 +437,9 @@ public class DaGUI extends javax.swing.JFrame {
 
 	private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
 
+		LinkedList<Route> criteria = new LinkedList<Route>();
+		double cost =0;
+		
 		if(originBox.getSelectedIndex()==destBox.getSelectedIndex()){
 
 			history.append("Invalid! Origin and destination are the same!\n");
@@ -447,7 +451,13 @@ public class DaGUI extends javax.swing.JFrame {
 			destAirport = destBox.getSelectedItem();
 			destString = destAirport.toString();
 			g.draw();
-			g.getCheapest(g.getNode((Airport)originAirport), g.getNode((Airport)destAirport));
+			criteria=g.getCheapest(g.getNode((Airport)originAirport), g.getNode((Airport)destAirport));
+			
+			for(int i=0;i<criteria.size();i++){
+				cost+=criteria.get(i).getCost();
+				
+			}
+			System.out.println(cost);
 			
 		}   
 

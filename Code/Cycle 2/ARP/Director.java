@@ -51,6 +51,21 @@ public class Director{
 		allAirports.add(a);
 	}
 	
+	public void editAirport(Airport a){
+		
+		for(int i=0;i<allAirports.size();i++){
+			
+			if(allAirports.get(i).toString().matches(a.toString())){
+				
+				allAirports.set(i, a);
+				
+			}
+			
+		}
+		
+		
+	}
+	
 	public void editRoute(Route r){
 		
 		for(int i=0;i<allRoutes.size();i++){

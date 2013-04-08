@@ -48,7 +48,7 @@ public class FileInput{
 			}else{
 				
 				JOptionPane.showMessageDialog(null,
-					    "No file chosen! System will now exit!");
+					    "No file chosen! System will now exit!","No File Chosen",JOptionPane.ERROR_MESSAGE);
 				System.exit(0);
 			}
 			
@@ -61,13 +61,16 @@ public class FileInput{
 		Pattern pattern = Pattern.compile(regex);
 		String regexClose = "([A-Z]{3})\\W*([0-9]{4})\\W*([0-9]{4}).*";
 		Pattern patternClose = Pattern.compile(regexClose);
+		String regexAirport = "[A-Z]{3}";
+		Pattern patternAirport = Pattern.compile(regexAirport);
 
 
 		while(line != null){
 			Matcher matcher = pattern.matcher(line);
 			Matcher matcherClose = patternClose.matcher(line);
+			Matcher matcherAirport = patternAirport.matcher(line);
 			if(!line.contains("#")){
-				if(line.length()==3 && !line.matches("[0-9]+")){
+				if(matcherAirport.matches()){
 
 					Airports.add(new Airport(line,0,0));
 

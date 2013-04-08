@@ -13,7 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FileInput{
 
 	LinkedList<Route> Routes;
-	ArrayList<Airport> Airports;
+	LinkedList<Airport> Airports;
 
 	public FileInput() throws IOException {
 
@@ -26,7 +26,7 @@ public class FileInput{
 		BufferedReader br = null;
 		String line = null;
 
-		Airports = new ArrayList<Airport>();
+		Airports = new LinkedList<Airport>();
 		Routes = new LinkedList<Route>();
 
 
@@ -126,7 +126,7 @@ public class FileInput{
 		return Routes;
 	}
 
-	public ArrayList<Airport> getAirports(){
+	public LinkedList<Airport> getAirports(){
 
 		return Airports;
 	}

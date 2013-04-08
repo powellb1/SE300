@@ -16,6 +16,45 @@ import javax.swing.table.DefaultTableModel;
  * @author Craig
  */
 public class DaGUI extends javax.swing.JFrame {
+	
+	
+	 // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel airportValidationLabel;
+    private javax.swing.JMenu airportsTab;
+    private javax.swing.JComboBox categoriesBox;
+    private javax.swing.JLabel categoriesLabel;
+    private javax.swing.JMenuBar daMenu;
+    private javax.swing.JMenuItem deleteAirport;
+    private javax.swing.JMenuItem deleteRouteOption;
+    private javax.swing.JComboBox destBox;
+    private javax.swing.JLabel destLabel;
+    private javax.swing.JButton destMoreInfo;
+    private javax.swing.JMenuItem editRouteOption;
+    private javax.swing.JMenu fileTab;
+    private javax.swing.JLabel filterLabel;
+    private javax.swing.JButton findButton;
+    private javax.swing.JTextArea history = new javax.swing.JTextArea();
+    private javax.swing.JScrollPane historyScroll;
+    private javax.swing.JTable info;
+    private javax.swing.JMenuItem newAirportOption;
+    private javax.swing.JMenuItem newRouteOption;
+    private javax.swing.JMenuItem openCloseOption;
+    private javax.swing.JComboBox originBox;
+    private javax.swing.JLabel originLabel;
+    private javax.swing.JButton originMoreInfo;
+    private javax.swing.JTextArea results;
+    private javax.swing.JScrollPane resultsScroll;
+    private javax.swing.JTable resultsTable;
+    private javax.swing.JMenu routesTab;
+    private javax.swing.JMenuItem saveOption;
+    private javax.swing.JPanel selectionPanel;
+    private javax.swing.JComboBox subcategoriesBox;
+    private javax.swing.JLabel subcatigoriesLabel;
+    private javax.swing.JPanel tablePanel;
+    private javax.swing.JScrollPane tableScroll;
+    private javax.swing.JScrollPane tableScroll1;
+    // End of variables declaration//GEN-END:variables
+	
 
 	/**
 	 * Creates new form DaGUI
@@ -24,7 +63,7 @@ public class DaGUI extends javax.swing.JFrame {
 	private String originString;
 	private Object destAirport;
 	private String destString;
-	Director d;
+	Director d = new Director(history);
 	Graph g; 
 	
 	LinkedList <Route> arrivingRoutes = new LinkedList<Route>();
@@ -36,9 +75,10 @@ public class DaGUI extends javax.swing.JFrame {
 
 	//addAirport a = new addAirport();
 
-	public DaGUI(Director d) {
-		this.d=d;
+	public DaGUI() {
+	
 		initComponents();
+	
 		setLocationRelativeTo(null);
 		g=new Graph(d);
 	}
@@ -72,7 +112,7 @@ public class DaGUI extends javax.swing.JFrame {
         resultsScroll = new javax.swing.JScrollPane();
         results = new javax.swing.JTextArea();
         historyScroll = new javax.swing.JScrollPane();
-        history = new javax.swing.JTextArea();
+       // history = new javax.swing.JTextArea();
         tableScroll1 = new javax.swing.JScrollPane();
         resultsTable = new javax.swing.JTable();
         daMenu = new javax.swing.JMenuBar();
@@ -477,7 +517,7 @@ public class DaGUI extends javax.swing.JFrame {
 	}//GEN-LAST:event_openCloseOptionActionPerformed
 
 	private void newAirportOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAirportOptionActionPerformed
-		new addAirport(d);
+		new addAirport(d,history);
 
 	}//GEN-LAST:event_newAirportOptionActionPerformed
 
@@ -676,40 +716,5 @@ public class DaGUI extends javax.swing.JFrame {
         }
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel airportValidationLabel;
-    private javax.swing.JMenu airportsTab;
-    private javax.swing.JComboBox categoriesBox;
-    private javax.swing.JLabel categoriesLabel;
-    private javax.swing.JMenuBar daMenu;
-    private javax.swing.JMenuItem deleteAirport;
-    private javax.swing.JMenuItem deleteRouteOption;
-    private javax.swing.JComboBox destBox;
-    private javax.swing.JLabel destLabel;
-    private javax.swing.JButton destMoreInfo;
-    private javax.swing.JMenuItem editRouteOption;
-    private javax.swing.JMenu fileTab;
-    private javax.swing.JLabel filterLabel;
-    private javax.swing.JButton findButton;
-    private javax.swing.JTextArea history;
-    private javax.swing.JScrollPane historyScroll;
-    private javax.swing.JTable info;
-    private javax.swing.JMenuItem newAirportOption;
-    private javax.swing.JMenuItem newRouteOption;
-    private javax.swing.JMenuItem openCloseOption;
-    private javax.swing.JComboBox originBox;
-    private javax.swing.JLabel originLabel;
-    private javax.swing.JButton originMoreInfo;
-    private javax.swing.JTextArea results;
-    private javax.swing.JScrollPane resultsScroll;
-    private javax.swing.JTable resultsTable;
-    private javax.swing.JMenu routesTab;
-    private javax.swing.JMenuItem saveOption;
-    private javax.swing.JPanel selectionPanel;
-    private javax.swing.JComboBox subcategoriesBox;
-    private javax.swing.JLabel subcatigoriesLabel;
-    private javax.swing.JPanel tablePanel;
-    private javax.swing.JScrollPane tableScroll;
-    private javax.swing.JScrollPane tableScroll1;
-    // End of variables declaration//GEN-END:variables
+   
 }

@@ -25,9 +25,9 @@ public class Main {
 		}
 
 
-		Director d = new Director();
+		//Director d = new Director();
 
-		DaGUI g = new DaGUI(d);
+		DaGUI g = new DaGUI();
 		g.setVisible(true);
 
 	}

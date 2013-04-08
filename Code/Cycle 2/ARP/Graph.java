@@ -160,7 +160,7 @@ public class Graph {
 	public static void main(String[] args) {
 
 		LinkedList<Route> allRoutes;
-		ArrayList<Airport> airports;
+		LinkedList<Airport> airports;
 		FileInput f = null;
 		//LinkedList<Route> a;
 		//LinkedList <Path> path = new LinkedList<Path>();
@@ -310,7 +310,7 @@ public class Graph {
 	}
 
 	//this method will automatically create nodes for all the airports in the system
-	public static LinkedList<Node> createNodes(ArrayList<Airport> airports){
+	public static LinkedList<Node> createNodes(LinkedList<Airport> airports){
 
 		LinkedList<Node> nodes = new LinkedList<Node>();
 

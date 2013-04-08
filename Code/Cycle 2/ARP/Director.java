@@ -5,6 +5,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import javax.swing.JTextArea;
+
 
 
 
@@ -15,13 +17,14 @@ import java.util.LinkedList;
 public class Director{
 
 	private LinkedList<Route> allRoutes;
-	private ArrayList<Airport> allAirports;
-
-	public Director(){
+	private LinkedList<Airport> allAirports;
+	private JTextArea history;
+	
+	public Director(JTextArea history){
 
 
 		FileInput f = null;
-
+		this.history=history;
 
 
 
@@ -41,14 +44,17 @@ public class Director{
 
 	public void addRoute(Route r) {
 		allRoutes.add(r);
+		history.append("Route "+allRoutes.getLast().toString()+" added to system!\n");
 	}
 
-	public ArrayList<Airport> getAirports() {
+	public LinkedList<Airport> getAirports() {
 		return allAirports;
 	}
 
 	public void addAirport(Airport a) {
 		allAirports.add(a);
+		history.append("Airport "+allAirports.get(allAirports.size()-1)+" added to the system!\n");
+
 	}
 	
 	public void editAirport(Airport a){
@@ -58,6 +64,7 @@ public class Director{
 			if(allAirports.get(i).toString().matches(a.toString())){
 				
 				allAirports.set(i, a);
+				history.append("Airport "+allAirports.get(allAirports.size()-1)+" modified!\n");
 				
 			}
 			
@@ -73,6 +80,7 @@ public class Director{
 			if(allRoutes.get(i).toString().matches(r.toString())){
 				
 				allRoutes.set(i, r);
+				history.append("Route "+allRoutes.get(i).toString()+" modified!\n");
 			}
 			
 		}
@@ -93,7 +101,7 @@ public class Director{
 		}
 		
 		for(int i=0;i<toBeRemoved.size();i++){
-			
+			history.append("Route "+toBeRemoved.get(i).toString()+" has been removed!\n");
 			allRoutes.remove(toBeRemoved.get(i));
 			
 		}
@@ -104,11 +112,12 @@ public class Director{
 	public void deleteRoute(Route r){
 		
 		allRoutes.remove(r);
+		history.append("Route "+r.toString()+" has been removed!\n");
 		
 		for(int i=0;i<allRoutes.size();i++){
 			
 			allRoutes.get(i).setNumber(i+1);
-			
+
 		}
 		
 	}

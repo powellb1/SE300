@@ -341,7 +341,7 @@ public class routeFrame extends javax.swing.JFrame {
         	d.addRoute(new Route(Integer.parseInt(routeNumberText.getText()), airlineText.getText(), new Node(originBox.getSelectedItem().toString()), departTime, new Node(destinationBox.getSelectedItem().toString()), arrivalTime, costDouble));
 
         	
-        	JOptionPane.showMessageDialog(null,
+        	JOptionPane.showMessageDialog(this,
 				    ("Route "+d.getAllRoutes().getLast().getNumber()+" added to the system!"),"Route added!", JOptionPane.INFORMATION_MESSAGE);
         	
             departValidationLabel.setText("            ");

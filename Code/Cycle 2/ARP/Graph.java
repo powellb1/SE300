@@ -39,12 +39,14 @@ public class Graph {
 		private  LinkedList<Route> route = new LinkedList<Route>();
 		private LinkedList<Route> cheapest = new LinkedList<Route>();
 		double cost=0;
-		private Stack<Route> routeStack;
+		private Stack<Route> routeStack = new Stack<Route>();
+		LinkedList<routePath>rP = new LinkedList<routePath>();
 
 		@SuppressWarnings("unchecked")
 		public Path(Stack <Node> nodeStack){ 
 			this.pathStack=(Stack <Node>)nodeStack.clone();
 			//System.out.println("Path's nodeStack: " + nodeStack.toString());
+			getRoutes(routeStack, rP);
 		}
 
 		@Override
@@ -53,10 +55,15 @@ public class Graph {
 			return nodeStack.toString();
 		}
 
+		public LinkedList<routePath> getroutePath(){
+			return rP;
+			
+		}
+		
 
 		public void getRoutes(Stack<Route> routeStack,LinkedList<routePath> routePath){
 
-			if(pathStack.size()<=1){
+			if(pathStack.size()<=1&&!pathStack.isEmpty()){
 				routePath.add(new routePath(routeStack));
 				//System.out.println(routeStack.toString());
 				return;
@@ -69,21 +76,41 @@ public class Graph {
 
 
 				for(int i=0;i<n.getInEdges().size();i++){
-
+					if(routeStack.size()<1){
 					if(n.getInEdges().get(i).getFrom().toString().matches(next.toString())){
 						routeStack.push(n.getInEdges().get(i).getRoute());
 						getRoutes(routeStack,routePath);
+						
 						routeStack.pop();
+					
 
 					}
+					
+					}
+					else{
+						if(n.getInEdges().get(i).getFrom().toString().matches(next.toString())&&routeStack.peek().getDepTime()-n.getInEdges().get(i).getRoute().getArrivalTime()>30){
+							routeStack.push(n.getInEdges().get(i).getRoute());
+							getRoutes(routeStack,routePath);
+							//pathStack.push(n);
+							routeStack.pop();
+							
 
+						}else{
+							//routeStack.pop();
+							//return;
+							
+						}
+						
+						
+					}
 				}
-
+				pathStack.push(n);
+			
 				
 			}
+	
 
 		}
-		
 		
 		
 		
@@ -96,10 +123,10 @@ public class Graph {
 			public routePath(Stack<Route> nodeStack){
 				this.routeStack=(Stack <Route>)nodeStack.clone();
 				for(int i=0;i<routeStack.size();i++){
-					routeList.addLast(routeStack.get(i));
+					routeList.addFirst(routeStack.get(i));
 					
 				}
-				System.out.println(routeList.toString());
+				//System.out.println(routeList.toString());
 				
 			}
 			
@@ -248,7 +275,7 @@ public class Graph {
 		//System.out.println(allRoutes.get(18).getAirline());
 		allAirports = createNodes(airports);
 		addRoutes(allAirports,allRoutes);
-		getCheapest(allAirports.get(0), allAirports.get(3));
+		getCheapest(allAirports.get(0), allAirports.get(2));
 
 
 
@@ -271,8 +298,9 @@ public class Graph {
 		
 		for(int i=0;i<cheapestPaths.size();i++){
 		
-			System.out.println(cheapestPaths.get(i).toString());
-			cheapestPaths.get(i).getRoutes(routeStack,rP);
+			//System.out.println(cheapestPaths.get(i).toString());
+			System.out.println(i);
+			System.out.println(cheapestPaths.get(i).getroutePath().toString());
 			
 		
 		

@@ -605,31 +605,31 @@ public class DaGUI extends javax.swing.JFrame {
     		
     		results.append(arrivingRoutes.get(i).getNumber()+"\t");
     	}
-    	
+    	((DefaultTableModel) resultsTable.getModel()).insertRow(0,new String[]{"Departing",null,null,null,null,null,null});
     	for(int i=0;i<departingRoutes.size();i++){
 
-			if ( i+1 < resultsTable.getRowCount()-1 )
+			//if ( i+1 < resultsTable.getRowCount()-1 )
 				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+1,new String[]{Integer.toString(departingRoutes.get(i).getNumber()),departingRoutes.get(i).getOrigin().toString(),
 						departingRoutes.get(i).getDestination().toString(),Integer.toString(departingRoutes.get(i).getDepTime()),
 						Integer.toString(departingRoutes.get(i).getArrivalTime()),departingRoutes.get(i).getAirline(),"$"+Double.toString(departingRoutes.get(i).getCost())});
-			else
+			/*else
 				( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(departingRoutes.get(i).getNumber()),departingRoutes.get(i).getOrigin().toString(),
 						departingRoutes.get(i).getDestination().toString(),Integer.toString(departingRoutes.get(i).getDepTime()),
 						Integer.toString(departingRoutes.get(i).getArrivalTime()),departingRoutes.get(i).getAirline(),"$"+Double.toString(departingRoutes.get(i).getCost())});	
-			
+			*/
 		}
-    	
+    	((DefaultTableModel) resultsTable.getModel()).insertRow(departingRoutes.size(),new String[]{"Arriving",null,null,null,null,null,null});
     	for(int i=0;i<arrivingRoutes.size();i++){
 
-			if ( i+1 < resultsTable.getRowCount()-1 )
-				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+1,new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
+			//if ( i+1 < resultsTable.getRowCount()-1 )
+				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+2+departingRoutes.size(),new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
 						arrivingRoutes.get(i).getDestination().toString(),Integer.toString(arrivingRoutes.get(i).getDepTime()),
 						Integer.toString(arrivingRoutes.get(i).getArrivalTime()),arrivingRoutes.get(i).getAirline(),"$"+Double.toString(arrivingRoutes.get(i).getCost())});
-			else
+			/*else
 				( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
 						arrivingRoutes.get(i).getDestination().toString(),Integer.toString(arrivingRoutes.get(i).getDepTime()),
 						Integer.toString(arrivingRoutes.get(i).getArrivalTime()),arrivingRoutes.get(i).getAirline(),"$"+Double.toString(arrivingRoutes.get(i).getCost())});	
-			
+			*/
 		}
     	
     	
@@ -673,30 +673,35 @@ public class DaGUI extends javax.swing.JFrame {
     		results.append(arrivingRoutes.get(i).getNumber()+"\t");
     	}
     	
+    	((DefaultTableModel) resultsTable.getModel()).insertRow(0,new String[]{"Departing",null,null,null,null,null,null});
+    	
     	for(int i=0;i<departingRoutes.size();i++){
 
-			if ( i+1 < resultsTable.getRowCount()-1 )
+			//if ( i+1 < resultsTable.getRowCount()-1 )
 				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+1,new String[]{Integer.toString(departingRoutes.get(i).getNumber()),departingRoutes.get(i).getOrigin().toString(),
 						departingRoutes.get(i).getDestination().toString(),Integer.toString(departingRoutes.get(i).getDepTime()),
 						Integer.toString(departingRoutes.get(i).getArrivalTime()),departingRoutes.get(i).getAirline(),"$"+Double.toString(departingRoutes.get(i).getCost())});
-			else
+			/*else
 				( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(departingRoutes.get(i).getNumber()),departingRoutes.get(i).getOrigin().toString(),
 						departingRoutes.get(i).getDestination().toString(),Integer.toString(departingRoutes.get(i).getDepTime()),
 						Integer.toString(departingRoutes.get(i).getArrivalTime()),departingRoutes.get(i).getAirline(),"$"+Double.toString(departingRoutes.get(i).getCost())});	
-			
+			*/
 		}
+
+    	((DefaultTableModel) resultsTable.getModel()).insertRow(departingRoutes.size(),new String[]{"Arriving",null,null,null,null,null,null});
+
     	
     	for(int i=0;i<arrivingRoutes.size();i++){
 
-			if ( i+1 < resultsTable.getRowCount()-1 )
-				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+1,new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
+			//if ( i+1 < resultsTable.getRowCount()-1 )
+				( (DefaultTableModel) resultsTable.getModel() ).insertRow(i+departingRoutes.size()+2,new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
 						arrivingRoutes.get(i).getDestination().toString(),Integer.toString(arrivingRoutes.get(i).getDepTime()),
 						Integer.toString(arrivingRoutes.get(i).getArrivalTime()),arrivingRoutes.get(i).getAirline(),"$"+Double.toString(arrivingRoutes.get(i).getCost())});
-			else
+			/*else
 				( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(arrivingRoutes.get(i).getNumber()),arrivingRoutes.get(i).getOrigin().toString(),
 						arrivingRoutes.get(i).getDestination().toString(),Integer.toString(arrivingRoutes.get(i).getDepTime()),
 						Integer.toString(arrivingRoutes.get(i).getArrivalTime()),arrivingRoutes.get(i).getAirline(),"$"+Double.toString(arrivingRoutes.get(i).getCost())});	
-			
+			*/
 		}
     	
     	

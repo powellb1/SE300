@@ -491,14 +491,14 @@ public class DaGUI extends javax.swing.JFrame {
 			destAirport = destBox.getSelectedItem();
 			destString = destAirport.toString();
 			g.draw();
-			criteria=g.getCheapest(g.getNode((Airport)originAirport), g.getNode((Airport)destAirport));
-			
+			g.getCheapest(g.getNode((Airport)originAirport), g.getNode((Airport)destAirport));
+			/*
 			for(int i=0;i<criteria.size();i++){
 				cost+=criteria.get(i).getCost();
 				
 			}
 			System.out.println(cost);
-			
+			*/
 		}   
 
 	}//GEN-LAST:event_findButtonActionPerformed
@@ -523,7 +523,6 @@ public class DaGUI extends javax.swing.JFrame {
 
 	private void deleteRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteOptionActionPerformed
 		new DeleteRoute(d);
-		history.append("Airport "+d.getAirports().get(d.getAirports().size()-1).toString()+" has been added to the system.\n");
 	}//GEN-LAST:event_deleteRouteOptionActionPerformed
 
 	private void categoriesBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriesBoxActionPerformed

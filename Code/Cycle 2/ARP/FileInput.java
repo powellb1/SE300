@@ -79,11 +79,11 @@ public class FileInput{
 				if(matcher.matches()){
 					if(Integer.parseInt(matcher.group(4))<Integer.parseInt(matcher.group(6))&& Integer.parseInt(matcher.group(6))-Integer.parseInt(matcher.group(4))>30){
 
-						//System.out.println("The flight departs before it arrives!");
 
 
 
-						Routes.add(new Route(Integer.parseInt(matcher.group(1)),matcher.group(2), new Node(matcher.group(3)), Integer.parseInt(matcher.group(4)), new Node(matcher.group(5)), Integer.parseInt(matcher.group(6)),Double.parseDouble(matcher.group(7))));
+
+						Routes.add(new Route(Integer.parseInt(matcher.group(1)),matcher.group(2), new Node(matcher.group(3)), Integer.parseInt(matcher.group(4)), new Node(matcher.group(5)), Integer.parseInt(matcher.group(6)),Double.parseDouble(matcher.group(7)),true));
 
 					}
 				}
@@ -99,6 +99,33 @@ public class FileInput{
 							Airports.get(i).setCloseEnd(Integer.parseInt(matcherClose.group(3)));
 							}
 
+							for(int k=0;k<Routes.size();k++){
+								
+								if(Routes.get(k).getOrigin().toString().matches(Airports.get(i).toString())){
+									
+									if(Routes.get(k).getDepTime()>Integer.parseInt(matcherClose.group(2))&&Routes.get(k).getDepTime()<Integer.parseInt(matcherClose.group(3))){
+										
+										Routes.get(k).setValid(false);
+										
+									}
+									
+									
+									
+								}
+								
+								if(Routes.get(k).getDestination().toString().matches(Airports.get(i).toString())){
+									
+									if(Routes.get(k).getArrivalTime()>Integer.parseInt(matcherClose.group(2))&&Routes.get(k).getDepTime()<Integer.parseInt(matcherClose.group(3))){
+										
+										Routes.get(k).setValid(false);
+										
+									}
+									
+								}
+								
+							}
+							
+							
 						}
 
 					}

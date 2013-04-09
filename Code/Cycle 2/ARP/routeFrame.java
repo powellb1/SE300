@@ -338,7 +338,7 @@ public class routeFrame extends javax.swing.JFrame {
         
         if(cost == true && airports == true && times == true && airline == true){
             
-        	d.addRoute(new Route(Integer.parseInt(routeNumberText.getText()), airlineText.getText(), new Node(originBox.getSelectedItem().toString()), departTime, new Node(destinationBox.getSelectedItem().toString()), arrivalTime, costDouble));
+        	d.addRoute(new Route(Integer.parseInt(routeNumberText.getText()), airlineText.getText(), new Node(originBox.getSelectedItem().toString()), departTime, new Node(destinationBox.getSelectedItem().toString()), arrivalTime, costDouble,true));
 
         	
         	JOptionPane.showMessageDialog(this,

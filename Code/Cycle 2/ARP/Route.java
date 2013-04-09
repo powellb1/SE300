@@ -10,8 +10,10 @@ public class Route {
 	private Node Destination;
 	private int arrivalTime;
 	private double cost;
+	private boolean valid;
 
-	public Route(int number, String Airline, Node Origin, int depTime, Node Destination, int arrivalTime, double cost){
+
+	public Route(int number, String Airline, Node Origin, int depTime, Node Destination, int arrivalTime, double cost,boolean valid){
 
 		this.number=number;
 		this.Airline = Airline;
@@ -20,6 +22,7 @@ public class Route {
 		this.Destination = Destination;
 		this.arrivalTime = arrivalTime;
 		this.cost = cost;
+		this.valid=valid;
 
 	}
 
@@ -91,13 +94,14 @@ public class Route {
 		//System.out.println("Number is: "+ number +"Airline is: " + Airline + "Origin is: " + Origin + "Departure time is: "+ depTime + "Destination is: "+ Destination + "Arrival time is: " + arrivalTime + "Cost: " + cost );
 		return Integer.toString(number);
 	}
-
-	public Vector<Route> toVector(){
-
-
-		return null;
-
-
+	
+	public boolean isValid() {
+		return valid;
 	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
+	
 
 }

@@ -1,16 +1,18 @@
+import java.util.LinkedList;
+
 
 public class Airport {
 
 	private String name;
-	private int closeBegin;
-	private int closeEnd;
+	private static LinkedList<Integer> closeBeginList = new LinkedList<Integer>();
+	private static LinkedList<Integer> closeEndList = new LinkedList<Integer>();
 
-	public Airport(String name,int closeBegin, int closeEnd){
+	public Airport(String name,Integer closeBegin, Integer closeEnd){
 
 		//this.open = open;
 		this.name = name;
-		this.closeBegin = closeBegin;
-		this.closeEnd=closeEnd;
+		closeBeginList.add(closeBegin);
+		closeEndList.add(closeEnd);
 
 	}
 
@@ -24,20 +26,20 @@ public class Airport {
 		return name;
 	}
 
-	public int getCloseBegin() {
-		return closeBegin;
+	public LinkedList<Integer> getCloseBegin() {
+		return closeBeginList;
 	}
 
 	public void setCloseBegin(int closeBegin) {
-		this.closeBegin = closeBegin;
+		closeBeginList.add(closeBegin);
 	}
 
-	public int getCloseEnd() {
-		return closeEnd;
+	public LinkedList<Integer> getCloseEnd() {
+		return closeEndList;
 	}
 
 	public void setCloseEnd(int closeEnd) {
-		this.closeEnd = closeEnd;
+		closeEndList.add(closeEnd);
 	}
 
 

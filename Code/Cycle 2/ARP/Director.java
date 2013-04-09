@@ -57,19 +57,45 @@ public class Director{
 
 	}
 	
-	public void editAirport(Airport a){
+	public void editAirport(Airport a,int closeBegin,int closeEnd){
 		
 		for(int i=0;i<allAirports.size();i++){
 			
 			if(allAirports.get(i).toString().matches(a.toString())){
 				
-				allAirports.set(i, a);
-				history.append("Airport "+allAirports.get(allAirports.size()-1)+" modified!\n");
+				a.setCloseBegin(closeBegin);
+				a.setCloseEnd(closeEnd);
+				int index=allAirports.indexOf(a);
+				history.append("Airport "+allAirports.get(index)+" will be closed from "+closeBegin+" to "+closeEnd+" !\n");
+				break;
+			}
+			
+		}
+		for(int i=0;i<allRoutes.size();i++){
+			
+			if(allRoutes.get(i).getOrigin().toString().matches(a.toString())){
+				
+				if(allRoutes.get(i).getDepTime()>closeBegin&&allRoutes.get(i).getDepTime()<closeEnd){
+					
+					allRoutes.get(i).setValid(false);
+					
+				}
+				
+				
+				
+			}
+			
+			if(allRoutes.get(i).getDestination().toString().matches(a.toString())){
+				
+				if(allRoutes.get(i).getArrivalTime()>closeBegin&&allRoutes.get(i).getDepTime()<closeEnd){
+					
+					allRoutes.get(i).setValid(false);
+					
+				}
 				
 			}
 			
 		}
-		
 		
 	}
 	

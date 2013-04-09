@@ -1,6 +1,8 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -213,8 +215,12 @@ public class Open_Close_Box extends javax.swing.JFrame {
         
     	boolean begin=false;
     	boolean end=false;
+    	boolean okay=false;
     	int s = tabbedPane.getSelectedIndex();
-    	
+    	int open = 0;
+    	int close = 0;
+    	int closeBegin = 0;
+    	int openBegin = 0;
     	
     	if(s==1){
     		
@@ -225,7 +231,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
                 
             if(o.matches()){
  
-            int closeBegin = Integer.parseInt(closeBeginField.getText());
+             closeBegin = Integer.parseInt(closeBeginField.getText());
                 
                 if(0000 < closeBegin && closeBegin < 2400){
                     
@@ -242,7 +248,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
              
              if(o.matches()){
             	 
-            	 int close = Integer.parseInt(closeEndField.getText());
+            	 close = Integer.parseInt(closeEndField.getText());
                  
                  if(0000 < close && close < 2400){
                      
@@ -255,24 +261,103 @@ public class Open_Close_Box extends javax.swing.JFrame {
              else{
                  closeEnd.setText("Invalid");
              }
+           
+             if(begin&&end){
+          	   
+          	   if(close<closeBegin){
+          		   okay=false;
+          		 JOptionPane.showMessageDialog(this,
+     					"Re-open time must be greater than close time!","Nope", JOptionPane.INFORMATION_MESSAGE);
+          		closeEnd.setText("Invalid");
+          		   
+          	   }
+          	   else{
+          		   okay=true;
+          	   }
+             }
+             
+             }else{
+            	 
+            	 Pattern q = Pattern.compile("[0-9]{4}");      
+                 Matcher o = q.matcher(openBeginField.getText());
+                 
+                 
+                     
+                 if(o.matches()){
+      
+                openBegin = Integer.parseInt(openBeginField.getText());
+                     
+                     if(0000 < openBegin && openBegin < 2400){
+                         
+                         begin = true; 
+                            beginValid.setText("Valid");            
+                     }
+                     
+                }
+                 else{
+                     beginValid.setText("Invalid");
+                 }
+                 
+                  o = q.matcher(openEndField.getText());
+                  
+                  if(o.matches()){
+                 	 
+                 	 open = Integer.parseInt(openEndField.getText());
+                      
+                      if(0000 < open && open < 2400){
+                          
+                          end = true; 
+                          endValid.setText("Valid");
+                                         
+                      }
+                      
+                 }
+                  else{
+                      endValid.setText("Invalid");
+                  }
+            	 
+                  if(begin&&end){
+               	   
+               	   if(open<openBegin){
+               		   okay=false;
+               		 JOptionPane.showMessageDialog(this,
+          					"Re-open time must be greater than close time!","Nope", JOptionPane.INFORMATION_MESSAGE);
+               		endValid.setText("Invalid");
+               	   }
+               	   else{
+               		   okay=true;
+               	   }
+            	   
+            	   
+               }
+            	 
             	 
              }
     	
-    	if(begin&&end){
+    	if(okay){
              
-    		
-    		Airport a = (Airport) Combo_AirportOpen.getSelectedItem();
-    		for(int i=0;i<d.getAllRoutes().size();i++){
+    		if(s==1){
+    		Airport a = (Airport) Combo_AirportClose.getSelectedItem();
+    		for(int i=0;i<d.getAirports().size();i++){
     			
-    			if(d.getAllRoutes().get(i).toString().matches(a.toString())){
-    				
-    				d.editAirport(a);
+    			if(d.getAirports().get(i).toString().matches(a.toString())){
+    				d.editAirport(a,Integer.parseInt(closeBeginField.getText()),Integer.parseInt(closeEndField.getText()));
+    				//d.getAirports().get(i).setCloseBegin(Integer.parseInt(closeBeginField.getText()));
+    				//d.getAirports().get(i).setCloseEnd(Integer.parseInt(closeEndField.getText()));
     				break;
     				
     			}
-    			
-    		}
     		
+    			}
+    		JOptionPane.showMessageDialog(this,
+					("Airport "+a.toString()+" will be closed from "+closeBeginField.getText()+" to "+closeEndField.getText()+" !"),"Airport added!", JOptionPane.INFORMATION_MESSAGE);
+    		beginClose.setText("");
+			closeEnd.setText("");
+			closeBeginField.setText("");
+			closeEndField.setText("");
+    		}
+    		begin=false;
+    		end=false;
     	}
     	
     	

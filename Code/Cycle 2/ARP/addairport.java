@@ -1,7 +1,10 @@
+import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /*
@@ -20,11 +23,14 @@ public class addAirport extends javax.swing.JFrame {
 	 */
 	Director d;
 
-	public addAirport(Director d) {
+	JTextArea history;// added
+
+	public addAirport(Director d,JTextArea history) {
 		this.d=d;
 		initComponents();
 		setLocationRelativeTo(null);
 		setVisible(true);
+		this.history = history;// added
 	}
 
 	/**
@@ -49,9 +55,10 @@ public class addAirport extends javax.swing.JFrame {
 		addButton.setText("Add");
 		addButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				addButtonActionPerformed(evt, airCodeField, result);
+				addButtonActionPerformed(evt,airCodeField,result,history);
 			}
-		});
+		});//change
+
 
 		result.setText("                                 ");
 
@@ -86,16 +93,45 @@ public class addAirport extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void addButtonActionPerformed(java.awt.event.ActionEvent evt,JTextField airCodeField,JLabel result){
+	private void addButtonActionPerformed(java.awt.event.ActionEvent evt,JTextField airCodeField,JLabel result,JTextArea history){
 		Pattern p=Pattern.compile("[A-Z]{3}");
 
 		Matcher m=p.matcher(airCodeField.getText());
+		boolean contained = false;
 
 		if(m.matches())
 		{
 
-			result.setText("Success!");
-			d.addAirport(new Airport(airCodeField.getText(),0,0));
+			for(int i=0;i<d.getAirports().size();i++){
+
+				if(d.getAirports().get(i).toString().matches(airCodeField.getText())){
+					contained = true;
+					break;
+					
+				}else{
+
+					contained=false;
+				}
+			}
+
+			if(contained){
+
+				result.setText("Airport already exists in system!");
+
+			}
+
+
+			else{
+				result.setText("Success!");
+				d.addAirport(new Airport(airCodeField.getText(),0,0));
+				JOptionPane.showMessageDialog(this,
+						("Airport "+d.getAirports().getLast()+" added to the system!"),"Airport added!", JOptionPane.INFORMATION_MESSAGE);
+				result.setText("");
+				airCodeField.setText("");
+
+			}
+
+			//history.append("Airport "+d.getAirports().get(d.getAirports().size()-1)+" has been added to the system.\n");
 			//System.out.println(d.getAirports().get(d.getAirports().size()-1).toString());
 
 		}else{

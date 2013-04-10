@@ -125,15 +125,15 @@ public class Graph {
 				return cost;
 			}
 
-			public int getTime(){
-				int time=0;
+			public Double getTime(){
+				double time=0;
 				for(int i=0;i<routeList.size();i++){
 					if(routeList.size()>i+1){
-						time+=(routeList.get(i).getDepTime()-routeList.get(i).getArrivalTime())+(routeList.get(i).getArrivalTime()-routeList.get(i+1).getDepTime());
+						time+=(routeList.get(i).getArrivalTime()-routeList.get(i).getDepTime())+(-routeList.get(i).getArrivalTime()+routeList.get(i+1).getDepTime());
 
 					}else{
 
-						time+=(routeList.get(i).getDepTime()-routeList.get(i).getArrivalTime());
+						time+=(routeList.get(i).getArrivalTime()-routeList.get(i).getDepTime());
 
 					}
 

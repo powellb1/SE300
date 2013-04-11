@@ -341,7 +341,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
     		for(int i=0;i<d.getAirports().size();i++){
     			
     			if(d.getAirports().get(i).toString().matches(a.toString())){
-    				d.editAirport(a,Integer.parseInt(closeBeginField.getText()),Integer.parseInt(closeEndField.getText()));
+    				d.closeAirport(a,Integer.parseInt(closeBeginField.getText()),Integer.parseInt(closeEndField.getText()));
     				//d.getAirports().get(i).setCloseBegin(Integer.parseInt(closeBeginField.getText()));
     				//d.getAirports().get(i).setCloseEnd(Integer.parseInt(closeEndField.getText()));
     				break;

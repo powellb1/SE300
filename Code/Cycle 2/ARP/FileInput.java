@@ -103,10 +103,10 @@ public class FileInput{
 								
 								if(Routes.get(k).getOrigin().toString().matches(Airports.get(i).toString())){
 									
-									if(Routes.get(k).getDepTime()>Integer.parseInt(matcherClose.group(2))&&Routes.get(k).getDepTime()<Integer.parseInt(matcherClose.group(3))){
+									if(Routes.get(k).getDepTime()>=Integer.parseInt(matcherClose.group(2))&&Routes.get(k).getDepTime()<=Integer.parseInt(matcherClose.group(3))){
 										
 										Routes.get(k).setValid(false);
-										
+
 									}
 									
 									
@@ -118,6 +118,7 @@ public class FileInput{
 									if(Routes.get(k).getArrivalTime()>Integer.parseInt(matcherClose.group(2))&&Routes.get(k).getDepTime()<Integer.parseInt(matcherClose.group(3))){
 										
 										Routes.get(k).setValid(false);
+
 										
 									}
 									

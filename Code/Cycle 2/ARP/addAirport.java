@@ -23,14 +23,14 @@ public class addAirport extends javax.swing.JFrame {
 	 */
 	Director d;
 
-	JTextArea history;// added
 
-	public addAirport(Director d,JTextArea history) {
+
+	public addAirport(Director d) {
 		this.d=d;
 		initComponents();
 		setLocationRelativeTo(null);
 		setVisible(true);
-		this.history = history;// added
+
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class addAirport extends javax.swing.JFrame {
 		addButton.setText("Add");
 		addButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				addButtonActionPerformed(evt,airCodeField,result,history);
+				addButtonActionPerformed(evt,airCodeField,result);
 			}
 		});//change
 
@@ -93,7 +93,7 @@ public class addAirport extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void addButtonActionPerformed(java.awt.event.ActionEvent evt,JTextField airCodeField,JLabel result,JTextArea history){
+	private void addButtonActionPerformed(java.awt.event.ActionEvent evt,JTextField airCodeField,JLabel result){
 		Pattern p=Pattern.compile("[A-Z]{3}");
 
 		Matcher m=p.matcher(airCodeField.getText());

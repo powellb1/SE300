@@ -48,6 +48,8 @@ R021,DELTA,ATL,0300,ORL,0400,180.00
 R022,DELTA,ORL,0740,DCA,1100,200.00
 R023,DELTA,ORL,0740,DCA,1100,200.00
 R024,DELTA,YES,0301,BWI,0401,180.00
+#R025,DELTA,ATL,0800,JFK,1100,184.00
+
 
 #comment All closures to be listed here.
 #comment Format: airport_code, time_c, time_o

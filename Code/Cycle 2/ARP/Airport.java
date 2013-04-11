@@ -1,11 +1,11 @@
-import java.util.LinkedList;
+import java.util.HashSet;
 
 
 public class Airport {
 
 	private String name;
-	private static LinkedList<Integer> closeBeginList = new LinkedList<Integer>();
-	private static LinkedList<Integer> closeEndList = new LinkedList<Integer>();
+	private static HashSet<Integer> closeBeginList = new HashSet<Integer>();
+	private static HashSet<Integer> closeEndList = new HashSet<Integer>();
 
 	public Airport(String name,Integer closeBegin, Integer closeEnd){
 
@@ -26,7 +26,7 @@ public class Airport {
 		return name;
 	}
 
-	public LinkedList<Integer> getCloseBegin() {
+	public HashSet<Integer> getCloseBegin() {
 		return closeBeginList;
 	}
 
@@ -34,7 +34,7 @@ public class Airport {
 		closeBeginList.add(closeBegin);
 	}
 
-	public LinkedList<Integer> getCloseEnd() {
+	public HashSet<Integer> getCloseEnd() {
 		return closeEndList;
 	}
 
@@ -42,6 +42,15 @@ public class Airport {
 		closeEndList.add(closeEnd);
 	}
 
+	public void setOpenBegin(int openBegin){
+		
+		//closeEndList.remove(o)
+	}
+	
+	public void setOpenEnd(int openEnd){
+		
+		
+	}
 
 
 }

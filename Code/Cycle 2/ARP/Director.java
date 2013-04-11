@@ -57,7 +57,7 @@ public class Director{
 
 	}
 	
-	public void editAirport(Airport a,int closeBegin,int closeEnd){
+	public void closeAirport(Airport a,int closeBegin,int closeEnd){
 		
 		for(int i=0;i<allAirports.size();i++){
 			
@@ -98,6 +98,26 @@ public class Director{
 		}
 		
 	}
+	
+	public void openAirport(Airport a, int openBegin, int openEnd){
+		
+		for(int i=0;i<allAirports.size();i++){
+			
+			if(allAirports.get(i).toString().matches(a.toString())){
+				
+				//a.set(closeBegin);
+				//a.setCloseEnd(closeEnd);
+				int index=allAirports.indexOf(a);
+				//history.append("Airport "+allAirports.get(index)+" will be closed from "+closeBegin+" to "+closeEnd+" !\n");
+				break;
+			}
+			
+		}
+		
+		
+		
+	}
+	
 	
 	public void editRoute(Route r){
 		

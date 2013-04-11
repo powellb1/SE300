@@ -1,6 +1,7 @@
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Stack;
+import java.util.TreeMap;
 
 /*
  * Credit should be given to Ben O'Brien and Max Dewees for their help in steering us on the right path
@@ -73,14 +74,14 @@ public class Graph {
 
 				for(int i=0;i<n.getInEdges().size();i++){
 					if(routeStack.size()<1){
-						if(n.getInEdges().get(i).getFrom().toString().matches(next.toString())){
+						if(n.getInEdges().get(i).getFrom().toString().matches(next.toString())&&n.getInEdges().get(i).getRoute().isValid()){
 							routeStack.push(n.getInEdges().get(i).getRoute());
 							getRoutes(routeStack,routePath);
 							routeStack.pop();
 						}
 					}
 					else{
-						if(n.getInEdges().get(i).getFrom().toString().matches(next.toString())&&routeStack.peek().getDepTime()-n.getInEdges().get(i).getRoute().getArrivalTime()>30){
+						if(n.getInEdges().get(i).getFrom().toString().matches(next.toString())&&routeStack.peek().getDepTime()-n.getInEdges().get(i).getRoute().getArrivalTime()>30&&n.getInEdges().get(i).getRoute().isValid()){
 							routeStack.push(n.getInEdges().get(i).getRoute());
 							getRoutes(routeStack,routePath);
 							routeStack.pop();
@@ -125,15 +126,35 @@ public class Graph {
 				return cost;
 			}
 
-			public Double getTime(){
+			public double getTime(){
 				double time=0;
 				for(int i=0;i<routeList.size();i++){
+					
+					double arrivalMinutes = routeList.get(i).getArrivalTime()%10.0;
+					double arrivalHours = (routeList.get(i).getArrivalTime()-arrivalMinutes)/100.0;
+					double piArrivalHours = arrivalHours*Math.PI*2.0;
+					double piArrivalMinutes = arrivalMinutes*Math.PI/30.0;
+					
+					double departureMinutes = routeList.get(i).getDepTime()%10.0;
+					double departureHours = (routeList.get(i).getDepTime()-departureMinutes)/100.0;
+					double piDepartureHours = departureHours*Math.PI*2.0;
+					double piDepartureMinutes = departureMinutes*Math.PI/30.0;
+					
 					if(routeList.size()>i+1){
-						time+=(routeList.get(i).getArrivalTime()-routeList.get(i).getDepTime())+(-routeList.get(i).getArrivalTime()+routeList.get(i+1).getDepTime());
+						
+					
+						double nextdepartureMinutes = routeList.get(i+1).getDepTime()%10.0;
+						double nextdepartureHours = (routeList.get(i+1).getDepTime()-nextdepartureMinutes)/100.0;
+						double nextpiDepartureHours = nextdepartureHours*Math.PI*2.0;
+						double nextpiDepartureMinutes = nextdepartureMinutes*Math.PI/30.0;
+						
+						
+						
+						time+=(((piArrivalHours+piArrivalMinutes)-(piDepartureHours+piDepartureMinutes))+((nextpiDepartureHours+nextpiDepartureMinutes)-(piArrivalHours+piArrivalMinutes)))/(2.0*Math.PI);
 
 					}else{
 
-						time+=(routeList.get(i).getArrivalTime()-routeList.get(i).getDepTime());
+						time+=(((piArrivalHours+piArrivalMinutes)-(piDepartureHours+piDepartureMinutes))/(2.0*Math.PI));
 
 					}
 
@@ -143,19 +164,33 @@ public class Graph {
 
 			public String getAirlines(){
 
-				HashSet <String> uniqueAirLines = new HashSet <String>();
+				TreeMap <String,Integer> uniqueAirlines = new TreeMap <String,Integer>();
 				LinkedList <String> airlines = new LinkedList<String>();
 
 				for(int i=0;i<routeList.size();i++){
 
-					if(!uniqueAirLines.contains(routeList.get(i).getAirline())){
+					if(!uniqueAirlines.containsKey(routeList.get(i).getAirline())){
 
-						uniqueAirLines.add(routeList.get(i).getAirline());
+						uniqueAirlines.put(routeList.get(i).getAirline(),Integer.valueOf(0));
 
 					}
 					airlines.add(routeList.get(i).getAirline());
 				}
+				
+				Integer count;
+				
+				for(int i=0;i<airlines.size();i++){
+					
+					count = uniqueAirlines.get(airlines.get(i));
+					count++;
+					uniqueAirlines.put(airlines.get(i), count);
 
+					count=0;
+					
+					
+					
+				}
+				System.out.println(uniqueAirlines.toString());
 				return "s";
 
 			}

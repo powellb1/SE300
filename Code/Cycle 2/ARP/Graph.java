@@ -15,9 +15,9 @@ import java.util.TreeMap;
 
 public class Graph {
 
-	static LinkedList <Path> p = new LinkedList<Path>();
-	static LinkedList <Node> path;
-	static LinkedList <Node> allAirports;
+	LinkedList <Path> p = new LinkedList<Path>();
+	LinkedList <Node> path;
+	LinkedList <Node> allAirports;
 	static Stack <Node> nodeStack = new Stack<Node>();
 	static LinkedList <Node> routePath = new LinkedList<Node>();
 	static LinkedList<Node>routePaths = new LinkedList<Node>();
@@ -31,14 +31,24 @@ public class Graph {
 
 	}
 
-
+	/*
+	 * This class is used to create a "path" of nodes. These are the nodes that need to be visited in order to make
+	 * a valid route. The order of the stack which is passed to the constructor is the order in which the nodes need
+	 * to be visited. This class contains an inner class of routePath with is a list of paths and the order in which 
+	 * they need to be visited to complete the chain
+	 *
+	 */
 	 class Path{
 
+		 //initalize variables
 		private  Stack<Node> pathStack;
 		double cost=0;
 		private Stack<Route> routeStack = new Stack<Route>();
 		LinkedList<routePath>rP = new LinkedList<routePath>();
 
+		//constructor
+		//clone the stack so that as we continue to recurse we don't
+		//mess with the copy of the stack for this class
 		@SuppressWarnings("unchecked")
 		public Path(Stack <Node> nodeStack){ 
 			this.pathStack=(Stack <Node>)nodeStack.clone();
@@ -46,7 +56,7 @@ public class Graph {
 			getRoutes(routeStack, rP);
 		}
 
-		@Override
+		//override the toString method
 		public String toString() {
 			// TODO Auto-generated method stub
 			return nodeStack.toString();
@@ -57,49 +67,65 @@ public class Graph {
 
 		}
 
-
+		//this method generates the routes in the order that we must visit them
 		public void getRoutes(Stack<Route> routeStack,LinkedList<routePath> routePath){
 
+			//if the size of our stack of paths is less than one, but not empty
 			if(pathStack.size()<=1&&!pathStack.isEmpty()){
+				//we make a new object of routePath with our current stack of routes
 				routePath.add(new routePath(routeStack));
-
+				//go back to the calling method
 				return;
 
 
 			}else{
+				//we'll pop off the first node so that we can see what lies beneath
 				Node n =pathStack.pop();
 				Node next = pathStack.peek();
-
-
-
+				//loop for all the incoming edges
 				for(int i=0;i<n.getInEdges().size();i++){
+					//if there is only one route on the stack
 					if(routeStack.size()<1){
+						//make sure that where we are coming from matches where we are and that the route is valid (the airport isn't closed)
 						if(n.getInEdges().get(i).getFrom().toString().matches(next.toString())&&n.getInEdges().get(i).getRoute().isValid()){
+							//we'll push this route onto our stack, recurse and once we recurse out, we'll pop the route off our stack
 							routeStack.push(n.getInEdges().get(i).getRoute());
 							getRoutes(routeStack,routePath);
 							routeStack.pop();
 						}
 					}
 					else{
+						//make sure that where we are coming from matches where we are and that the duration between flights is atleast 30 minutes and the route is valid
 						if(n.getInEdges().get(i).getFrom().toString().matches(next.toString())&&routeStack.peek().getDepTime()-n.getInEdges().get(i).getRoute().getArrivalTime()>30&&n.getInEdges().get(i).getRoute().isValid()){
+							//push the route onto the stack, recurse and pop off once recursing is done
 							routeStack.push(n.getInEdges().get(i).getRoute());
 							getRoutes(routeStack,routePath);
 							routeStack.pop();
 						}
 					}
 				}
+				//push the node we popped off back onto the stack
 				pathStack.push(n);
 			}
 		}
 
+		/*
+		 * This is the red-headed step child class. I'm not happy with how this was implemented, but this is the way that it is done.
+		 * This class holds the LinkedList of routes that service our airport, as well as the order in which they must be visited.
+		 * This also contains the methods to return total time and cost as well as what airline most services this airport. 
+		 * 
+		 */
+		
 		 class routePath{
 
 			private Stack<Route> routeStack;
 			private LinkedList<Route> routeList = new LinkedList<Route>();
 
 			@SuppressWarnings("unchecked")
+			//we'll once again only clone the stack so that we don't mess up our copy as we make changes
 			public routePath(Stack<Route> nodeStack){
 				this.routeStack=(Stack <Route>)nodeStack.clone();
+				//turn it into a linked list, in reverse order just for easier reading
 				for(int i=0;i<routeStack.size();i++){
 					routeList.addFirst(routeStack.get(i));
 
@@ -111,12 +137,14 @@ public class Graph {
 				return routeList.toString();
 			}
 			
+			//return our routeList
 			public LinkedList<Route> getPath(){
 				
 				return routeList;
 				
 			}
 
+			//get the total cost
 			public double getCost(){
 				double cost =0;
 				for(int i=0;i<routeList.size();i++){
@@ -126,9 +154,14 @@ public class Graph {
 				return cost;
 			}
 
+			//get the total time
 			public double getTime(){
 				double time=0;
 				for(int i=0;i<routeList.size();i++){
+					
+					//this nonsense in terms of "piTime" is a result of me not realizing that mod 60 is a much better way to implement.
+					//piTime is derived from the notion that an hour is 2pi revolutions around the clock, and a minute is pi/30 revolutions
+					//around that same clock. This implementation was left for its novelty. 
 					
 					double arrivalMinutes = routeList.get(i).getArrivalTime()%10.0;
 					double arrivalHours = (routeList.get(i).getArrivalTime()-arrivalMinutes)/100.0;
@@ -162,6 +195,7 @@ public class Graph {
 				return time;
 			}
 
+			//return what airline the route uses the most
 			public String getAirlines(){
 
 				TreeMap <String,Integer> uniqueAirlines = new TreeMap <String,Integer>();
@@ -190,8 +224,8 @@ public class Graph {
 					
 					
 				}
-				System.out.println(uniqueAirlines.toString());
-				return "s";
+				//System.out.println(uniqueAirlines.toString()+"\n");
+				return uniqueAirlines.firstKey();
 
 			}
 
@@ -199,18 +233,21 @@ public class Graph {
 		}
 	}
 	 
-	public LinkedList<Path> getCheapest(Node Origin, Node Destination){
+	 //get the path between the Origin and Destination
+	public LinkedList<Path> getPath(Node Origin, Node Destination){
 		Stack <Node> cheapestNodesStack = new Stack <Node>();
-		LinkedList <Path> cheapestPaths = new LinkedList<Path>();
-		pathFind(Origin,Destination,cheapestNodesStack, cheapestPaths);
+		LinkedList <Path> Path = new LinkedList<Path>();
+		pathFind(Origin,Destination,cheapestNodesStack, Path);
 		
-		return cheapestPaths;
+		return Path;
 	}
 
+	//this method recreates the graph. Its here since the user can make changes to the system
 	public void draw(){
 
 		allAirports=createNodes(d.getAirports());
 		addRoutes(allAirports,d.getAllRoutes());
+		System.out.println(allAirports.toString());
 
 	}
 
@@ -296,34 +333,38 @@ public class Graph {
 
 	}
 
-
+//this method will find a path of nodes between two nodes, in the order in which they must be visited
 	public void pathFind(Node Origin, Node Destination, Stack<Node> nodeStack, LinkedList <Path> path){
 
 
 		LinkedList <Node> visibleNodes = new LinkedList<Node>();
-
+		
 		nodeStack.push(Origin);
 
+		//if we have nothing in our node, we need to get out of the method
 		if(nodeStack.size()==0){
 			return;
 		}
-
+		//if our origin is the same as our destination, we know we have arrived, meaning we can create a new Path
 		if(Origin.toString().matches(Destination.toString())){
 			path.add(new Path(nodeStack));
 
 		}else{
+			//otherwise we need to get where we can go from where we are
 			visibleNodes=getVisibleNodes(Origin,nodeStack);
-
+			//for all the possibilities of visible nodes
 			for(int i=0;i<visibleNodes.size();i++){
-
+				//recurse
 				pathFind(visibleNodes.get(i),Destination,nodeStack,path);
 
 			}
 		}
+		//pop off the node
 		nodeStack.pop();
 
 	}
 
+	//this method will return to us all nodes we can reach going forward from where we are
 	public LinkedList <Node> getVisibleNodes(Node n,Stack<Node> nodeStack){
 
 		LinkedList<Node> visibleNodesunSorted = new LinkedList<Node>();

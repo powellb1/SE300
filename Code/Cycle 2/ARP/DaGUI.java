@@ -1,3 +1,5 @@
+import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -12,6 +14,10 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+
+
+
 
 
 /*
@@ -398,6 +404,11 @@ public class DaGUI extends javax.swing.JFrame {
 
 		editRouteOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
 		editRouteOption.setText("Edit Route");
+		editRouteOption.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				editRouteOptionActionPerformed(evt);
+			}
+		});
 		routesTab.add(editRouteOption);
 
 		daMenu.add(routesTab);
@@ -491,9 +502,12 @@ public class DaGUI extends javax.swing.JFrame {
 		LinkedList<Graph.Path> p = new LinkedList<Graph.Path>();
 		g.draw();
 		boolean empty=false;
-		TreeMap<Double, LinkedList<Route>> costs = new TreeMap<Double,LinkedList <Route>>();
-		TreeMap<Double, LinkedList<Route>> times = new TreeMap<Double,LinkedList<Route>>();
-		p=g.getCheapest(g.getNode((Airport)originBox.getSelectedItem()), g.getNode((Airport)destBox.getSelectedItem()));
+		LinkedList <Graph.Path.routePath> routes = new LinkedList<Graph.Path.routePath>();
+		//ArrayList <Graph.Path.routePath> routes = new ArrayList<Graph.Path.routePath>();
+		ArrayList<Double> costs = new ArrayList<Double>();
+		ArrayList<Double> times = new ArrayList<Double>();
+		LinkedList<LinkedList<Route>> cos = new LinkedList<LinkedList<Route>>();
+		p=g.getPath(g.getNode((Airport)originBox.getSelectedItem()), g.getNode((Airport)destBox.getSelectedItem()));
 
 		if(originBox.getSelectedIndex()==destBox.getSelectedIndex()){
 
@@ -502,7 +516,7 @@ public class DaGUI extends javax.swing.JFrame {
 		}else{
 			if(categoriesBox.getSelectedIndex()==1){
 				history.append((String)subcategoriesBox.getSelectedItem()+" cost between "+originBox.getSelectedItem().toString()+" and "+ destBox.getSelectedItem().toString()+" filter applied.\n");
-				
+
 				for(int i=0;i<p.size();i++){
 					if(p.get(i).getroutePath().size()==0){
 						empty=true;
@@ -523,14 +537,16 @@ public class DaGUI extends javax.swing.JFrame {
 
 						for(int k=0;k<p.get(i).getroutePath().size();k++){
 
-							for(int u=0;u<p.get(i).getroutePath().get(k).getPath().size();u++){
 
-								if(!p.get(i).getroutePath().get(k).getPath().isEmpty()){
 
-									costs.put(p.get(i).getroutePath().get(k).getCost(),p.get(i).getroutePath().get(k).getPath());
+							if(!p.get(i).getroutePath().get(k).getPath().isEmpty()){
 
-								}
+								routes.add(p.get(i).getroutePath().get(k));
+
+
+
 							}
+							
 
 
 						}
@@ -539,46 +555,87 @@ public class DaGUI extends javax.swing.JFrame {
 
 					if(subcategoriesBox.getSelectedIndex()==1){
 
-						NavigableMap<Double, LinkedList<Route>> upsideDownCost = costs.descendingMap();
-						
-						results.append("Most expensive cost is $"+ upsideDownCost.firstKey()+" .\n");
-						
-						for(Map.Entry<Double, LinkedList<Route>> entry : upsideDownCost.entrySet()){
+						for(int i=0;i<routes.size();i++){
 
-							Double cost = entry.getKey();
-							LinkedList<Route> value = entry.getValue();
+							costs.add(routes.get(i).getCost());
 
-							for(int i=0;i<value.size();i++){
-
-								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(value.get(i).getNumber()),value.get(i).getOrigin().toString(),
-										value.get(i).getDestination().toString(),Integer.toString(value.get(i).getDepTime()),
-										Integer.toString(value.get(i).getArrivalTime()),value.get(i).getAirline(),"$"+Double.toString(value.get(i).getCost())});
-							}
-							
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,null,null,null,"$"+cost});
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
 						}
+
+						Collections.sort(costs);
+						Collections.reverse(costs);
+
+						for(int i=0;i<costs.size();i++){
+
+							for(int k=0;k<routes.size();k++){
+
+								if(costs.get(i)==routes.get(k).getCost()&&!cos.contains(routes.get(k).getPath())){
+									times.add(i,routes.get(k).getTime());
+									cos.add(i,routes.get(k).getPath());
+
+								}
+
+							}
+
+
+						}
+
+						results.append("Highest cost is $ "+costs.get(0)+".\n");
+
+
+						for(int i=0;i<cos.size();i++){
+							for(int k=0;k<cos.get(i).size();k++){
+
+								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(cos.get(i).get(k).getNumber()),cos.get(i).get(k).getOrigin().toString(),
+										cos.get(i).get(k).getDestination().toString(),Integer.toString(cos.get(i).get(k).getDepTime()),
+										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),"$"+Double.toString(cos.get(i).get(k).getCost())});
+							}
+
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,"$"+costs.get(i)});
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
+
+						}
+
 					}else{
-						
-						results.append("Cheapest cost is $"+ costs.firstKey()+" .\n");
-						
-						for(Map.Entry<Double, LinkedList<Route>> entry : costs.entrySet()){
 
-							Double cost = entry.getKey();
-							LinkedList<Route> value = entry.getValue();
-							
-							
-							for(int i=0;i<value.size();i++){
+						for(int i=0;i<routes.size();i++){
 
-								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(value.get(i).getNumber()),value.get(i).getOrigin().toString(),
-										value.get(i).getDestination().toString(),Integer.toString(value.get(i).getDepTime()),
-										Integer.toString(value.get(i).getArrivalTime()),value.get(i).getAirline(),"$"+Double.toString(value.get(i).getCost())});
+							costs.add(routes.get(i).getCost());
+
+						}
+
+						Collections.sort(costs);
+
+						for(int i=0;i<costs.size();i++){
+
+							for(int k=0;k<routes.size();k++){
+
+								if(costs.get(i)==routes.get(k).getCost()&&!cos.contains(routes.get(k).getPath())){
+									times.add(i,routes.get(k).getTime());
+									cos.add(i,routes.get(k).getPath());
+
+								}
+
 							}
-							
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,null,null,null,"$"+cost});
+
+
+						}
+
+
+						results.append("Cheapest cost is $ "+costs.get(0)+".\n");
+
+						for(int i=0;i<cos.size();i++){
+							for(int k=0;k<cos.get(i).size();k++){
+
+								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(cos.get(i).get(k).getNumber()),cos.get(i).get(k).getOrigin().toString(),
+										cos.get(i).get(k).getDestination().toString(),Integer.toString(cos.get(i).get(k).getDepTime()),
+										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),"$"+Double.toString(cos.get(i).get(k).getCost())});
+							}
+
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,"$"+costs.get(i)});
 							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
 
 						}
+
 					}
 
 				}else{
@@ -588,10 +645,10 @@ public class DaGUI extends javax.swing.JFrame {
 
 				}
 			}else if(categoriesBox.getSelectedIndex()==3){
-				
+
 				history.append((String)subcategoriesBox.getSelectedItem()+" time between "+originBox.getSelectedItem().toString()+" and "+ destBox.getSelectedItem().toString()+" filter applied.\n");
 				//p=g.getCheapest(g.getNode((Airport)originBox.getSelectedItem()), g.getNode((Airport)destBox.getSelectedItem()));
-				
+
 				for(int i=0;i<p.size();i++){
 					if(p.get(i).getroutePath().size()==0){
 						empty=true;
@@ -612,58 +669,93 @@ public class DaGUI extends javax.swing.JFrame {
 
 						for(int k=0;k<p.get(i).getroutePath().size();k++){
 
-							for(int u=0;u<p.get(i).getroutePath().get(k).getPath().size();u++){
-
 								if(!p.get(i).getroutePath().get(k).getPath().isEmpty()){
 
-									times.put(p.get(i).getroutePath().get(k).getTime(),p.get(i).getroutePath().get(k).getPath());
+									routes.add(p.get(i).getroutePath().get(k));
 
 								}
-							}
-
-
 						}
 
 					}
 
 					if(subcategoriesBox.getSelectedIndex()==1){
-						NavigableMap<Double, LinkedList<Route>> upsideDownTimes = times.descendingMap();
-						
-						results.append(String.format("Most time is %.2f hours.\n",upsideDownTimes.firstKey()));
-						
-						for(Entry<Double, LinkedList<Route>> entry : upsideDownTimes.entrySet()){
+						for(int i=0;i<routes.size();i++){
 
-							Double time = entry.getKey();
-							LinkedList<Route> value = entry.getValue();
+							times.add(routes.get(i).getTime());
 
-							for(int i=0;i<value.size();i++){
-
-								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(value.get(i).getNumber()),value.get(i).getOrigin().toString(),
-										value.get(i).getDestination().toString(),Integer.toString(value.get(i).getDepTime()),
-										Integer.toString(value.get(i).getArrivalTime()),value.get(i).getAirline(),"$"+Double.toString(value.get(i).getCost())});
-							}
-							
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f",time),null,null,null});
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
 						}
-					}else{
-						
-						results.append(String.format("Least time is %.2f hours.\n",times.firstKey()));
-						
-						for(Entry<Double, LinkedList<Route>> entry : times.entrySet()){
 
-							Double time = entry.getKey();
-							LinkedList<Route> value = entry.getValue();
-							
-							
-							for(int i=0;i<value.size();i++){
+						Collections.sort(times);
+						Collections.reverse(times);
 
-								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(value.get(i).getNumber()),value.get(i).getOrigin().toString(),
-										value.get(i).getDestination().toString(),Integer.toString(value.get(i).getDepTime()),
-										Integer.toString(value.get(i).getArrivalTime()),value.get(i).getAirline(),"$"+Double.toString(value.get(i).getCost())});
+						for(int i=0;i<times.size();i++){
+
+							for(int k=0;k<times.size();k++){
+
+								if(times.get(i)==routes.get(k).getTime()&&!cos.contains(routes.get(k).getPath())){
+									costs.add(i,routes.get(k).getCost());
+									cos.add(i,routes.get(k).getPath());
+
+								}
+
 							}
-							
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f",time),null,null,null});
+
+
+						}
+
+						results.append(String.format("Longest time is %.2f \n",times.get(0) ));
+
+
+						for(int i=0;i<cos.size();i++){
+							for(int k=0;k<cos.get(i).size();k++){
+
+								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(cos.get(i).get(k).getNumber()),cos.get(i).get(k).getOrigin().toString(),
+										cos.get(i).get(k).getDestination().toString(),Integer.toString(cos.get(i).get(k).getDepTime()),
+										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),"$"+Double.toString(cos.get(i).get(k).getCost())});
+							}
+
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,"$"+Double.toString(costs.get(i))});
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
+
+						}
+						
+					}else{
+
+						for(int i=0;i<routes.size();i++){
+
+							times.add(routes.get(i).getTime());
+
+						}
+
+						Collections.sort(times);
+
+						for(int i=0;i<times.size();i++){
+
+							for(int k=0;k<times.size();k++){
+
+								if(times.get(i)==routes.get(k).getTime()&&!cos.contains(routes.get(k).getPath())){
+									costs.add(i,routes.get(k).getCost());
+									cos.add(i,routes.get(k).getPath());
+
+								}
+
+							}
+
+
+						}
+
+						results.append(String.format("Shortest time is %.2f \n",times.get(0) ));
+
+
+						for(int i=0;i<cos.size();i++){
+							for(int k=0;k<cos.get(i).size();k++){
+
+								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(cos.get(i).get(k).getNumber()),cos.get(i).get(k).getOrigin().toString(),
+										cos.get(i).get(k).getDestination().toString(),Integer.toString(cos.get(i).get(k).getDepTime()),
+										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),"$"+Double.toString(cos.get(i).get(k).getCost())});
+							}
+
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,"$"+Double.toString(costs.get(i))});
 							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
 
 						}
@@ -675,9 +767,9 @@ public class DaGUI extends javax.swing.JFrame {
 							"No valid path found!","'fraid I can't let you do that", JOptionPane.ERROR_MESSAGE);
 
 				}
-				
+
 			}else if(categoriesBox.getSelectedIndex()==2){
-				
+
 				for(int i=0;i<p.size();i++){
 					if(p.get(i).getroutePath().size()==0){
 						empty=true;
@@ -702,25 +794,35 @@ public class DaGUI extends javax.swing.JFrame {
 
 								if(!p.get(i).getroutePath().get(k).getPath().isEmpty()){
 
-									p.get(i).getroutePath().get(k).getAirlines();
-									//System.out.println(p.get(i).getroutePath().get(k).toString());
+									if(p.get(i).getroutePath().get(k).getAirlines().matches((String)subcategoriesBox.getSelectedItem())){
+
+
+										( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(p.get(i).getroutePath().get(k).getPath().get(u).getNumber()),p.get(i).getroutePath().get(k).getPath().get(u).getOrigin().toString(),
+												p.get(i).getroutePath().get(k).getPath().get(u).getDestination().toString(),Integer.toString(p.get(i).getroutePath().get(k).getPath().get(u).getDepTime()),
+												Integer.toString(p.get(i).getroutePath().get(k).getPath().get(u).getArrivalTime()),p.get(i).getroutePath().get(k).getPath().get(u).getAirline(),"$"+Double.toString(p.get(i).getroutePath().get(k).getPath().get(u).getCost())});
+
+
+									}
+									else
+										System.out.println("Nope");
 
 								}
+
 							}
 
-
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
 						}
 
 					}
 				}
 
-				
-				
-				
+
+
+
 			}
 		}
 
-		
+
 
 
 	}//GEN-LAST:event_findButtonActionPerformed
@@ -739,6 +841,11 @@ public class DaGUI extends javax.swing.JFrame {
 		new Open_Close_Box(d);
 		//g.draw();
 	}//GEN-LAST:event_openCloseOptionActionPerformed
+
+	private void editRouteOptionActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_editRouteOptionActionPerformed
+
+		new editRoute(d);		
+	}//GEN-LAST:event_editRouteOptionActionPerformed
 
 	private void newAirportOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAirportOptionActionPerformed
 		new addAirport(d);
@@ -944,7 +1051,6 @@ public class DaGUI extends javax.swing.JFrame {
 			model.removeRow(i);
 		}
 	}
-
 
 
 }

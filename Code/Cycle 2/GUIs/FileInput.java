@@ -72,26 +72,40 @@ public class FileInput{
 			if(!line.contains("#")){
 				if(matcherAirport.matches()){
 					
-					if(Airports.contains(line) == false){ // eliminates repeat airports
+					boolean airportIndicator = false;
+					airportIndicator = Airports.contains(line); 
 
 					Airports.add(new Airport(line,0,0));
+					
+					if(airportIndicator == true){
+						
+						Airports.removeLast(); // should eliminate repeat airports
 					}
 
 				}
 
 				if(matcher.matches()){
 					if(Integer.parseInt(matcher.group(4))<Integer.parseInt(matcher.group(6))&& Integer.parseInt(matcher.group(6))-Integer.parseInt(matcher.group(4))>30){
-
+						boolean numberIndicator = false;
+						boolean realAirportIndicator1 = true;
+						boolean realAirportIndicator2 = true;
+						boolean airportMatchingIndicator = false;
 						
-						if( Airports.contains(matcher.group(5)) == true && Airports.contains(matcher.group(3)) == true){ // checks to see that the airports exist
-							if(matcher.group(3) != matcher.group(5)){ // checks to make sure the airport are not the same
-								if(Routes.contains(matcher.group(1)) == false){ // eliminates repeat route numbers
+						numberIndicator = Routes.contains(matcher.group(1)); 
+							 realAirportIndicator1 = Airports.contains(matcher.group(5));
+							 realAirportIndicator2 = Airports.contains(matcher.group(3)); 
+								if(matcher.group(3) == matcher.group(5)){
+									airportMatchingIndicator = true;
+								}
+								
 						Routes.add(new Route(Integer.parseInt(matcher.group(1)),matcher.group(2), new Node(matcher.group(3)), Integer.parseInt(matcher.group(4)), new Node(matcher.group(5)), Integer.parseInt(matcher.group(6)),Double.parseDouble(matcher.group(7)),true));
 						
-								}
-						}
-					}
-				}
+							if(numberIndicator == true || realAirportIndicator1 == false || realAirportIndicator2 == false || airportMatchingIndicator == true){
+								Routes.removeLast();
+							} // should eliminate repeat route numbers, same origin and destination routes, and non-existent airport routes
+						
+				
+
 				if(matcherClose.matches()){
 
 					for(int i=0;i<Airports.size();i++){
@@ -160,6 +174,8 @@ public class FileInput{
 			
 		}
 		}
+		}
+		
 		
 	}
 	

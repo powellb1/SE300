@@ -5,7 +5,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 
 
 /*
@@ -20,12 +24,18 @@ public class Director{
 	private LinkedList<Route> allRoutes;
 	private LinkedList<Airport> allAirports;
 	private JTextArea history;
+	private JTable info;
+	private JComboBox destBox;
+	private JComboBox originBox;
 	
-	public Director(JTextArea history){
+	public Director(JTextArea history, JTable info, JComboBox destBox, JComboBox originBox){
 
 		//create a new fileinput class
 		FileInput f = null;
 		this.history=history;
+		this.info = info;
+		this.destBox = destBox;
+		this.originBox = originBox;
 
 
 
@@ -59,6 +69,10 @@ public class Director{
 	public void addAirport(Airport a) {
 		allAirports.add(a);
 		history.append("Airport "+allAirports.get(allAirports.size()-1)+" added to the system!\n");
+		JOptionPane.showMessageDialog(null,
+				("Airport "+a.toString()+" has been added!"),"Buh bye!", JOptionPane.INFORMATION_MESSAGE);
+		originBox.setModel(new javax.swing.DefaultComboBoxModel(allAirports.toArray()));
+		destBox.setModel(new javax.swing.DefaultComboBoxModel(allAirports.toArray()));
 
 	}
 	
@@ -161,8 +175,11 @@ public class Director{
 			allRoutes.remove(toBeRemoved.get(i));
 			
 		}
-	
-
+		originBox.setModel(new javax.swing.DefaultComboBoxModel(allAirports.toArray()));
+		destBox.setModel(new javax.swing.DefaultComboBoxModel(allAirports.toArray()));
+		UpdateInfo();
+		JOptionPane.showMessageDialog(null,
+				("Airport "+a.toString()+" has been deleted!"),"Buh bye!", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	//deletes a route
@@ -171,12 +188,14 @@ public class Director{
 		allRoutes.remove(r);
 		history.append("Route "+r.toString()+" has been removed!\n");
 		
+		/*
 		//renumbers the routes
 		for(int i=0;i<allRoutes.size();i++){
 			
 			allRoutes.get(i).setNumber(i+1);
 
 		}
+*/
 		
 	}
 	//saves the information to a text file
@@ -209,7 +228,24 @@ public class Director{
 
 
 	}
+	public void UpdateInfo(){
+		deleteAllRows((DefaultTableModel) info.getModel());
+		
+		for(int i=0;i<allRoutes.size();i++){
 
+				( (DefaultTableModel) info.getModel() ).addRow(new String[]{Integer.toString(allRoutes.get(i).getNumber()),allRoutes.get(i).getOrigin().toString(),
+						allRoutes.get(i).getDestination().toString(),Integer.toString(allRoutes.get(i).getDepTime()),
+						Integer.toString(allRoutes.get(i).getArrivalTime()),allRoutes.get(i).getAirline(),"$"+Double.toString(allRoutes.get(i).getCost())});
 
+		}
+		
+	}
+
+	public static void deleteAllRows(final DefaultTableModel model) {
+		for( int i = model.getRowCount() - 1; i >= 0; i-- ) {
+			model.removeRow(i);
+		}
+	}
+	
 
 }

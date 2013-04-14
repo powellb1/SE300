@@ -1,4 +1,5 @@
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /*
  * To change this template, choose Tools | Templates
@@ -209,6 +210,13 @@ public class DeleteRoute extends javax.swing.JFrame {
 		JOptionPane.showMessageDialog(this,
 				("Route "+routeBox.getSelectedItem().toString()+" has been deleted!"),"Buh bye!", JOptionPane.INFORMATION_MESSAGE);
 		routeBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAllRoutes().toArray()));
+		airlineField.setText(d.getAllRoutes().getFirst().getAirline());
+		arrivalField.setText(Integer.toString(d.getAllRoutes().getFirst().getArrivalTime()));
+		costField.setText(Double.toString(d.getAllRoutes().getFirst().getCost()));
+		departField.setText(Integer.toString(d.getAllRoutes().getFirst().getDepTime()));
+		destField.setText(d.getAllRoutes().getFirst().getDestination().toString());
+		originField.setText(d.getAllRoutes().getFirst().getOrigin().toString());
+		d.UpdateInfo();
 		}
 	}//GEN-LAST:event_deleteButtonActionPerformed
 

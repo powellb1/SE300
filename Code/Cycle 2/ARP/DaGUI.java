@@ -31,7 +31,7 @@ public class DaGUI extends javax.swing.JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JLabel airportValidationLabel;
 	private javax.swing.JMenu airportsTab;
@@ -40,7 +40,7 @@ public class DaGUI extends javax.swing.JFrame {
 	private javax.swing.JMenuBar daMenu;
 	private javax.swing.JMenuItem deleteAirport;
 	private javax.swing.JMenuItem deleteRouteOption;
-	private javax.swing.JComboBox destBox;
+	private javax.swing.JComboBox destBox = new javax.swing.JComboBox();
 	private javax.swing.JLabel destLabel;
 	private javax.swing.JButton destMoreInfo;
 	private javax.swing.JMenuItem editRouteOption;
@@ -49,11 +49,11 @@ public class DaGUI extends javax.swing.JFrame {
 	private javax.swing.JButton findButton;
 	private javax.swing.JTextArea history = new javax.swing.JTextArea();
 	private javax.swing.JScrollPane historyScroll;
-	private javax.swing.JTable info;
+	private javax.swing.JTable info = new javax.swing.JTable();
 	private javax.swing.JMenuItem newAirportOption;
 	private javax.swing.JMenuItem newRouteOption;
 	private javax.swing.JMenuItem openCloseOption;
-	private javax.swing.JComboBox originBox;
+	private javax.swing.JComboBox originBox = new javax.swing.JComboBox();
 	private javax.swing.JLabel originLabel;
 	private javax.swing.JButton originMoreInfo;
 	private javax.swing.JTextArea results;
@@ -70,7 +70,7 @@ public class DaGUI extends javax.swing.JFrame {
 	// End of variables declaration//GEN-END:variables
 
 
-	Director d = new Director(history);
+	Director d = new Director(history, info, destBox, originBox);
 	Graph g; 
 
 	LinkedList <Route> arrivingRoutes = new LinkedList<Route>();
@@ -102,8 +102,8 @@ public class DaGUI extends javax.swing.JFrame {
 		selectionPanel = new javax.swing.JPanel();
 		originLabel = new javax.swing.JLabel();
 		destLabel = new javax.swing.JLabel();
-		originBox = new javax.swing.JComboBox();
-		destBox = new javax.swing.JComboBox();
+		//originBox = new javax.swing.JComboBox();
+		//destBox = new javax.swing.JComboBox();
 		filterLabel = new javax.swing.JLabel();
 		findButton = new javax.swing.JButton();
 		categoriesBox = new javax.swing.JComboBox();
@@ -115,7 +115,7 @@ public class DaGUI extends javax.swing.JFrame {
 		destMoreInfo = new javax.swing.JButton();
 		tablePanel = new javax.swing.JPanel();
 		tableScroll = new javax.swing.JScrollPane();
-		info = new javax.swing.JTable();
+		//info = new javax.swing.JTable();
 		resultsScroll = new javax.swing.JScrollPane();
 		results = new javax.swing.JTextArea();
 		historyScroll = new javax.swing.JScrollPane();
@@ -280,7 +280,7 @@ public class DaGUI extends javax.swing.JFrame {
 			/**
 					 * 
 					 */
-					private static final long serialVersionUID = 1L;
+
 			Class[] types = new Class [] {
 					java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
 			};
@@ -337,7 +337,7 @@ public class DaGUI extends javax.swing.JFrame {
 			/**
 					 * 
 					 */
-					private static final long serialVersionUID = 1L;
+
 			Class[] types = new Class [] {
 					java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
 			};
@@ -349,11 +349,13 @@ public class DaGUI extends javax.swing.JFrame {
 
 		for(int i=0;i<d.getAllRoutes().size();i++){
 
-			if ( i+1 < info.getRowCount()-1 )
+			//if ( i+1 < info.getRowCount()-1 )
+			/*
 				( (DefaultTableModel) info.getModel() ).insertRow(i+1,new String[]{Integer.toString(d.getAllRoutes().get(i).getNumber()),d.getAllRoutes().get(i).getOrigin().toString(),
 						d.getAllRoutes().get(i).getDestination().toString(),Integer.toString(d.getAllRoutes().get(i).getDepTime()),
 						Integer.toString(d.getAllRoutes().get(i).getArrivalTime()),d.getAllRoutes().get(i).getAirline(),"$"+Double.toString(d.getAllRoutes().get(i).getCost())});
 			else
+			*/
 				( (DefaultTableModel) info.getModel() ).addRow(new String[]{Integer.toString(d.getAllRoutes().get(i).getNumber()),d.getAllRoutes().get(i).getOrigin().toString(),
 						d.getAllRoutes().get(i).getDestination().toString(),Integer.toString(d.getAllRoutes().get(i).getDepTime()),
 						Integer.toString(d.getAllRoutes().get(i).getArrivalTime()),d.getAllRoutes().get(i).getAirline(),"$"+Double.toString(d.getAllRoutes().get(i).getCost())});	
@@ -793,6 +795,8 @@ public class DaGUI extends javax.swing.JFrame {
 
 	private void newAirportOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAirportOptionActionPerformed
 		new addAirport(d);
+		originBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
+		destBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
 	}//GEN-LAST:event_newAirportOptionActionPerformed
 
 	private void deleteRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteOptionActionPerformed
@@ -846,6 +850,7 @@ public class DaGUI extends javax.swing.JFrame {
 
 	private void deleteAirportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirportActionPerformed
 		new deleteAirport(d);
+
 	}//GEN-LAST:event_deleteAirportActionPerformed
 
 	private void destMoreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destMoreInfoActionPerformed

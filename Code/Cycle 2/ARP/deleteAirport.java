@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -97,7 +99,12 @@ public class deleteAirport extends javax.swing.JFrame {
 
     //call the delete method within the director
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+    	int result=JOptionPane.showConfirmDialog(this,
+				("Are you sure you want to delete "+airportBox.getSelectedItem().toString()+" ?"),"Confirmation", JOptionPane.INFORMATION_MESSAGE);
+		if(result==JOptionPane.OK_OPTION){
         d.deleteAirport((Airport) airportBox.getSelectedItem());
+        airportBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAirports().toArray()));
+		}
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,10 +8,16 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Craig
+/*
+ * This class will allow the user to create new routes to add to the system.
+ * This is done by entering the appropriate information into various jtextfields.
+ * The route number is automatically generated for them, and the destination and origin
+ * fields are populated by airports in the system, thus eliminating the possibility for user
+ * error. This is all possible by calling the add route function within the director.
  */
+
+
+@SuppressWarnings("serial")
 public class routeFrame extends javax.swing.JFrame {
 
     /**
@@ -51,6 +57,7 @@ public class routeFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    //NETBEANS was used to build the GUI to our liking. Any actionlistener was implemented to work for our application
     private void initComponents() {
 
         routePanel = new javax.swing.JPanel();
@@ -234,12 +241,14 @@ public class routeFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_routeNumberTextActionPerformed
 
+    //if they accept, we check for these regular expressions to let them know if they succeeded
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
        
         Pattern p = Pattern.compile("[A-Z]*\\s*[A-Z]+");
        
         Matcher m = p.matcher(airlineText.getText());
         
+        //check to make sure the airline syntax is correct (i.e. no numbers)
         if(m.matches()){
              airlineValidationLabel.setText("Valid");
              airline = true;
@@ -255,7 +264,8 @@ public class routeFrame extends javax.swing.JFrame {
         Matcher o = q.matcher(departTimeText.getText());
         
         
-            
+        //make sure the departure time doesn't contain letters and is four digits 
+        //long
         if(o.matches()){
         
         departText = departTimeText.getText();

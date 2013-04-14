@@ -8,10 +8,15 @@ import javax.swing.JOptionPane;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Muraad Khan
+/*
+ * The class allows the user to edit the times that an airport is
+ * open or closed. This is done by calling the close airport method
+ * within the director class to close an airport or the open airport
+ * method in the director class to open an airport back up for service.
+ * The class checks the user input for bad syntax and will reject any
+ * bad input. 
  */
+
 public class Open_Close_Box extends javax.swing.JFrame {
 
 	//checking for invalid input
@@ -222,7 +227,12 @@ public class Open_Close_Box extends javax.swing.JFrame {
     	int closeBegin = 0;
     	int openBegin = 0;
     	
+    	//check to see what tab is selected
+    	
     	if(s==1){
+    		
+    		//all the closures must follow the syntax put in place by
+    		//patter q
     		
     		Pattern q = Pattern.compile("[0-9]{4}");      
             Matcher o = q.matcher(closeBeginField.getText());
@@ -261,9 +271,11 @@ public class Open_Close_Box extends javax.swing.JFrame {
              else{
                  closeEnd.setText("Invalid");
              }
-           
+             
+           //if the syntax is valid for both fields
              if(begin&&end){
           	   
+            	 //check to make sure the closure time makes sense
           	   if(close<closeBegin){
           		   okay=false;
           		 JOptionPane.showMessageDialog(this,
@@ -275,9 +287,10 @@ public class Open_Close_Box extends javax.swing.JFrame {
           		   okay=true;
           	   }
              }
-             
+             //if the open pane is selected
              }else{
             	 
+            	 //match the same pattern
             	 Pattern q = Pattern.compile("[0-9]{4}");      
                  Matcher o = q.matcher(openBeginField.getText());
                  
@@ -316,6 +329,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
                       endValid.setText("Invalid");
                   }
             	 
+                  //do the same checking to make sure closure time is greater
                   if(begin&&end){
                	   
                	   if(open<openBegin){
@@ -335,7 +349,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
              }
     	
     	if(okay){
-             
+             //update the list
     		if(s==1){
     		Airport a = (Airport) Combo_AirportClose.getSelectedItem();
     		for(int i=0;i<d.getAirports().size();i++){
@@ -349,6 +363,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
     			}
     		
     			}
+    		//display a nice dialog box
     		JOptionPane.showMessageDialog(this,
 					("Airport "+a.toString()+" will be closed from "+closeBeginField.getText()+" to "+closeEndField.getText()+" !"),"Airport added!", JOptionPane.INFORMATION_MESSAGE);
     		beginClose.setText("");

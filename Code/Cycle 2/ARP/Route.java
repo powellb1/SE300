@@ -1,5 +1,12 @@
-import java.util.Vector;
 
+/*
+ * This class is how we make a route. It takes in a number, servicing airline,
+ * a node for origin, a node for destination, a departure time, an arrival time, a
+ * cost and a field that will tell us if its valid (the airport where it goes or comes
+ * from is closed). Through this class, making the graph and getting other information 
+ * became significantly easier.
+ * 
+ */
 
 public class Route {
 
@@ -26,7 +33,9 @@ public class Route {
 
 	}
 
-	
+	/*
+	 * getters and setters for all the variables. Nothing unusual here.
+	 */
 
 	public int getNumber() {
 		return number;
@@ -84,6 +93,7 @@ public class Route {
 		this.cost = cost;
 	}
 
+	//returns a string representation of the route. Makes writing to the file easier
 	public String Stringify(){
 		return String.format("%2d\t%s\t%4s\t%5d\t%4s\t%5d\t%.2f",number,Airline,Origin,depTime,Destination,arrivalTime,cost);
 
@@ -91,7 +101,6 @@ public class Route {
 
 	public String toString(){
 
-		//System.out.println("Number is: "+ number +"Airline is: " + Airline + "Origin is: " + Origin + "Departure time is: "+ depTime + "Destination is: "+ Destination + "Arrival time is: " + arrivalTime + "Cost: " + cost );
 		return Integer.toString(number);
 	}
 	

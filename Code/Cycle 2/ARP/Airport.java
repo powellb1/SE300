@@ -1,5 +1,9 @@
 import java.util.HashSet;
 
+/*
+ * This class is used as a basis for our Nodes in the graph.
+ * Each object will have a name, as well as a list of closures. 
+ */
 
 public class Airport {
 
@@ -16,6 +20,8 @@ public class Airport {
 
 	}
 
+	//getters and setters. Nothing unusual here. 
+	
 	public String toString(){
 
 		return name;

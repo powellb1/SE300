@@ -8,7 +8,8 @@ import java.util.TreeMap;
  * 
  * This class creates nodes and edges that will be used for searching. The nodes are created from the Airports and
  * the edges are the Routes. The methods in this class will automatically generate Nodes and Edges based on the input
- * file. This class implements the depth first tree traversal searching ideology. 
+ * file. This class implements the depth first tree traversal searching ideology. The class also has an inner class of
+ * Path. 
  * 
  */
 
@@ -127,9 +128,9 @@ public class Graph {
 				this.routeStack=(Stack <Route>)nodeStack.clone();
 				//turn it into a linked list, in reverse order just for easier reading
 				for(int i=0;i<routeStack.size();i++){
-					routeList.addFirst(routeStack.get(i));
-
+					routeList.addFirst(routeStack.get(i));	
 				}
+
 			}
 
 			public String toString() {
@@ -238,7 +239,6 @@ public class Graph {
 		Stack <Node> cheapestNodesStack = new Stack <Node>();
 		LinkedList <Path> Path = new LinkedList<Path>();
 		pathFind(Origin,Destination,cheapestNodesStack, Path);
-		
 		return Path;
 	}
 
@@ -247,7 +247,6 @@ public class Graph {
 
 		allAirports=createNodes(d.getAirports());
 		addRoutes(allAirports,d.getAllRoutes());
-		System.out.println(allAirports.toString());
 
 	}
 
@@ -293,10 +292,10 @@ public class Graph {
 		LinkedList<Route> Arrivals = new LinkedList<Route>();
 
 		//loops for every incoming route associated with that airport	
-		for(int i=0;i<airport.inEdges.size();i++){
+		for(int i=0;i<airport.getInEdges().size();i++){
 
 			//add to a linked list of all the routes associated with particular node
-			Arrivals.add(airport.inEdges.get(i).getRoute());
+			Arrivals.add(airport.getInEdges().get(i).getRoute());
 
 		} 
 		return Arrivals;
@@ -308,10 +307,10 @@ public class Graph {
 		LinkedList<Route> Departures = new LinkedList<Route>();
 
 		//loop for all the outgoing edges associated with a node
-		for(int i=0;i<airport.outEdges.size();i++){
+		for(int i=0;i<airport.getOutEdges().size();i++){
 
 			//return a linked list of all the routes associated
-			Departures.add(airport.outEdges.get(i).getRoute());
+			Departures.add(airport.getOutEdges().get(i).getRoute());
 
 		} 
 		return Departures;
@@ -369,10 +368,11 @@ public class Graph {
 
 		LinkedList<Node> visibleNodesunSorted = new LinkedList<Node>();
 
+		//for all the edges that come out of this node
 		for(int i=0;i<n.getOutEdges().size();i++){
-
+			//provided its not already in the stack
 			if(!nodeStack.contains(n.getOutEdges().get(i).getTo())){
-
+				//we'll add it to the unsorted list
 				visibleNodesunSorted.add(n.getOutEdges().get(i).getTo());
 
 
@@ -380,11 +380,11 @@ public class Graph {
 			}
 
 		}
-
+		//cast it to a hashset and back to a linkedlist to remove duplicates
 		return new LinkedList<Node>(new HashSet<Node>(visibleNodesunSorted));
 	}
 
-
+//returns a node. This is used to get the appropriate node in the GUI.
 	public Node getNode(Airport a){
 
 		Node n = null;

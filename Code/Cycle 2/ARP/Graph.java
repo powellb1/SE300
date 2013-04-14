@@ -197,7 +197,7 @@ public class Graph {
 			}
 
 			//return what airline the route uses the most
-			public String getAirlines(){
+			public TreeMap<String,Integer> getAirlines(){
 
 				TreeMap <String,Integer> uniqueAirlines = new TreeMap <String,Integer>();
 				LinkedList <String> airlines = new LinkedList<String>();
@@ -226,8 +226,7 @@ public class Graph {
 					
 				}
 				//System.out.println(uniqueAirlines.toString()+"\n");
-				return uniqueAirlines.firstKey();
-
+				return uniqueAirlines;
 			}
 
 

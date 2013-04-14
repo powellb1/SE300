@@ -57,6 +57,39 @@ public class Director{
 	//adds a route to the system
 	public void addRoute(Route r) {
 		allRoutes.add(r);
+		Airport origin = null;
+		Airport destination = null;
+		
+		for(int i=0;i<allAirports.size();i++){
+			
+			if(allAirports.get(i).toString().matches(r.getOrigin().toString())){
+				
+				origin = allAirports.get(i);
+				
+			}
+			if(allAirports.get(i).toString().matches(r.getDestination().toString())){
+				
+				destination = allAirports.get(i);
+				
+			}
+			
+		}
+		
+		if(!origin.getCloseBegin().isEmpty()&&!origin.getCloseEnd().isEmpty()){
+			
+
+			
+			for(int i=0;i < origin.getCloseBegin().size();i++){
+				
+			}
+			
+		}
+		if(!destination.getCloseBegin().isEmpty()&&!destination.getCloseEnd().isEmpty()){
+			
+			
+			
+		}
+		
 		history.append("Route "+allRoutes.getLast().toString()+" added to system!\n");
 		UpdateInfo();
 	}
@@ -83,11 +116,14 @@ public class Director{
 			if(allAirports.get(i).toString().matches(a.toString())){
 				System.out.println(allAirports.get(i).toString());
 				//add the begining and ending closing time to the list of closures
-				a.setCloseBegin(closeBegin);
-				a.setCloseEnd(closeEnd);
-				int index=allAirports.indexOf(a);
-				history.append("Airport "+allAirports.get(index)+" will be closed from "+closeBegin+" to "+closeEnd+" !\n");
+				allAirports.get(i).setCloseBegin(closeBegin);
+				allAirports.get(i).setCloseEnd(closeEnd);
+				//int index=allAirports.indexOf(a);
+				history.append("Airport "+allAirports.get(i)+" will be closed from "+closeBegin+" to "+closeEnd+" !\n");
 			}
+			System.out.println(allAirports.get(i).toString());
+			System.out.println(allAirports.get(i).getCloseBegin().toString());
+			System.out.println(allAirports.get(i).getCloseEnd().toString());
 			
 		}
 		//if a route departs or arrives during that block, we have to tell the route its invalid since the airport will be closed

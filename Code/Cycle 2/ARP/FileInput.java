@@ -108,7 +108,7 @@ public class FileInput{
 					}
 					
 					if(!exists){
-						Airports.add(new Airport(line,0,0));
+						Airports.add(new Airport(line));
 					}
 					exists=false;
 

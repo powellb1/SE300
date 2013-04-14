@@ -8,16 +8,23 @@ import java.util.HashSet;
 public class Airport {
 
 	private String name;
-	private static HashSet<Integer> closeBeginList = new HashSet<Integer>();
-	private static HashSet<Integer> closeEndList = new HashSet<Integer>();
+	private HashSet<Integer> closeBeginList= new HashSet<Integer>();
+
+	private HashSet<Integer> closeEndList= new HashSet<Integer>(); 
 
 	public Airport(String name,Integer closeBegin, Integer closeEnd){
 
 		//this.open = open;
 		this.name = name;
+
 		closeBeginList.add(closeBegin);
 		closeEndList.add(closeEnd);
 
+	}
+	public Airport(String name){
+		
+		this.name=name;
+		
 	}
 
 	//getters and setters. Nothing unusual here. 

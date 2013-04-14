@@ -71,39 +71,24 @@ public class FileInput{
 			Matcher matcherAirport = patternAirport.matcher(line);
 			if(!line.contains("#")){
 				if(matcherAirport.matches()){
+					
+					if(Airports.contains(line) == false){ // eliminates repeat airports
 
 					Airports.add(new Airport(line,0,0));
+					}
 
 				}
 
 				if(matcher.matches()){
 					if(Integer.parseInt(matcher.group(4))<Integer.parseInt(matcher.group(6))&& Integer.parseInt(matcher.group(6))-Integer.parseInt(matcher.group(4))>30){
 
-						boolean indicator1 = false;
-						boolean indicator2 = false;
-						int i = 0;
-						while(indicator1 == false && indicator2 == false ){
-							
-							if(Airports.get(i).toString() == matcher.group(3)){
-								
-								indicator1 = true;
-							
-							}
-							if(Airports.get(i).toString() == matcher.group(5)){
-								
-								indicator2 = true;
-							}
-							else{
-								i++;
-							}
-						}
-
-
-						if(indicator1 == true && indicator2 == true){
-							if(matcher.group(3) != matcher.group(5)){
+						
+						if( Airports.contains(matcher.group(5)) == true && Airports.contains(matcher.group(3)) == true){ // checks to see that the airports exist
+							if(matcher.group(3) != matcher.group(5)){ // checks to make sure the airport are not the same
+								if(Routes.contains(matcher.group(1)) == false){ // eliminates repeat route numbers
 						Routes.add(new Route(Integer.parseInt(matcher.group(1)),matcher.group(2), new Node(matcher.group(3)), Integer.parseInt(matcher.group(4)), new Node(matcher.group(5)), Integer.parseInt(matcher.group(6)),Double.parseDouble(matcher.group(7)),true));
 						
-							}
+								}
 						}
 					}
 				}
@@ -118,6 +103,16 @@ public class FileInput{
 							Airports.get(i).setCloseBegin(Integer.parseInt(matcherClose.group(2)));
 							Airports.get(i).setCloseEnd(Integer.parseInt(matcherClose.group(3)));
 							}
+							/* It looks like we could do one of two things for the opening.
+							 * 1. set the values for that part of the array to 0 which is what they are initialized as, which I would assume is open.
+							 * this would just flatly eliminate closures.
+							 * 2. compare the values typed into the open boxes with the closure times already in the system, and the adjust the closure
+							 * accordingly.
+							 * We need to consider how the system will handle it if the user tries to close the same airport at different times,
+							 * as in multiple, non-overlapping, closures at the same airport. One option is to have a warning box pop up that warns the 
+							 * user that this closure will overwrite their previous closure at that airport.  At that point we would just replace the values
+							 * or leave them alone depending on the user's choice. (have an ok and a cancel button or something).
+							 */
 
 							for(int k=0;k<Routes.size();k++){
 								
@@ -163,6 +158,7 @@ public class FileInput{
 			
 			readFile();
 			
+		}
 		}
 		
 	}

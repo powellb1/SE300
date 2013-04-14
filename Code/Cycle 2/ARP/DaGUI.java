@@ -88,6 +88,7 @@ public class DaGUI extends javax.swing.JFrame {
 
 		setLocationRelativeTo(null);
 		g=new Graph(d);
+		g.draw();
 	}
 
 	/**
@@ -358,7 +359,7 @@ public class DaGUI extends javax.swing.JFrame {
 			*/
 				( (DefaultTableModel) info.getModel() ).addRow(new String[]{Integer.toString(d.getAllRoutes().get(i).getNumber()),d.getAllRoutes().get(i).getOrigin().toString(),
 						d.getAllRoutes().get(i).getDestination().toString(),Integer.toString(d.getAllRoutes().get(i).getDepTime()),
-						Integer.toString(d.getAllRoutes().get(i).getArrivalTime()),d.getAllRoutes().get(i).getAirline(),"$"+Double.toString(d.getAllRoutes().get(i).getCost())});	
+						Integer.toString(d.getAllRoutes().get(i).getArrivalTime()),d.getAllRoutes().get(i).getAirline(),String.format("$%.2f",d.getAllRoutes().get(i).getCost())});	
 
 		}
 
@@ -573,10 +574,10 @@ public class DaGUI extends javax.swing.JFrame {
 
 								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(cos.get(i).get(k).getNumber()),cos.get(i).get(k).getOrigin().toString(),
 										cos.get(i).get(k).getDestination().toString(),Integer.toString(cos.get(i).get(k).getDepTime()),
-										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),"$"+Double.toString(cos.get(i).get(k).getCost())});
+										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),String.format("$%.2f",cos.get(i).get(k).getCost())});
 							}
 
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,"$"+costs.get(i)});
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,String.format("$%.2f", costs.get(i))});
 							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
 
 						}
@@ -614,10 +615,10 @@ public class DaGUI extends javax.swing.JFrame {
 
 								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(cos.get(i).get(k).getNumber()),cos.get(i).get(k).getOrigin().toString(),
 										cos.get(i).get(k).getDestination().toString(),Integer.toString(cos.get(i).get(k).getDepTime()),
-										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),"$"+Double.toString(cos.get(i).get(k).getCost())});
+										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),String.format("$%.2f",cos.get(i).get(k).getCost())});
 							}
 
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,"$"+costs.get(i)});
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,String.format("$%.2f", costs.get(i))});
 							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
 
 						}
@@ -679,10 +680,10 @@ public class DaGUI extends javax.swing.JFrame {
 
 								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(cos.get(i).get(k).getNumber()),cos.get(i).get(k).getOrigin().toString(),
 										cos.get(i).get(k).getDestination().toString(),Integer.toString(cos.get(i).get(k).getDepTime()),
-										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),"$"+Double.toString(cos.get(i).get(k).getCost())});
+										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),String.format("$%.2f",cos.get(i).get(k).getCost())});
 							}
 
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,"$"+Double.toString(costs.get(i))});
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,String.format("$%.2f", costs.get(i))});
 							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
 
 						}
@@ -720,10 +721,10 @@ public class DaGUI extends javax.swing.JFrame {
 
 								( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(cos.get(i).get(k).getNumber()),cos.get(i).get(k).getOrigin().toString(),
 										cos.get(i).get(k).getDestination().toString(),Integer.toString(cos.get(i).get(k).getDepTime()),
-										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),"$"+Double.toString(cos.get(i).get(k).getCost())});
+										Integer.toString(cos.get(i).get(k).getArrivalTime()),cos.get(i).get(k).getAirline(),String.format("$%.2f",cos.get(i).get(k).getCost())});
 							}
 
-							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,"$"+Double.toString(costs.get(i))});
+							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{"Total",null,null,String.format("%.2f", times.get(i)),null,null,String.format("$%.2f", costs.get(i))});
 							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
 
 						}
@@ -749,19 +750,18 @@ public class DaGUI extends javax.swing.JFrame {
 
 										( (DefaultTableModel) resultsTable.getModel() ).addRow(new String[]{Integer.toString(p.get(i).getroutePath().get(k).getPath().get(u).getNumber()),p.get(i).getroutePath().get(k).getPath().get(u).getOrigin().toString(),
 												p.get(i).getroutePath().get(k).getPath().get(u).getDestination().toString(),Integer.toString(p.get(i).getroutePath().get(k).getPath().get(u).getDepTime()),
-												Integer.toString(p.get(i).getroutePath().get(k).getPath().get(u).getArrivalTime()),p.get(i).getroutePath().get(k).getPath().get(u).getAirline(),"$"+Double.toString(p.get(i).getroutePath().get(k).getPath().get(u).getCost())});
+												Integer.toString(p.get(i).getroutePath().get(k).getPath().get(u).getArrivalTime()),p.get(i).getroutePath().get(k).getPath().get(u).getAirline(),String.format("$%.2f",p.get(i).getroutePath().get(k).getPath().get(u).getCost())});
 
-
+									
 									}
-									else
-										System.out.println("Nope");
 
 								}
-
 							}
-
 							((DefaultTableModel) resultsTable.getModel()).addRow(new String[]{null,null,null,null,null,null,null});
+
+
 						}
+
 						}
 
 					}
@@ -773,6 +773,12 @@ public class DaGUI extends javax.swing.JFrame {
 
 
 	}//GEN-LAST:event_findButtonActionPerformed
+	
+	private void closeButtonActionPerformed(java.awt.event.WindowEvent evt){
+		
+		
+		
+	}
 
 	private void saveOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveOptionActionPerformed
 		d.saveMeh();

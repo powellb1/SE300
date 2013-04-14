@@ -58,6 +58,7 @@ public class Director{
 	public void addRoute(Route r) {
 		allRoutes.add(r);
 		history.append("Route "+allRoutes.getLast().toString()+" added to system!\n");
+		UpdateInfo();
 	}
 
 	//returns what airports are in the system
@@ -69,8 +70,6 @@ public class Director{
 	public void addAirport(Airport a) {
 		allAirports.add(a);
 		history.append("Airport "+allAirports.get(allAirports.size()-1)+" added to the system!\n");
-		JOptionPane.showMessageDialog(null,
-				("Airport "+a.toString()+" has been added!"),"Buh bye!", JOptionPane.INFORMATION_MESSAGE);
 		originBox.setModel(new javax.swing.DefaultComboBoxModel(allAirports.toArray()));
 		destBox.setModel(new javax.swing.DefaultComboBoxModel(allAirports.toArray()));
 
@@ -82,12 +81,12 @@ public class Director{
 		for(int i=0;i<allAirports.size();i++){
 			//if the airport we pass matches
 			if(allAirports.get(i).toString().matches(a.toString())){
+				System.out.println(allAirports.get(i).toString());
 				//add the begining and ending closing time to the list of closures
 				a.setCloseBegin(closeBegin);
 				a.setCloseEnd(closeEnd);
 				int index=allAirports.indexOf(a);
 				history.append("Airport "+allAirports.get(index)+" will be closed from "+closeBegin+" to "+closeEnd+" !\n");
-				break;
 			}
 			
 		}
@@ -96,7 +95,7 @@ public class Director{
 			
 			if(allRoutes.get(i).getOrigin().toString().matches(a.toString())){
 				
-				if(allRoutes.get(i).getDepTime()>closeBegin&&allRoutes.get(i).getDepTime()<closeEnd){
+				if(allRoutes.get(i).getDepTime()>=closeBegin&&allRoutes.get(i).getDepTime()<=closeEnd){
 					
 					allRoutes.get(i).setValid(false);
 					
@@ -149,9 +148,11 @@ public class Director{
 				
 				allRoutes.set(i, r);
 				history.append("Route "+allRoutes.get(i).toString()+" modified!\n");
+				break;
 			}
 			
 		}
+		UpdateInfo();
 		
 	}
 
@@ -215,6 +216,10 @@ public class Director{
 		for(int i=0;i<allAirports.size();i++){
 
 			writer.println(allAirports.get(i).toString());
+			writer.println("Closing begin times:");
+			writer.println(allAirports.get(i).getCloseBegin().toString());
+			writer.println("Closing end times: ");
+			writer.println(allAirports.get(i).getCloseEnd().toString()+"\n\n");
 
 		}
 		writer.println("\n\n# The list of routes are as follows:\n");

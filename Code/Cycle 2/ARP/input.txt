@@ -14,11 +14,14 @@
 #airports
 ATL
 DCA
+DCA
 ORL
 JFK
 YES
 BWI
 NAY
+ATL
+
 
 #comment All routes to be listed here, one route per line.
 #comment Format: route_id, carrier_id, ap_dep, time_dep, ap_arr, time_arr, price, [val8, val9, val10, ...]
@@ -49,6 +52,7 @@ R022,DELTA,ORL,0740,DCA,1100,200.00
 R023,DELTA,ORL,0740,DCA,1100,200.00
 R024,DELTA,YES,0301,BWI,0401,180.00
 #R025,DELTA,ATL,0800,JFK,1100,184.00
+R001,DELTA,ATL,0800,JFK,1100,184.00
 
 
 #comment All closures to be listed here.
@@ -58,6 +62,6 @@ R024,DELTA,YES,0301,BWI,0401,180.00
 #comment No closures in initial data set.
 #comment Example: ATL, 0800, 1000
 
-ATL, 0800, 1000
+#ATL, 0800, 1000
 
 #end

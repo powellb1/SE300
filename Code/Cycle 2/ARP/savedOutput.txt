@@ -1,11 +1,54 @@
 # The list of airports are as follows:
 
 ATL
+Closing begin times:
+[0, 800]
+Closing end times: 
+[0, 1000]
+
+
 DCA
+Closing begin times:
+[0, 800]
+Closing end times: 
+[0, 1000]
+
+
 ORL
+Closing begin times:
+[0, 800]
+Closing end times: 
+[0, 1000]
+
+
 JFK
+Closing begin times:
+[0, 800]
+Closing end times: 
+[0, 1000]
+
+
 YES
+Closing begin times:
+[0, 800]
+Closing end times: 
+[0, 1000]
+
+
 BWI
+Closing begin times:
+[0, 800]
+Closing end times: 
+[0, 1000]
+
+
+NAY
+Closing begin times:
+[0, 800]
+Closing end times: 
+[0, 1000]
+
+
 
 
 # The list of routes are as follows:
@@ -30,6 +73,10 @@ BWI
 18	AIR TRAN	 YES	 1500	 DCA	 1600	190.00
 19	AMERICAN AIRLINES	 BWI	 1920	 DCA	 2100	185.00
 20	DELTA	 YES	 1150	 BWI	 1300	190.00
+21	DELTA	 ATL	  300	 ORL	  400	180.00
+22	DELTA	 ORL	  740	 DCA	 1100	200.00
+23	DELTA	 ORL	  740	 DCA	 1100	200.00
+24	DELTA	 YES	  301	 BWI	  401	180.00
 
 
 

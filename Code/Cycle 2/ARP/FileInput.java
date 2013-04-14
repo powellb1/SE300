@@ -20,6 +20,8 @@ public class FileInput{
 
 	LinkedList<Route> Routes;
 	LinkedList<Airport> Airports;
+	LinkedList<Route> NoDupRoutes;
+	LinkedList<Airport> NoDupAirports;
 
 	public FileInput() throws IOException {
 
@@ -79,6 +81,10 @@ public class FileInput{
 		//or openings
 		String regexAirport = "[A-Z]{3}";
 		Pattern patternAirport = Pattern.compile(regexAirport);
+		
+		boolean exists = false;
+		boolean origin = false;
+		boolean destination = false;
 
 		//NOTE: if the user happens to have a text document that fits this EXACT format, but doesn't have anything useful in it,
 		//that's quite the coincidence......
@@ -91,8 +97,20 @@ public class FileInput{
 			//and if it doesn't have a #, representing a comment
 			if(!line.contains("#")){
 				if(matcherAirport.matches()){
-
-					Airports.add(new Airport(line,0,0));
+					
+					for(int i=0;i<Airports.size();i++){
+						
+						if(Airports.get(i).toString().matches(line)){
+							exists=true;
+							
+						}
+						
+					}
+					
+					if(!exists){
+						Airports.add(new Airport(line,0,0));
+					}
+					exists=false;
 
 				}
 
@@ -100,12 +118,34 @@ public class FileInput{
 					//if it doesn't depart before it arrives and if there is atleast a 30 minute travel time
 					if(Integer.parseInt(matcher.group(4))<Integer.parseInt(matcher.group(6))&& Integer.parseInt(matcher.group(6))-Integer.parseInt(matcher.group(4))>30){
 
-
-
-
-
+						for(int i=0;i<Airports.size();i++){
+							
+							if(Airports.get(i).toString().matches(matcher.group(3))){
+								origin=true;
+								
+							}
+							if(Airports.get(i).toString().matches(matcher.group(5))){
+								destination=true;
+								
+							}
+						}
+						
+						for(int i=0;i<Routes.size();i++){
+	
+							if(Routes.get(i).getNumber()==Integer.parseInt(matcher.group(1))){
+								exists=true;
+								
+							}
+							
+						}
+						
+						if(destination&&origin&&!matcher.group(3).matches(matcher.group(5))&&!exists){
+		
 						Routes.add(new Route(Integer.parseInt(matcher.group(1)),matcher.group(2), new Node(matcher.group(3)), Integer.parseInt(matcher.group(4)), new Node(matcher.group(5)), Integer.parseInt(matcher.group(6)),Double.parseDouble(matcher.group(7)),true));
-
+						}
+						destination=false;
+						origin=false;
+						exists=false;
 					}
 				}
 				//if the airport is closed, we need to set all the routes attached to invalid
@@ -159,7 +199,10 @@ public class FileInput{
 			}
 			line = br.readLine();
 		}
-
+		
+		//NoDupRoutes = new LinkedList<Route>(new HashSet<Route>(Routes));
+		//NoDupAirports = new LinkedList<Airport>(new HashSet<Airport>(Airports));
+		
 		br.close();
 		
 		//if nothing matched, bad file. Recurse.
@@ -173,14 +216,14 @@ public class FileInput{
 	
 	//return our routes
 	public LinkedList<Route> getRoutes(){
-
 		return Routes;
+		//return NoDupRoutes;
 	}
 
 	//return our airports
 	public LinkedList<Airport> getAirports(){
-
 		return Airports;
+		//return NoDupAirports;
 	}
 	
 	//create a filter for what files the JFileChooser defaults to

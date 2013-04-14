@@ -365,7 +365,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
     			}
     		//display a nice dialog box
     		JOptionPane.showMessageDialog(this,
-					("Airport "+a.toString()+" will be closed from "+closeBeginField.getText()+" to "+closeEndField.getText()+" !"),"Airport added!", JOptionPane.INFORMATION_MESSAGE);
+					("Airport "+a.toString()+" will be closed from "+closeBeginField.getText()+" to "+closeEndField.getText()+"!"),"Airport closed!", JOptionPane.INFORMATION_MESSAGE);
     		beginClose.setText("");
 			closeEnd.setText("");
 			closeBeginField.setText("");

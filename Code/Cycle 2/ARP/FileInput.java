@@ -9,6 +9,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/*
+ * This class is responsible for reading in the file to our system.
+ * It will handle the file not found exception with a JFileChooser 
+ * as well as make sure there is something sensical in the file. 
+ * 
+ */
 
 public class FileInput{
 
@@ -20,8 +26,9 @@ public class FileInput{
 		readFile();
 
 
-	} //constructor
+	} 
 
+	//this method reads in the file and handles the file not found exception
 	private void readFile() throws IOException{
 		BufferedReader br = null;
 		String line = null;
@@ -36,6 +43,13 @@ public class FileInput{
 
 		}catch(FileNotFoundException e){
 
+			/*
+			 * if the file is not in the working directory of the program, the program opens
+			 * a filechooser to allow the user to pick a file. The program will then scan it. If it determines
+			 * that nothing in that file matches the specified format, it attempts again.
+			 * It will continue to allow the user to pick a file until a valid one is chosen
+			 * or the user closes the box, at which point the system will exit
+			 */
 			JFileChooser inputFileChooser = new JFileChooser();
 			inputFileChooser.setMultiSelectionEnabled(false);
 			inputFileChooser.setFileFilter(new TextFileFilter());
@@ -56,19 +70,25 @@ public class FileInput{
 
 		line = br.readLine();
 
-
+		// we match this big old regular expression to the route format we want
 		String regex = "R(\\d{3})\\W*([A-Z]*\\s*[A-Z]+)\\W*([A-Z]{3})\\W*([0-9]{4})\\W*([A-Z]{3})\\W*([0-9]{4})\\W*([0-9]*\\.*[0-9]*).*";
 		Pattern pattern = Pattern.compile(regex);
+		//same thing for closures
 		String regexClose = "([A-Z]{3})\\W*([0-9]{4})\\W*([0-9]{4}).*";
 		Pattern patternClose = Pattern.compile(regexClose);
+		//or openings
 		String regexAirport = "[A-Z]{3}";
 		Pattern patternAirport = Pattern.compile(regexAirport);
 
+		//NOTE: if the user happens to have a text document that fits this EXACT format, but doesn't have anything useful in it,
+		//that's quite the coincidence......
 
+		//while we still have lines in the file
 		while(line != null){
 			Matcher matcher = pattern.matcher(line);
 			Matcher matcherClose = patternClose.matcher(line);
 			Matcher matcherAirport = patternAirport.matcher(line);
+			//and if it doesn't have a #, representing a comment
 			if(!line.contains("#")){
 				if(matcherAirport.matches()){
 
@@ -77,6 +97,7 @@ public class FileInput{
 				}
 
 				if(matcher.matches()){
+					//if it doesn't depart before it arrives and if there is atleast a 30 minute travel time
 					if(Integer.parseInt(matcher.group(4))<Integer.parseInt(matcher.group(6))&& Integer.parseInt(matcher.group(6))-Integer.parseInt(matcher.group(4))>30){
 
 
@@ -87,12 +108,13 @@ public class FileInput{
 
 					}
 				}
+				//if the airport is closed, we need to set all the routes attached to invalid
 				if(matcherClose.matches()){
 
 					for(int i=0;i<Airports.size();i++){
 
 						if(matcherClose.group(1).matches(Airports.get(i).getCode())){
-
+							//provided the difference between closing times is greater than 30
 							if(Integer.parseInt(matcherClose.group(2))<Integer.parseInt(matcherClose.group(3))&& Integer.parseInt(matcherClose.group(3))-Integer.parseInt(matcherClose.group(2))>30){
 							
 							Airports.get(i).setCloseBegin(Integer.parseInt(matcherClose.group(2)));
@@ -140,6 +162,7 @@ public class FileInput{
 
 		br.close();
 		
+		//if nothing matched, bad file. Recurse.
 		if(Routes.isEmpty()&&Airports.isEmpty()){
 			
 			readFile();
@@ -148,17 +171,19 @@ public class FileInput{
 		
 	}
 	
-	
+	//return our routes
 	public LinkedList<Route> getRoutes(){
 
 		return Routes;
 	}
 
+	//return our airports
 	public LinkedList<Airport> getAirports(){
 
 		return Airports;
 	}
 	
+	//create a filter for what files the JFileChooser defaults to
 	public class TextFileFilter extends javax.swing.filechooser.FileFilter  
 	{  
 	     public boolean accept(File file)  

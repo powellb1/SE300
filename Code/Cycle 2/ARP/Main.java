@@ -25,7 +25,6 @@ public class Main {
 		}
 
 
-		//Director d = new Director();
 
 		DaGUI g = new DaGUI();
 		g.setVisible(true);

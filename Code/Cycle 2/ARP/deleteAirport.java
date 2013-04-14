@@ -2,10 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-/**
- *
- * @author Craig
+
+/*
+ * This class is used to delete an airport from the system. In order 
+ * alleviate confusion and silliness, any route associated with that 
+ * airport is also deleted. Class takes in a director so that any changes
+ * will show to all other classes.
  */
+
 public class deleteAirport extends javax.swing.JFrame {
 
 	Director d;
@@ -26,6 +30,8 @@ public class deleteAirport extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
+    //NETBEANS was used to build a GUI to suit our needs. Any actionlistener was built on a case by case basis
     private void initComponents() {
 
         stuffPanel = new javax.swing.JPanel();
@@ -89,6 +95,7 @@ public class deleteAirport extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //call the delete method within the director
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         d.deleteAirport((Airport) airportBox.getSelectedItem());
     }//GEN-LAST:event_deleteButtonActionPerformed

@@ -5,10 +5,14 @@ import javax.swing.JOptionPane;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Craig
+/*
+ * This class is used to delete a route from the system. As the user
+ * changes the combo box, the fields will auto update, telling the user
+ * the information about the route that they currently have selected. When
+ * they click the delete button, the program will confirm their selection. 
  */
+
+@SuppressWarnings("serial")
 public class DeleteRoute extends javax.swing.JFrame {
 
 	/**
@@ -30,6 +34,8 @@ public class DeleteRoute extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	//NETBEANS was used to build the GUI to suit our needs. All the actionlisteners were built according to
+	//our requirements. 
 	private void initComponents() {
 
 		routePanel = new javax.swing.JPanel();
@@ -91,6 +97,13 @@ public class DeleteRoute extends javax.swing.JFrame {
 				destFieldActionPerformed(evt);
 			}
 		});
+		
+		airlineField.setText(d.getAllRoutes().getFirst().getAirline());
+		arrivalField.setText(Integer.toString(d.getAllRoutes().getFirst().getArrivalTime()));
+		costField.setText(Double.toString(d.getAllRoutes().getFirst().getCost()));
+		departField.setText(Integer.toString(d.getAllRoutes().getFirst().getDepTime()));
+		destField.setText(d.getAllRoutes().getFirst().getDestination().toString());
+		originField.setText(d.getAllRoutes().getFirst().getOrigin().toString());
 
 		departField.setEditable(false);
 
@@ -184,12 +197,14 @@ public class DeleteRoute extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	@SuppressWarnings("unchecked")
 	private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
 		
-		
+		//make sure the user is sure about what they want
 		int result=JOptionPane.showConfirmDialog(this,
 				("Are you sure you want to delete "+routeBox.getSelectedItem().toString()+" ?"),"Confirmation", JOptionPane.INFORMATION_MESSAGE);
 		if(result==JOptionPane.OK_OPTION){
+			//remove and carry on
 		d.deleteRoute((Route) routeBox.getSelectedItem());
 		JOptionPane.showMessageDialog(this,
 				("Route "+routeBox.getSelectedItem().toString()+" has been deleted!"),"Buh bye!", JOptionPane.INFORMATION_MESSAGE);
@@ -202,7 +217,7 @@ public class DeleteRoute extends javax.swing.JFrame {
 	}//GEN-LAST:event_destFieldActionPerformed
 
 	private void routeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeBoxActionPerformed
-
+		//update the other fields as the combo box is changed
 		int i=routeBox.getSelectedIndex();
 		airlineField.setText(d.getAllRoutes().get(i).getAirline());
 		arrivalField.setText(Integer.toString(d.getAllRoutes().get(i).getArrivalTime()));

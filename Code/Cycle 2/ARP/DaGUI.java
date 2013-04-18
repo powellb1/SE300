@@ -754,7 +754,7 @@ public class DaGUI extends javax.swing.JFrame {
 							}
 
 
-
+//
 
 						}
 
@@ -831,7 +831,13 @@ public class DaGUI extends javax.swing.JFrame {
 	}//GEN-LAST:event_newAirportOptionActionPerformed
 
 	private void deleteRouteOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRouteOptionActionPerformed
+		if(!d.getAllRoutes().isEmpty()){
 		new DeleteRoute(d);
+		}else{
+			JOptionPane.showMessageDialog(this,
+					"All Routes have been deleted!","Silly Goose", JOptionPane.ERROR_MESSAGE);	
+			
+		}
 	}//GEN-LAST:event_deleteRouteOptionActionPerformed
 
 	private void categoriesBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriesBoxActionPerformed
@@ -880,8 +886,9 @@ public class DaGUI extends javax.swing.JFrame {
 	}//GEN-LAST:event_categoriesBoxActionPerformed
 
 	private void deleteAirportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAirportActionPerformed
+		
 		new deleteAirport(d);
-
+		
 	}//GEN-LAST:event_deleteAirportActionPerformed
 
 	private void destMoreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destMoreInfoActionPerformed

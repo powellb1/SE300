@@ -116,7 +116,7 @@ public class FileInput{
 
 				if(matcher.matches()){
 					//if it doesn't depart before it arrives and if there is atleast a 30 minute travel time
-					if(Integer.parseInt(matcher.group(4))<Integer.parseInt(matcher.group(6))&& Integer.parseInt(matcher.group(6))-Integer.parseInt(matcher.group(4))>30){
+					if(Integer.parseInt(matcher.group(4))<Integer.parseInt(matcher.group(6))&& Integer.parseInt(matcher.group(6))-Integer.parseInt(matcher.group(4))>30&&0<Integer.parseInt(matcher.group(4))&&2400>Integer.parseInt(matcher.group(4))&&0<Integer.parseInt(matcher.group(6))&&2400>Integer.parseInt(matcher.group(6))){
 
 						for(int i=0;i<Airports.size();i++){
 							

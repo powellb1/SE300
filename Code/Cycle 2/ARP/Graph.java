@@ -184,7 +184,7 @@ public class Graph {
 						
 						
 						
-						time+=(((piArrivalHours+piArrivalMinutes)-(piDepartureHours+piDepartureMinutes))+((nextpiDepartureHours+nextpiDepartureMinutes)-(piArrivalHours+piArrivalMinutes)))/(2.0*Math.PI);
+						time+=(((piArrivalHours-piDepartureHours)+(piArrivalMinutes-piDepartureMinutes))+((nextpiDepartureHours -piArrivalHours)+(nextpiDepartureMinutes -piArrivalMinutes)))/(2.0*Math.PI);
 
 					}else{
 

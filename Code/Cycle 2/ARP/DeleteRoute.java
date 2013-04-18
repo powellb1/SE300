@@ -26,6 +26,7 @@ public class DeleteRoute extends javax.swing.JFrame {
 		initComponents();
 		setLocationRelativeTo(null);
 		setVisible(true);
+		
 	}
 
 	/**
@@ -209,6 +210,7 @@ public class DeleteRoute extends javax.swing.JFrame {
 		d.deleteRoute((Route) routeBox.getSelectedItem());
 		JOptionPane.showMessageDialog(this,
 				("Route "+routeBox.getSelectedItem().toString()+" has been deleted!"),"Buh bye!", JOptionPane.INFORMATION_MESSAGE);
+		if(!d.getAllRoutes().isEmpty()){
 		routeBox.setModel(new javax.swing.DefaultComboBoxModel(d.getAllRoutes().toArray()));
 		airlineField.setText(d.getAllRoutes().getFirst().getAirline());
 		arrivalField.setText(Integer.toString(d.getAllRoutes().getFirst().getArrivalTime()));
@@ -217,6 +219,9 @@ public class DeleteRoute extends javax.swing.JFrame {
 		destField.setText(d.getAllRoutes().getFirst().getDestination().toString());
 		originField.setText(d.getAllRoutes().getFirst().getOrigin().toString());
 		d.UpdateInfo();
+		}else{
+		dispose();	
+		}
 		}
 	}//GEN-LAST:event_deleteButtonActionPerformed
 
@@ -226,6 +231,7 @@ public class DeleteRoute extends javax.swing.JFrame {
 
 	private void routeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeBoxActionPerformed
 		//update the other fields as the combo box is changed
+		if(!d.getAllRoutes().isEmpty()){
 		int i=routeBox.getSelectedIndex();
 		airlineField.setText(d.getAllRoutes().get(i).getAirline());
 		arrivalField.setText(Integer.toString(d.getAllRoutes().get(i).getArrivalTime()));
@@ -233,6 +239,7 @@ public class DeleteRoute extends javax.swing.JFrame {
 		departField.setText(Integer.toString(d.getAllRoutes().get(i).getDepTime()));
 		destField.setText(d.getAllRoutes().get(i).getDestination().toString());
 		originField.setText(d.getAllRoutes().get(i).getOrigin().toString());
+		}
 	}//GEN-LAST:event_routeBoxActionPerformed
 
 

@@ -159,6 +159,7 @@ public class Director{
 	//method under construction
 	public void openAirport(Airport a, int openBegin, int openEnd){
 
+		/*
 		for(int i=0;i<allAirports.size();i++){
 
 			if(allAirports.get(i).toString().matches(a.toString())){
@@ -171,6 +172,10 @@ public class Director{
 			}
 
 		}
+		*/
+		a.setOpen(openBegin, openEnd);
+		System.out.println(a.getCloseBegin().toString());
+		System.out.println(a.getCloseEnd().toString());
 
 
 

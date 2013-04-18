@@ -370,7 +370,36 @@ public class Open_Close_Box extends javax.swing.JFrame {
 			closeEnd.setText("");
 			closeBeginField.setText("");
 			closeEndField.setText("");
+    		
+    		
+    		}else{
+    			
+    			Airport a = (Airport) Combo_AirportClose.getSelectedItem();
+        		for(int i=0;i<d.getAirports().size();i++){
+        			
+        			if(d.getAirports().get(i).toString().matches(a.toString())){
+        				d.openAirport(a,Integer.parseInt(openBeginField.getText()),Integer.parseInt(openEndField.getText()));
+        				//d.getAirports().get(i).setCloseBegin(Integer.parseInt(closeBeginField.getText()));
+        				//d.getAirports().get(i).setCloseEnd(Integer.parseInt(closeEndField.getText()));
+        				break;
+        				
+        			}
+        		
+        			}
+        		//display a nice dialog box
+        		JOptionPane.showMessageDialog(this,
+    					("Airport "+a.toString()+" will be open from "+openBeginField.getText()+" to "+openEndField.getText()+"!"),"Airport opened!", JOptionPane.INFORMATION_MESSAGE);
+        		beginValid.setText("");
+    			endValid.setText("");
+    			openBeginField.setText("");
+    			openEndField.setText("");
+    			
+    			
+    			
     		}
+    		
+    		
+    		
     		begin=false;
     		end=false;
     	}

@@ -7,13 +7,20 @@ import java.util.HashSet;
 
 public class Airport {
 
+	private int beginDiff;
+	private int endDiff;
+	private int closeBegin;
+	private int closeEnd;
+	private int openBegin;
+	private int openEnd;
 	private String name;
 	private HashSet<Integer> closeBeginList= new HashSet<Integer>();
 
 	private HashSet<Integer> closeEndList= new HashSet<Integer>(); 
 
 	public Airport(String name,Integer closeBegin, Integer closeEnd){
-
+	
+	
 		//this.open = open;
 		this.name = name;
 
@@ -45,6 +52,7 @@ public class Airport {
 
 	public void setCloseBegin(int closeBegin) {
 		closeBeginList.add(closeBegin);
+		this.closeBegin = closeBegin;
 	}
 
 	public HashSet<Integer> getCloseEnd() {
@@ -53,17 +61,43 @@ public class Airport {
 
 	public void setCloseEnd(int closeEnd) {
 		closeEndList.add(closeEnd);
+		this.closeEnd = closeEnd;
 	}
 
-	public void setOpenBegin(int openBegin){
+	public void setOpen(int openBegin, int openEnd){
 		
-		//closeEndList.remove(o)
+		beginDiff = openBegin - closeBegin;
+		
+		endDiff = closeEnd - openEnd;
+		
+		closeBeginList.clear();
+		closeEndList.clear();
+		
+		if(beginDiff < 0){
+			this.beginDiff = 0;
+			closeBeginList.clear();
+		}
+		
+		if (beginDiff > 0){
+			closeBeginList.add(closeBegin);
+			closeEndList.add(openBegin);
+		}
+		
+		if(endDiff < 0){
+			this.endDiff = 0;
+			closeEndList.clear();
+		}
+		
+		if(endDiff > 0){
+			closeBeginList.add(openEnd);
+			closeEndList.add(closeEnd);
+		}
+		
 	}
 	
-	public void setOpenEnd(int openEnd){
+	
 		
 		
-	}
 
 
 }

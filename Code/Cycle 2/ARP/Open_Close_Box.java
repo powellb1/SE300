@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * bad input. 
  */
 
-public class Open_Close_Box extends javax.swing.JFrame {
+public class Open_Close_Box extends javax.swing.JDialog {
 
 	//checking for invalid input
 
@@ -212,7 +212,7 @@ public class Open_Close_Box extends javax.swing.JFrame {
         );
 
         tabbedPane.getAccessibleContext().setAccessibleName("Open an airport");
-
+		setModal(true);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 

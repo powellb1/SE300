@@ -14,7 +14,7 @@ import javax.swing.JTable;
  */
 
 @SuppressWarnings("serial")
-public class DeleteRoute extends javax.swing.JFrame {
+public class DeleteRoute extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form DeleteRoute
@@ -26,6 +26,7 @@ public class DeleteRoute extends javax.swing.JFrame {
 		initComponents();
 		setLocationRelativeTo(null);
 		setVisible(true);
+
 		
 	}
 
@@ -195,7 +196,7 @@ public class DeleteRoute extends javax.swing.JFrame {
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addComponent(routePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 				);
-
+		setModal(true);
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 

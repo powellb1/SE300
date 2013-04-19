@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  * and adds to the history pane.
  */
 @SuppressWarnings("serial")
-public class editRoute extends javax.swing.JFrame {
+public class editRoute extends javax.swing.JDialog {
 
     /**
      * Creates new form editRoute
@@ -57,6 +57,7 @@ public class editRoute extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
+
     }
     
 
@@ -322,7 +323,7 @@ public class editRoute extends javax.swing.JFrame {
                 .addComponent(modifyButton)
                 .addGap(19, 19, 19))
         );
-
+		setModal(true);
         pack();
     }// </editor-fold>                        
 

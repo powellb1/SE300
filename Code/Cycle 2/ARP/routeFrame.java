@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 
 @SuppressWarnings("serial")
-public class routeFrame extends javax.swing.JFrame {
+public class routeFrame extends javax.swing.JDialog {
 
     /**
      * Creates new form Routes
@@ -233,7 +233,7 @@ public class routeFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(routePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
+		setModal(true);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 

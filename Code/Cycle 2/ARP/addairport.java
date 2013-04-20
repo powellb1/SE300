@@ -17,7 +17,7 @@ import javax.swing.JTextField;
  */
 
 @SuppressWarnings("serial")
-public class addAirport extends javax.swing.JFrame {
+public class addAirport extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form addAirport
@@ -92,7 +92,7 @@ public class addAirport extends javax.swing.JFrame {
 								.addComponent(result)
 								.addGap(15, 15, 15))
 				);
-
+		setModal(true);
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
